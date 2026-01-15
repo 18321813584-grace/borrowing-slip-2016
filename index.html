@@ -3,368 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2015年的借阅条 - 校园悬疑解密</title>
+    <title>2015年的借阅条 | 上北大学老图书馆</title>
     <style>
+        /* 全局样式：营造昏暗、压抑的校园氛围 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Courier New", monospace;
+            font-family: "Microsoft YaHei", "SimSun", monospace;
         }
         body {
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            line-height: 1.6;
-            padding: 20px;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50 L50 0 L100 50 L50 100 L0 50 Z' fill='%232d2d2d' fill-opacity='0.3'/%3E%3C/svg%3E");
+            background-color: #181818;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2zM60 91c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2zM35 41c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2zM12 60c1.105 0 2-0.895 2-2s-0.895-2-2-2-2 0.895-2 2 0.895 2 2 2z' fill='%232c2c2c' fill-opacity='0.4'/%3E%3C/svg%3E");
+            color: #e8e8e8;
+            overflow-x: hidden;
+            line-height: 1.8;
         }
+
+        /* 主容器：模拟老旧图书馆的昏暗感 */
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #222;
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: rgba(24, 24, 24, 0.95);
             border: 1px solid #444;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+            position: relative;
         }
-        .header {
-            background-color: #333;
-            padding: 20px;
-            border-bottom: 1px solid #555;
-            text-align: center;
-        }
-        .header h1 {
-            color: #ff6b6b;
+
+        /* 标题样式：泛黄的旧纸张质感 */
+        .page-title {
             font-size: 2.2rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px rgba(255,107,107,0.3);
+            color: #f0e6d2;
+            text-align: center;
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(180, 160, 120, 0.3);
+            border-bottom: 1px dashed #555;
+            padding-bottom: 20px;
         }
-        .header p {
-            color: #aaa;
+
+        /* 剧情文本：逐行浮现的悬疑感 */
+        .story-text {
             font-size: 1.1rem;
-            font-style: italic;
+            color: #dcdcdc;
+            margin-bottom: 40px;
+            text-indent: 2em;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 0.3s;
         }
-        .tab-container {
-            display: flex;
-            border-bottom: 1px solid #444;
+        .story-text:nth-child(2) { animation-delay: 0.6s; }
+        .story-text:nth-child(3) { animation-delay: 0.9s; }
+        .story-text:nth-child(4) { animation-delay: 1.2s; }
+        .story-text:nth-child(5) { animation-delay: 1.5s; }
+
+        /* 关键细节高亮：营造心理压迫感 */
+        .highlight {
+            color: #e2b887;
+            font-weight: 500;
+            text-shadow: 0 0 2px rgba(226, 184, 135, 0.5);
         }
-        .tab {
-            padding: 15px 20px;
-            background-color: #2a2a2a;
-            border: none;
-            color: #ccc;
-            cursor: pointer;
-            flex: 1;
-            text-align: center;
-            transition: all 0.3s;
-        }
-        .tab.active {
-            background-color: #ff6b6b;
-            color: #1a1a1a;
-            font-weight: bold;
-        }
-        .tab:hover:not(.active) {
-            background-color: #333;
-        }
-        .content {
-            padding: 30px;
-            display: none;
-        }
-        .content.active {
+
+        /* 开始游玩按钮：老旧金属质感 */
+        .start-btn {
             display: block;
-            animation: fadeIn 0.5s ease;
+            width: 200px;
+            height: 60px;
+            margin: 0 auto;
+            background-color: #333;
+            border: 2px solid #555;
+            color: #f0e6d2;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .start-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(240, 230, 210, 0.2), transparent);
+            transition: left 0.6s ease;
         }
-        .card {
-            background-color: #2a2a2a;
-            border: 1px solid #444;
-            border-radius: 6px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        .start-btn:hover {
+            background-color: #444;
+            border-color: #e2b887;
+            color: #e2b887;
+            box-shadow: 0 0 10px rgba(226, 184, 135, 0.3);
         }
-        .card h3 {
-            color: #4ecdc4;
-            margin-bottom: 15px;
-            border-bottom: 1px dashed #444;
-            padding-bottom: 10px;
+        .start-btn:hover::before {
+            left: 100%;
         }
-        .quote {
-            border-left: 3px solid #ff6b6b;
-            padding-left: 15px;
-            margin: 15px 0;
-            color: #ddd;
+
+        /* 底部细节：模拟图书馆的老旧标注 */
+        .footer-note {
+            text-align: right;
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #888;
             font-style: italic;
         }
-        .clue-item {
-            margin: 15px 0;
-            padding: 10px;
-            background-color: #333;
-            border-radius: 4px;
+
+        /* 动画：文本渐入 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .clue-item h4 {
-            color: #ffd166;
-            margin-bottom: 5px;
-        }
-        .blur-text {
-            filter: blur(3px);
-            transition: filter 0.5s;
-            cursor: pointer;
-        }
-        .blur-text:hover {
-            filter: blur(0);
-        }
-        .lock-icon {
-            color: #ff6b6b;
-            margin-right: 5px;
-        }
-        .slider-container {
-            margin: 20px 0;
-        }
-        .slider {
-            width: 100%;
-            height: 8px;
-            background-color: #444;
-            border-radius: 4px;
-            outline: none;
-        }
-        .slider::-webkit-slider-thumb {
-            width: 20px;
-            height: 20px;
-            background-color: #4ecdc4;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .magnify-text {
-            font-size: 1rem;
-            transition: font-size 0.3s;
-            text-align: center;
-            color: #ffd166;
-        }
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0,0,0,0.9);
-            border: 2px solid #ff6b6b;
-            border-radius: 8px;
-            padding: 25px;
-            color: #ff6b6b;
-            font-size: 1.2rem;
-            text-align: center;
-            z-index: 100;
-            display: none;
-            animation: flash 1s infinite alternate;
-        }
-        @keyframes flash {
-            from { opacity: 0.7; }
-            to { opacity: 1; }
-        }
-        .corner-note {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            color: transparent;
-            background-clip: text;
-            background-color: #555;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-        .corner-note:hover {
-            color: #ff6b6b;
-            background-color: transparent;
-        }
-        .last-update {
-            text-align: right;
-            color: #777;
-            font-size: 0.9rem;
-            margin-top: 30px;
-            padding-top: 10px;
-            border-top: 1px solid #444;
-        }
-        .warning {
-            color: #ff6b6b;
-            font-weight: bold;
-            margin: 10px 0;
-        }
+
+        /* 响应式适配：手机端也能正常显示 */
         @media (max-width: 768px) {
-            .tab-container {
-                flex-direction: column;
+            .container {
+                margin: 20px;
+                padding: 25px;
             }
-            .header h1 {
+            .page-title {
                 font-size: 1.8rem;
             }
-            .content {
-                padding: 15px;
+            .story-text {
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 头部标题 -->
-        <div class="header">
-            <h1>2015年的借阅条</h1>
-            <p>闭馆前最后一分钟，借阅机吐出一张无卡号的纸条——借阅人是2015年失踪的学姐，借阅书目：一本不存在的《雾声录》</p>
-        </div>
-
-        <!-- 标签栏 -->
-        <div class="tab-container">
-            <button class="tab active" onclick="switchTab('event')">事件档案</button>
-            <button class="tab" onclick="switchTab('clues')">关键线索</button>
-            <button class="tab" onclick="switchTab('decrypt')">真相推演</button>
-        </div>
-
-        <!-- 事件档案内容 -->
-        <div id="event" class="content active">
-            <div class="card">
-                <h3>匿名爆料（文学院大二学生·周桐）</h3>
-                <div class="quote">
-                    我为了赶古代文学的论文，在旧图书馆泡了一整天。闭馆铃响的时候，我正蹲在借阅机前补打之前借的书的清单，想着留作参考。
-                </div>
-                <div class="quote">
-                    机器嗡嗡作响，吐出我要的三张纸条后，又额外滚出来一张泛黄的小票。
-                </div>
-                <div class="quote">
-                    小票上的字迹模糊，只有几个地方能看清：<br>
-                    借阅日期：2015.10.12<br>
-                    借阅人：苏晚<br>
-                    书名：《雾声录》<br>
-                    归还日期：无
-                </div>
-                <div class="quote">
-                    我当时没在意，以为是机器故障吐了旧单据。直到回宿舍刷校园论坛，才看见2015年的旧帖——文学院学姐苏晚，在2015年10月12日放学后失踪，警方查遍监控，最后拍到她的画面，就是走进老图书馆的地下一层。
-                </div>
-                <div class="quote warning">
-                    更让我头皮发麻的是，我翻遍了学校图书馆的电子书目和古籍名录，根本没有《雾声录》这本书。
-                </div>
-                <div class="quote">
-                    那张借阅条现在还在我书包里，背面好像有铅笔写的小字，我越擦越看不清，只认出这几个字：书架7。
-                </div>
-            </div>
-        </div>
-
-        <!-- 关键线索内容 -->
-        <div id="clues" class="content">
-            <div class="card">
-                <h3>线索1：周桐的补充手记（扫描件样式）</h3>
-                <div class="clue-item">
-                    <h4>10月13日 凌晨</h4>
-                    <p>我问了图书馆的管理员张叔，他说2015年地下一层的古籍书架，在苏晚失踪后就全部清空了，现在摆的都是些没人要的地方志。他还说，苏晚失踪前，总来地下一层，说听见书架后面有“唱歌的声音”。</p>
-                </div>
-                <div class="clue-item">
-                    <h4>10月13日 晚</h4>
-                    <p>我偷偷溜进老馆地下一层，找到书架7的位置。现在那里堆着落满灰的《XX县志》，我搬书的时候，摸到书架背面有个洞，手指伸进去，摸到一张纸——又是一张借阅条，借阅人还是苏晚，书名《雾声录》，借阅日期2015.10.11。背面写着：“<span class="blur-text">它让我把书还回去，在闭馆的时候。</span>”</p>
-                </div>
-                <div class="clue-item">
-                    <h4>10月14日</h4>
-                    <p>张叔看见我在地下一层，脸色发白地把我赶出来。他说，当年苏晚的书包，在书架7后面找到的，里面只有一本空白的笔记本，和一张借阅条。</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>线索2：校园论坛旧帖（截图样式）</h3>
-                <div class="clue-item">
-                    <h4>楼主[匿名] 2015-10-15</h4>
-                    <p>苏晚失踪前一天，和我说她在老馆地下一层借到一本奇怪的书，没有封面，里面写的都是听来的声音——风吹过走廊的声音，落叶砸窗户的声音，还有人在书架后面哭的声音。书的最后一页写着：“<span class="blur-text">借了我的书，要在闭馆时，对着书架7唱歌，才算归还。</span>”</p>
-                </div>
-                <div class="clue-item">
-                    <h4>楼层3[已注销]</h4>
-                    <p><span class="blur-text">我听说老馆地下一层，以前是学校的音乐教室，1998年着过火，一个女学生被困在里面，再也没出来……</span></p>
-                </div>
-                <div class="clue-item">
-                    <h4>楼层12[管理员]</h4>
-                    <p>本帖涉及不实信息，部分内容删除，请勿造谣。</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <h3>线索3：借阅条背面的放大图（滑动放大）</h3>
-                <div class="slider-container">
-                    <input type="range" min="1" max="2" value="1" class="slider" id="magnifySlider">
-                </div>
-                <div class="magnify-text" id="magnifyContent">
-                    书架7的后面，它在等我还书。闭馆的铃响三次，就能听见雾声。
-                </div>
-            </div>
-        </div>
-
-        <!-- 真相推演内容 -->
-        <div id="decrypt" class="content">
-            <div class="card">
-                <h3>核心谜题</h3>
-                <ul style="list-style-type: none; margin: 15px 0;">
-                    <li>🔍 1. 《雾声录》到底是什么？是失踪学姐的幻想，还是真的存在过的“禁忌书目”？</li>
-                    <li>🔍 2. 老图书馆地下一层，1998年的火灾和2015年的失踪案，到底有什么关联？</li>
-                    <li>🔍 3. 闭馆铃响三次的时候，对着书架7唱歌，会发生什么？</li>
-                </ul>
-            </div>
-
-            <div class="card">
-                <h3>未解锁线索提示（灰色锁定样式）</h3>
-                <div class="clue-item">
-                    <p><span class="lock-icon">🔒</span> 需找到2015年苏晚的空白笔记本 → 线索指向：图书馆管理员张叔的办公室</p>
-                </div>
-                <div class="clue-item">
-                    <p><span class="lock-icon">🔒</span> 需确认《雾声录》的真实内容 → 线索指向：老馆地下一层的火灾档案</p>
-                </div>
-            </div>
-
-            <div class="last-update">
-                最后更新：2026-1-14 21:57<br>
-                投稿人周桐的账号，已注销<br>
-                最后一条私信：“我听见了，雾声。它在翻书。”
-            </div>
+        <h1 class="page-title">2015年的借阅条</h1>
+        
+        <p class="story-text">你是上北大学的一名新生，临近期末考，宿舍里键盘敲击声、背书声、嬉笑打闹声混作一团，吵得你根本没法静下心复习。你揉了揉发胀的太阳穴，心里盘算着找个安静的地方——新图书馆是首选，但你太清楚了，那里早就被占座的“卷王”们挤得水泄不通，连个空座位的影子都见不到。</p>
+        
+        <p class="story-text">你站在宿舍楼下，目光无意间扫向校园深处的老图书馆。那栋楼比新馆矮了半截，外墙的瓷砖掉了不少，窗框也泛着锈迹，看起来灰蒙蒙的。但奇怪的是，傍晚的天色里，老馆的几层窗户还亮着昏黄的灯光，像是有人还在里面。</p>
+        
+        <p class="story-text">“凑活一下吧。”你想着，抬脚往老图书馆走。里面的设施确实老旧，木质书架磨得发亮，借阅机也卡得厉害，但胜在人少，找了个靠窗的位置坐下，居然真的安安静静看了一下午书。</p>
+        
+        <p class="story-text">闭馆的铃声响了三遍，管理员开始催促离场。你收拾好东西往外走，在门口碰到一个陌生的小姐姐，她抱着几本书，说要去借阅机打张借阅条，让你稍等她一分钟。你没多想，点了点头，先走到一楼大厅等她。</p>
+        
+        <p class="story-text">可等你走出老图书馆的大门，晚风裹着凉意吹过来，你回头望了望，<span class="highlight">大厅里空空的，根本没有她的身影</span>。你愣了愣，心想她是不是从侧门走了，或者自己走得太快没注意，没太放在心上，转身回了宿舍。</p>
+        
+        <p class="story-text">七天后，你在食堂门口的公告栏上看到一张<span class="highlight">寻人启事</span>——照片上的女孩眉眼清秀，正是那天在老图书馆门口让你等她的那个小姐姐。启事上写着：“失踪时间：闭馆当日晚；失踪地点：上北大学老图书馆附近”。你的后背瞬间爬满凉意，手里的饭盒差点没拿稳。</p>
+        
+        <!-- 开始游玩按钮：点击跳转到第二页（可替换为实际第二页路径） -->
+        <button class="start-btn" onclick="enterNextPage()">开始游玩</button>
+        
+        <!-- 底部微恐细节：强化日常中的异常感 -->
+        <div class="footer-note">
+            提示：老图书馆闭馆时间——每日21:00，闭馆铃响三遍后，请勿逗留。
         </div>
     </div>
-
-    <!-- 动态弹窗 -->
-    <div class="popup" id="systemPopup">
-        <p>【系统提示】</p>
-        <p>检测到 IP 地址：[你的 IP 地址]</p>
-        <p>检测到当前位置：上北大学老图书馆 地下一层 书架 7 附近</p>
-        <p class="warning">闭馆铃声，已经响了一次。</p>
-    </div>
-
-    <!-- 角落小字 -->
-    <div class="corner-note">你现在关掉页面，还来得及。</div>
 
     <script>
-        // 标签切换功能
-        function switchTab(tabId) {
-            const tabs = document.querySelectorAll('.tab');
-            const contents = document.querySelectorAll('.content');
-            
-            tabs.forEach(tab => tab.classList.remove('active'));
-            contents.forEach(content => content.classList.remove('active'));
-            
-            document.querySelector(`.tab[onclick="switchTab('${tabId}')"]`).classList.add('active');
-            document.getElementById(tabId).classList.add('active');
+        // 跳转第二页的逻辑（可根据实际第二页文件名修改）
+        function enterNextPage() {
+            // 这里可替换为第二页的实际路径，比如 "second-page.html"
+            // 测试阶段先弹出提示，实际使用时删除alert，保留location.href
+            alert("正在进入老图书馆的秘密...");
+            // location.href = "second-page.html"; 
         }
-
-        // 借阅条放大功能
-        const slider = document.getElementById('magnifySlider');
-        const magnifyContent = document.getElementById('magnifyContent');
-        
-        slider.addEventListener('input', function() {
-            magnifyContent.style.fontSize = `${this.value}rem`;
-        });
-
-        // 动态弹窗（10秒间隔闪烁）
-        const popup = document.getElementById('systemPopup');
-        setInterval(() => {
-            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
-        }, 10000);
-
-        // 初始显示一次弹窗
-        setTimeout(() => {
-            popup.style.display = 'block';
-        }, 3000);
     </script>
 </body>
 </html>
