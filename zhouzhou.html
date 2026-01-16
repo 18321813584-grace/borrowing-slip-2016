@@ -18,8 +18,8 @@
             position: relative;
         }
 
-        /* 顶部导航栏：最上方（显示上北大学·校园圈） */
-        .top-nav {
+        <!-- 顶部导航行：包含标题、时间、头像，同一行 -->
+        .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -32,12 +32,19 @@
             right: 0;
             z-index: 999;
         }
-        .top-nav .title {
+        .top-bar .title {
             font-size: 18px;
             font-weight: 600;
             color: #1d1d1f;
         }
-        .top-nav .avatar {
+        .top-bar .time {
+            font-size: 14px;
+            color: #86868b;
+            flex: 1;
+            text-align: center;
+            margin: 0 10px;
+        }
+        .top-bar .avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -49,24 +56,7 @@
             font-size: 14px;
         }
 
-        /* 时间容器：在导航栏下方（和正确页面一致） */
-        .top-time-container {
-            background-color: #fff;
-            border-bottom: 1px solid #e5e5e7;
-            padding: 4px 0;
-            text-align: center;
-            position: fixed;
-            top: 48px; /* 适配导航栏高度 */
-            left: 0;
-            right: 0;
-            z-index: 999;
-        }
-        .top-time {
-            font-size: 14px;
-            color: #86868b;
-        }
-
-        /* 底部功能导航 */
+        <!-- 底部功能导航 -->
         .bottom-tab {
             display: flex;
             position: fixed;
@@ -93,9 +83,9 @@
             font-size: 12px;
         }
 
-        /* 内容区域：适配顶部固定栏（导航48px + 时间28px） */
+        <!-- 内容区域：适配顶部固定栏 -->
         .content {
-            margin-top: 76px; 
+            margin-top: 56px; <!-- 适配顶部栏高度 -->
             margin-bottom: 60px;
             padding: 10px 16px;
             display: none;
@@ -104,7 +94,7 @@
             display: block;
         }
 
-        /* 圈子板块：卡片样式和正确页面一致 */
+        <!-- 圈子板块：卡片样式 -->
         .post-card {
             background-color: #fff;
             border-radius: 12px;
@@ -194,7 +184,7 @@
             color: #86868b;
         }
 
-        /* 发现板块样式 */
+        <!-- 发现板块样式 -->
         .discover-content {
             display: flex;
             flex-direction: column;
@@ -231,10 +221,10 @@
             text-align: center;
         }
 
-        /* 私信板块样式 */
+        <!-- 私信板块样式 -->
         .message-content {
             display: flex;
-            height: calc(100vh - 136px);
+            height: calc(100vh - 116px);
         }
         .contact-list {
             width: 30%;
@@ -335,7 +325,7 @@
             cursor: pointer;
         }
 
-        /* 我的板块样式 */
+        <!-- 我的板块样式 -->
         .profile-content {
             padding: 20px 16px;
         }
@@ -466,15 +456,11 @@
     </style>
 </head>
 <body>
-    <!-- 顶部导航：最上方（显示上北大学·校园圈） -->
-    <div class="top-nav">
+    <!-- 顶部导航行：标题、时间、头像同一行 -->
+    <div class="top-bar">
         <div class="title">上北大学 · 校园圈</div>
+        <div class="time" id="currentTime">2026年1月10日 0:00</div>
         <div class="avatar">周</div>
-    </div>
-
-    <!-- 时间容器：导航栏下方（和正确页面位置一致） -->
-    <div class="top-time-container">
-        <div class="top-time" id="currentTime">2026年1月10日 0:00</div>
     </div>
 
     <!-- 圈子板块：完整保留所有帖子 -->
@@ -900,7 +886,7 @@
     </div>
 
     <script>
-        // 标签切换功能
+        <!-- 标签切换功能 -->
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.content');
             contents.forEach(content => content.classList.remove('active'));
@@ -910,7 +896,7 @@
             document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
         }
 
-        // 私信切换聊天对象
+        <!-- 私信切换聊天对象 -->
         function switchChat(chatId, event) {
             const chatWindows = document.querySelectorAll('.chat-window');
             chatWindows.forEach(window => window.style.display = 'none');
@@ -921,16 +907,16 @@
             event.target.closest('.contact-item').classList.add('active');
         }
 
-        // 退出登录
+        <!-- 退出登录 -->
         function logout() {
             location.href = "second-page.html"; 
         }
 
-        // 初始化时间和交互
+        <!-- 初始化时间和交互 -->
         window.onload = function() {
             document.getElementById('currentTime').textContent = '2026年1月10日 0:00';
             
-            // 复选框交互
+            <!-- 复选框交互 -->
             const checkboxes = document.querySelectorAll('.checkbox');
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('click', function() {
@@ -938,7 +924,7 @@
                 });
             });
 
-            // 搜索功能
+            <!-- 搜索功能 -->
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('keyup', function(e) {
                 if (e.key === 'Enter') {
