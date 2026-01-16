@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周桐 | 个人备忘录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            min-height: 100vh;
+            padding-top: 60px;
+            padding-bottom: 20px;
+        }
+
+        /* 顶部导航栏 */
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e7;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+        .top-nav .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        .top-nav .back-btn {
+            color: #e2b887;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* 备忘录卡片 */
+        .memo-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px 16px;
+            margin: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+        .memo-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #e2b887;
+        }
+        .memo-time {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* 待办事项样式 */
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .todo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        /* 复选框样式 */
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #e2b887;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .checkbox.checked {
+            background-color: #e2b887;
+            color: #fff;
+        }
+        .checkbox.checked::after {
+            content: "✓";
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .todo-text {
+            flex: 1;
+        }
+        .todo-important {
+            color: #ff453a;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+        .todo-highlight {
+            color: #ff7300;
+            font-weight: 500;
+        }
+
+        /* 返回按钮响应式 */
+        @media (max-width: 768px) {
+            .memo-card {
+                padding: 16px;
+            }
+            .todo-item {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="back-btn" onclick="window.history.back()">← 返回</div>
+        <div class="title">周桐的备忘录</div>
+        <div></div> <!-- 占位 -->
+    </div>
+
+    <!-- 备忘录内容卡片 -->
+    <div class="memo-card">
+        <div class="memo-header">个人备忘录</div>
+        <span class="memo-time">1月12日 中午</span>
+        
+        <div class="todo-list">
+            <!-- 已完成的待办 -->
+            <div class="todo-item">
+                <div class="checkbox checked"></div>
+                <div class="todo-text">问张叔有没有捡到一本黑色笔记本</div>
+            </div>
+            
+            <!-- 未完成的待办 -->
+            <div class="todo-item">
+                <div class="checkbox"></div>
+                <div class="todo-text">
+                    晚上去拿本子！<span class="todo-important">（重要）</span>，在<span class="todo-highlight">地下一层书架7</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 可选：添加复选框点击切换功能
+        const checkboxes = document.querySelectorAll('.checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                this.classList.toggle('checked');
+            });
+        });
+    </script>
+</body>
+</html>
