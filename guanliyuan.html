@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上北大学 | 图书馆管理员名单</title>
+    <style>
+        /* 保持和主页面一致的样式风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            padding: 20px 16px;
+        }
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e7;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .top-nav .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        .top-nav .back {
+            color: #e2b887;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .content-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        .result-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+        .admin-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+        .admin-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background-color: #f8f8f8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .admin-item.active {
+            color: #e2b887;
+            font-weight: 500;
+            background-color: #fef7ed;
+        }
+        .admin-item:not(.active):hover {
+            background-color: #f0f0f0;
+        }
+        .admin-item.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            background-color: #fafafa;
+        }
+        .admin-detail {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .admin-detail p {
+            margin-bottom: 8px;
+        }
+        .admin-detail strong {
+            color: #e2b887;
+            width: 80px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航（带返回按钮） -->
+    <div class="top-nav">
+        <div class="back" onclick="window.history.back()">← 返回校园圈</div>
+        <div class="title">上北大学图书馆管理员名单</div>
+        <div></div>
+    </div>
+
+    <!-- 管理员列表 -->
+    <div class="content-card" id="adminListCard">
+        <div class="result-title">管理员名单</div>
+        <ul class="admin-list">
+            <li class="admin-item disabled">管理员1</li>
+            <li class="admin-item disabled">管理员2</li>
+            <li class="admin-item disabled">管理员3</li>
+            <li class="admin-item disabled">管理员4</li>
+            <li class="admin-item disabled">管理员5</li>
+            <li class="admin-item disabled">管理员6</li>
+            <li class="admin-item active" onclick="showAdmin7Detail()">管理员7</li>
+            <li class="admin-item disabled">管理员8</li>
+            <li class="admin-item disabled">管理员9</li>
+            <li class="admin-item disabled">管理员10</li>
+        </ul>
+    </div>
+
+    <!-- 管理员7详情（默认隐藏，点击后显示） -->
+    <div class="content-card" id="admin7Card" style="display: none;">
+        <div class="result-title">管理员7 张睿 个人资料</div>
+        <div class="admin-detail">
+            <p><strong>姓名：</strong>张睿</p>
+            <p><strong>出生年份：</strong>1959年</p>
+            <p><strong>入职时间：</strong>1982年</p>
+            <p><strong>学历背景：</strong>高校图书情报专业专科毕业</p>
+            <p><strong>工作履历：</strong>1982年入职上北大学图书馆，先后负责流通阅览、图书编目、古籍整理等工作；1988年参与火灾后书籍抢救与图书馆重建筹备，全程跟进馆藏恢复与设施调试；深耕岗位四十余年，现主要负责老馆日常管理与读者咨询服务</p>
+            <p><strong>核心特质：</strong>沉稳内敛，对馆藏资源（尤其老馆古籍相关）极为熟悉，对待工作严谨细致，因见证过1988年火灾与图书馆变迁，对老馆地下一层相关话题较为敏感</p>
+            <p><strong>口碑评价：</strong>师生眼中的“老图书馆活字典”，熟悉各类书籍存放位置，能精准帮读者对接所需资源，四十余年坚守岗位，是校园里见证图书馆发展的“元老级”人物</p>
+        </div>
+    </div>
+
+    <script>
+        // 显示管理员7详情
+        function showAdmin7Detail() {
+            document.getElementById('adminListCard').style.display = 'none';
+            document.getElementById('admin7Card').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
