@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上北大学 | 校园圈 - 2016年的借阅条</title>
+    <title>上北大学 | 校园圈 - 周桐的主页</title>
     <style>
         * {
             margin: 0;
@@ -12,29 +12,35 @@
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
         }
         body {
-            background-color: #f5f5f7; /* 主体背景色 */
+            background-color: #f5f5f7;
             color: #1d1d1f;
             overflow-x: hidden;
             position: relative;
-            min-height: 100vh; /* 确保背景铺满整个视口 */
-            padding-bottom: 60px; /* 为底部导航留出空间 */
+            padding-top: 20px; /* 给顶部时间留出空间 */
         }
 
-        /* 顶部导航栏：狐友经典样式 + 新增时间容器 */
-        .top-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background-color: #fff;
-            border-bottom: 1px solid #e5e5e7;
-            z-index: 999;
+        /* 新增：顶部时间样式（和second-page.html一致） */
+        .top-time {
+            text-align: center;
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 10px;
+            padding: 4px 0;
         }
+
+        /* 顶部导航栏：和主页面一致（调整margin-top适配时间） */
         .top-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 16px;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e7;
+            position: fixed;
+            top: 34px; /* 适配顶部时间高度 */
+            left: 0;
+            right: 0;
+            z-index: 999;
         }
         .top-nav .title {
             font-size: 18px;
@@ -53,16 +59,7 @@
             font-size: 14px;
         }
 
-        /* 新增：顶部中间时间样式 */
-        .top-time {
-            text-align: center;
-            font-size: 14px;
-            color: #86868b;
-            padding: 4px 0;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        /* 底部功能导航：圈子/发现/私信/我的 */
+        /* 底部功能导航：和主页面一致 */
         .bottom-tab {
             display: flex;
             position: fixed;
@@ -89,17 +86,18 @@
             font-size: 12px;
         }
 
+        /* 内容区域：调整margin-top适配新的导航位置 */
         .content {
-            margin-top: 100px; /* 顶部新增时间栏，调整内容区上边距 */
+            margin-top: 94px; /* 时间(34px) + 导航(60px) */
             margin-bottom: 60px;
             padding: 10px 16px;
             display: none;
-            background-color: transparent; /* 确保继承body背景 */
         }
         .content.active {
             display: block;
         }
 
+        /* 圈子板块样式：完全复用主页面 */
         .post-card {
             background-color: #fff;
             border-radius: 12px;
@@ -166,12 +164,6 @@
             margin-bottom: 12px;
             color: #1d1d1f;
         }
-        .post-content img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin: 8px 0;
-            opacity: 0.8;
-        }
         .post-content .blur-text {
             color: #ccc;
             user-select: none;
@@ -204,13 +196,12 @@
             color: #1d1d1f;
         }
 
-        /* 发现板块：搜索框样式 */
+        /* 发现板块样式：完全复用主页面 */
         .discover-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding-top: 50px;
-            background-color: transparent; /* 继承body背景 */
         }
         .search-box {
             width: 100%;
@@ -249,183 +240,267 @@
             text-align: center;
         }
 
-        .empty-content {
+        /* ========== 周桐页面专属样式 ========== */
+        /* 私信板块：联系人列表 + 聊天内容 */
+        .message-content {
+            display: flex;
+            height: calc(100vh - 154px); /* 适配顶部和底部高度 */
+        }
+        /* 联系人列表 */
+        .contact-list {
+            width: 30%;
+            min-width: 200px;
+            background-color: #fff;
+            border-right: 1px solid #e5e5e7;
+            overflow-y: auto;
+        }
+        .contact-item {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        .contact-item.active {
+            background-color: #fef7ed;
+            color: #e2b887;
+        }
+        .contact-item:hover {
+            background-color: #f8f8f8;
+        }
+        .contact-name {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        .contact-lastmsg {
+            font-size: 12px;
+            color: #86868b;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* 聊天窗口 */
+        .chat-window {
+            flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: calc(100vh - 160px); /* 适配视口高度 */
-            color: #86868b;
-            background-color: transparent; /* 继承body背景 */
+            background-color: #fff;
         }
-        .empty-content .placeholder-icon {
-            font-size: 48px;
+        .chat-header {
+            padding: 12px 16px;
+            border-bottom: 1px solid #e5e5e7;
+            font-weight: 500;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+        .chat-message {
             margin-bottom: 16px;
-            opacity: 0.5;
-            display: block;
+            max-width: 80%;
         }
-        .empty-content span {
-            font-size: 15px;
+        .chat-message.receive {
+            align-self: flex-start;
+        }
+        .chat-message.send {
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        .message-bubble {
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .receive .message-bubble {
+            background-color: #f0f0f0;
+            border-top-left-radius: 0;
+        }
+        .send .message-bubble {
+            background-color: #e2b887;
+            color: #fff;
+            border-top-right-radius: 0;
+        }
+        .message-time {
+            font-size: 10px;
+            color: #86868b;
+            margin-top: 4px;
+            text-align: right;
+        }
+        /* 聊天输入框 */
+        .chat-input {
+            padding: 12px 16px;
+            border-top: 1px solid #e5e5e7;
+            display: flex;
+            gap: 8px;
+        }
+        .chat-input input {
+            flex: 1;
+            height: 36px;
+            padding: 0 12px;
+            border-radius: 18px;
+            border: 1px solid #e5e5e7;
+            outline: none;
+        }
+        .chat-input button {
+            padding: 0 16px;
+            border-radius: 18px;
+            border: none;
+            background-color: #e2b887;
+            color: #fff;
+            cursor: pointer;
         }
 
-        /* 新增：搜索结果卡片样式 */
-        .search-result-card {
-            max-width: 500px;
-            margin: 0 auto;
+        /* 我的板块：周桐的个人信息 */
+        .profile-content {
+            padding: 20px 16px;
+        }
+        .profile-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .profile-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background-color: #e2b887;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .profile-id {
+            font-size: 14px;
+            color: #86868b;
+        }
+        .profile-logout {
+            color: #ff453a;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        /* 个人信息项 */
+        .profile-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .profile-item-label {
+            font-size: 15px;
+            color: #86868b;
+        }
+        .profile-item-value {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        /* 备忘录卡片 */
+        .memo-card {
             background-color: #fff;
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            display: none;
         }
-        .search-result-card.active {
-            display: block;
-        }
-        .result-title {
-            font-size: 18px;
+        .memo-header {
+            font-size: 16px;
             font-weight: 600;
             margin-bottom: 16px;
-            color: #1d1d1f;
-            border-bottom: 1px solid #f0f0f0;
             padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #e2b887;
         }
-        .result-text {
-            font-size: 15px;
-            line-height: 1.8;
-            color: #333;
-        }
-
-        /* 新增：权限封禁提示 */
-        .forbidden-tip {
-            text-align: center;
-            padding: 40px 20px;
-            color: #ff453a;
-            background-color: transparent; /* 继承body背景 */
-        }
-        .forbidden-icon {
-            font-size: 60px;
-            margin-bottom: 16px;
-            display: block;
-        }
-        .forbidden-text {
-            font-size: 16px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-        .forbidden-desc {
+        .memo-time {
             font-size: 14px;
             color: #86868b;
+            margin-bottom: 20px;
+            display: block;
         }
-
-        /* 新增：管理员列表样式 */
-        .admin-list {
-            list-style: none;
-            margin-top: 10px;
-        }
-        .admin-item {
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            background-color: #f8f8f8;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .admin-item.active {
-            color: #e2b887;
-            font-weight: 500;
-            background-color: #fef7ed;
-        }
-        .admin-item:not(.active):hover {
-            background-color: #f0f0f0;
-        }
-        .admin-item.disabled {
-            color: #ccc;
-            cursor: not-allowed;
-            background-color: #fafafa;
-        }
-
-        /* 新增：管理员7详情样式 */
-        .admin-detail {
-            font-size: 15px;
-            line-height: 1.8;
-        }
-        .admin-detail p {
-            margin-bottom: 8px;
-        }
-        .admin-detail strong {
-            color: #e2b887;
-            width: 80px;
-            display: inline-block;
-        }
-
-        /* 登录表单样式 */
-        .login-btn {
-            padding: 10px 24px;
-            background-color: #e2b887;
-            color: #fff;
-            border: none;
-            border-radius: 22px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            margin-top: 16px;
-            transition: all 0.2s ease;
-        }
-        .login-btn:hover {
-            background-color: #d1a06d;
-        }
-        .login-form {
-            display: none;
+        .todo-list {
+            display: flex;
             flex-direction: column;
             gap: 16px;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .login-form.active {
+        .todo-item {
             display: flex;
-        }
-        .form-input {
-            height: 44px;
-            padding: 0 16px;
-            border-radius: 8px;
-            border: 1px solid #e5e5e7;
+            align-items: flex-start;
+            gap: 12px;
             font-size: 15px;
-            outline: none;
+            line-height: 1.6;
         }
-        .form-input:focus {
-            border-color: #e2b887;
-            box-shadow: 0 0 0 4px rgba(226, 184, 135, 0.1);
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #e2b887;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+            cursor: pointer;
         }
-        .submit-btn {
-            height: 44px;
+        .checkbox.checked {
             background-color: #e2b887;
             color: #fff;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
         }
-        .submit-btn:hover {
-            background-color: #d1a06d;
+        .checkbox.checked::after {
+            content: "✓";
+            font-size: 14px;
+            font-weight: bold;
         }
-        .error-tip {
+        .todo-text {
+            flex: 1;
+        }
+        .todo-important {
             color: #ff453a;
-            font-size: 12px;
-            text-align: center;
-            display: none;
+            font-weight: 500;
+            margin-left: 8px;
         }
-        .error-tip.active {
-            display: block;
+        .todo-highlight {
+            color: #ff7300;
+            font-weight: 500;
         }
 
         @media (max-width: 768px) {
+            /* 移动端适配 */
+            .content {
+                margin-top: 90px;
+            }
+            .message-content {
+                flex-direction: column;
+                height: calc(100vh - 150px);
+            }
+            .contact-list {
+                width: 100%;
+                height: 40%;
+                border-right: none;
+                border-bottom: 1px solid #e5e5e7;
+            }
+            .chat-window {
+                height: 60%;
+            }
             .post-card {
                 padding: 12px;
             }
@@ -435,28 +510,20 @@
             .comment-item {
                 font-size: 13px;
             }
-            .content {
-                margin-top: 90px; /* 移动端适配，微调上边距 */
-            }
-            .empty-content {
-                height: calc(100vh - 150px); /* 移动端适配高度 */
-            }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部容器：包含导航栏 + 中间时间 -->
-    <div class="top-container">
-        <!-- 顶部导航 -->
-        <div class="top-nav">
-            <div class="title">上北大学 · 校园圈</div>
-            <div class="avatar">我</div>
-        </div>
-        <!-- 顶部中间时间 -->
-        <div class="top-time" id="currentTime">2026年1月9日 0:00</div>
+    <!-- 新增：顶部中间时间显示（和second-page.html格式一致） -->
+    <div class="top-time" id="currentTime">2026年1月10日 0:00</div>
+
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <div class="title">上北大学 · 校园圈</div>
+        <div class="avatar">周</div>
     </div>
 
-    <!-- 圈子板块 -->
+    <!-- 圈子板块：和主页面内容一致 -->
     <div id="circle" class="content active">
         <!-- 置顶通知帖 -->
         <div class="post-card sticky">
@@ -478,7 +545,7 @@
                 <div class="left">
                     <span class="post-tag tag-complaint">[吐槽]</span>
                     <span class="post-author">熬夜赶 due 人</span>
-                    <span class="post-time">30分钟前</span>
+                    <span class="post-time">1天前</span>
                 </div>
             </div>
             <div class="post-content">
@@ -505,13 +572,13 @@
             </div>
         </div>
 
-        <!-- 求助帖：丢笔记本 -->
+        <!-- 周桐的求助帖：丢笔记本 -->
         <div class="post-card">
             <div class="post-header">
                 <div class="left">
                     <span class="post-tag tag-help">[求助]</span>
-                    <span class="post-author">ZHOUZHOU</span>
-                    <span class="post-time">2小时前</span>
+                    <span class="post-author">ZHOUZHOU（我）</span>
+                    <span class="post-time">1天前</span>
                 </div>
             </div>
             <div class="post-content">
@@ -521,26 +588,26 @@
             <div class="comment-list">
                 <div class="comment-item">
                     <span class="comment-author">璐葚嘉</span>
-                    <span class="comment-content">帮顶！老馆丢东西还挺常见的，可以问问管理员张叔，他会帮忙留意的！</span>
+                    <span class="comment-content">帮顶！老馆丢东西还挺常见的，可以问问张叔，他会帮忙留意的！</span>
                 </div>
                 <div class="comment-item">
                     <span class="comment-author">LIBRARY</span>
                     <span class="comment-content">是不是一本黑色的、上面写着<strong>DEATHNOTE</strong>的笔记本？如果是，可能在地下一层书架 7 附近…</span>
                 </div>
                 <div class="comment-item">
-                    <span class="comment-author">ZHOUZHOU</span>
+                    <span class="comment-author">ZHOUZHOU（我）</span>
                     <span class="comment-content">是的是的！那我明天去找找！谢谢你，同学！</span>
                 </div>
             </div>
         </div>
-                        
-        <!-- 求助帖：古代文学论文参考文献 -->
+
+        <!-- 周桐的求助帖：古代文学论文参考文献 -->
         <div class="post-card">
             <div class="post-header">
                 <div class="left">
                     <span class="post-tag tag-help">[求助]</span>
-                    <span class="post-author">ZHOUZHOU</span>
-                    <span class="post-time">1天前</span>
+                    <span class="post-author">ZHOUZHOU（我）</span>
+                    <span class="post-time">2天前</span>
                 </div>
             </div>
             <div class="post-content">
@@ -554,10 +621,10 @@
                 </div>
                 <div class="comment-item">
                     <span class="comment-author">LIBRARY</span>
-                    <span class="comment-content">当年写类似论文的时候，在老图书馆的地下一层借过一本《......》，不过现在可能下架了</span>
+                    <span class="comment-content">当年写类似论文的时候，在旧图书馆的地下一层借过一本《......》，不过现在可能下架了</span>
                 </div>
                 <div class="comment-item">
-                    <span class="comment-author">ZHOUZHOU</span>
+                    <span class="comment-author">ZHOUZHOU（我）</span>
                     <span class="comment-content">谢谢！已经去电子库查了, 准备明天去旧图书馆看看，不过2楼学长你说的是什么呀？</span>
                 </div>
             </div>
@@ -569,7 +636,7 @@
                 <div class="left">
                     <span class="post-tag tag-help">[求助]</span>
                     <span class="post-author">匿名</span>
-                    <span class="post-time">2天前</span>
+                    <span class="post-time">3天前</span>
                 </div>
             </div>
             <div class="post-content">
@@ -598,7 +665,7 @@
                 <div class="left">
                     <span class="post-tag tag-complaint">[吐槽]</span>
                     <span class="post-author">书虫本虫</span>
-                    <span class="post-time">2天前</span>
+                    <span class="post-time">3天前</span>
                 </div>
             </div>
             <div class="post-content">
@@ -631,7 +698,7 @@
                 <div class="left">
                     <span class="post-tag tag-chat">[闲聊]</span>
                     <span class="post-author">校园探险队</span>
-                    <span class="post-time">3天前</span>
+                    <span class="post-time">4天前</span>
                 </div>
             </div>
             <div class="post-content">
@@ -640,23 +707,23 @@
                 2. 西校区废弃音乐教室：窗户永远锁着，晚上路过能看到影子晃动<br>
                 3. 后山竹林小径：据说有人深夜看到过白色身影，还会听到哭声<br>
                 有没有同学亲身经历过？一起来分享一下！顺便宣传一下我的小红书呀，大家能来支持关注一下不。<a href="https://www.xiaohongshu.com/user/profile/5fb4e2f8000000000100816e">【比格大王的小红书】</a>
-            </div>
-            <div class="comment-list">
-                <div class="comment-item">
-                    <span class="comment-author">厄运小姐</span>
-                    <span class="comment-content">我高中校友她姐姐就是上北西校区的，说她室友去音乐教室总能够听到奇怪的声音……</span>
-                </div>
-                <div class="comment-item">
-                    <span class="comment-author">临床医学2023届黄霖阳学长</span>
-                    <span class="comment-content">都是谣言！老馆地下一层以前就是普通阅览室，哪有那么多怪事。</span>
-                </div>
-                <div class="comment-item">
-                    <span class="comment-author">大妮蔻</span>
-                    <span class="comment-content">你们有没有想过，那些 “谣言” 为什么从来没断过？</span>
-                </div>
-                <div class="comment-item">
-                    <span class="comment-author">爱玩金铲铲</span>
-                    <span class="comment-content">求楼主深扒！1998 年到底发生了什么？</span>
+                <div class="comment-list">
+                    <div class="comment-item">
+                        <span class="comment-author">厄运小姐</span>
+                        <span class="comment-content">我高中校友她姐姐就是上北西校区的，说她室友去音乐教室总能够听到奇怪的声音……</span>
+                    </div>
+                    <div class="comment-item">
+                        <span class="comment-author">临床医学2023届黄霖阳学长</span>
+                        <span class="comment-content">都是谣言！老馆地下一层以前就是普通阅览室，哪有那么多怪事。</span>
+                    </div>
+                    <div class="comment-item">
+                        <span class="comment-author">大妮蔻</span>
+                        <span class="comment-content">你们有没有想过，那些 “谣言” 为什么从来没断过？</span>
+                    </div>
+                    <div class="comment-item">
+                        <span class="comment-author">爱玩金铲铲</span>
+                        <span class="comment-content">求楼主深扒！1998 年到底发生了什么？</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -667,11 +734,8 @@
                 <div class="left">
                     <span class="post-tag tag-help">[求助]</span>
                     <span class="post-author">DZINZ</span>
-                    <span class="post-time">14天前</span>
+                    <span class="post-time">15天前</span>
                 </div>
-            </div>
-            <div class="post-content">
-                谁能教教我怎么用灭火器吹笛子啊(っ °Д °;)っ
             </div>
             <div class="comment-list">
                 <div class="comment-item">
@@ -694,8 +758,8 @@
             <div class="post-header">
                 <div class="left">
                     <span class="post-tag tag-recommend">[安利]</span>
-                    <span class="post-author">ZHOUZHOU</span>
-                    <span class="post-time">16天前</span>
+                    <span class="post-author">ZHOUZHOU（我）</span>
+                    <span class="post-time">17天前</span>
                 </div>
             </div>
             <div class="post-content">
@@ -714,9 +778,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- 圈子板块闭合 -->
 
-    <!-- 发现板块 -->
+    <!-- 发现板块：和主页面一致 -->
     <div id="discover" class="content">
         <div class="discover-content">
             <div class="search-box">
@@ -727,27 +791,140 @@
         </div>
     </div>
 
-    <!-- 私信板块 -->
+    <!-- 私信板块：周桐专属 - 联系人列表 + 聊天内容 -->
     <div id="message" class="content">
-        <div class="empty-content">
-            <span class="placeholder-icon">💬</span>
-            <span>暂无私信消息</span>
+        <div class="message-content">
+            <!-- 联系人列表 -->
+            <div class="contact-list">
+                <div class="contact-item active" onclick="switchChat('library', event)">
+                    <div class="contact-name">LIBRARY</div>
+                    <div class="contact-lastmsg">黑色笔记本在地下一层书架7附近...</div>
+                </div>
+                <div class="contact-item" onclick="switchChat('zhangshu', event)">
+                    <div class="contact-name">张叔</div>
+                    <div class="contact-lastmsg">你要找的笔记本我帮你留着了...</div>
+                </div>
+                <div class="contact-item" onclick="switchChat('admin7', event)">
+                    <div class="contact-name">管理员7</div>
+                    <div class="contact-lastmsg">禁止打探苏晚相关信息...</div>
+                </div>
+            </div>
+            
+            <!-- 聊天窗口：默认显示和LIBRARY的聊天 -->
+            <div class="chat-window" id="libraryChat">
+                <div class="chat-header">LIBRARY</div>
+                <div class="chat-messages">
+                    <div class="chat-message receive">
+                        <div class="message-bubble">是不是一本黑色的、上面写着DEATHNOTE的笔记本？</div>
+                        <div class="message-time">6小时前</div>
+                    </div>
+                    <div class="chat-message receive">
+                        <div class="message-bubble">如果是，应该在地下一层书架7附近...记住，只能晚上闭馆后去</div>
+                        <div class="message-time">6小时前</div>
+                    </div>
+                    <div class="chat-message send">
+                        <div class="message-bubble">是的是的！那我明天去找找！谢谢你，同学！</div>
+                        <div class="message-time">5小时58分钟前</div>
+                    </div>
+                    <div class="chat-message receive">
+                        <div class="message-bubble">注意安全，千万别离开...</div>
+                        <div class="message-time">5小时50分钟前</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="输入消息...">
+                    <button>发送</button>
+                </div>
+            </div>
+
+            <!-- 和张叔的聊天（默认隐藏） -->
+            <div class="chat-window" id="zhangshuChat" style="display: none;">
+                <div class="chat-header">张叔</div>
+                <div class="chat-messages">
+                    <div class="chat-message send">
+                        <div class="message-bubble">张叔您好，请问您捡到我的黑色笔记本了吗？</div>
+                        <div class="message-time">12小时前</div>
+                    </div>
+                    <div class="chat-message receive">
+                        <div class="message-bubble">是那个写着DEATHNOTE的本子吧？我帮你收在地下一层了</div>
+                        <div class="message-time">12小时前</div>
+                    </div>
+                    <div class="chat-message receive">
+                        <div class="message-bubble">不过现在地下一层封了，暂时拿不了</div>
+                        <div class="message-time">12小时前</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="输入消息...">
+                    <button>发送</button>
+                </div>
+            </div>
+
+            <!-- 和管理员7的聊天（默认隐藏） -->
+            <div class="chat-window" id="admin7Chat" style="display: none;">
+                <div class="chat-header">管理员7</div>
+                <div class="chat-messages">
+                    <div class="chat-message send">
+                        <div class="message-bubble">请问苏晚学姐的事情是真的吗？</div>
+                        <div class="message-time">2天前</div>
+                    </div>
+                    <div class="chat-message receive">
+                        <div class="message-bubble">本平台禁止打探他人隐私，请遵守社区规定</div>
+                        <div class="message-time">2天前</div>
+                    </div>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="输入消息...">
+                    <button>发送</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- 我的板块 -->
+    <!-- 我的板块：周桐的个人信息 + 备忘录 -->
     <div id="mine" class="content">
-        <div class="empty-content">
-            <span class="placeholder-icon">👤</span>
-            <span>请登录后查看我的内容</span>
-            <button class="login-btn" onclick="showLoginForm()">登录</button>
-            
-            <!-- 登录表单 -->
-            <div class="login-form" id="loginForm">
-                <input type="text" class="form-input" id="username" placeholder="请输入用户名">
-                <input type="password" class="form-input" id="password" placeholder="请输入密码">
-                <button class="submit-btn" onclick="checkLogin()">登录</button>
-                <div class="error-tip" id="errorTip">用户名或密码错误</div>
+        <div class="profile-content">
+            <!-- 个人信息卡片 -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">周</div>
+                    <div class="profile-info">
+                        <div class="profile-name">周桐</div>
+                        <div class="profile-id">用户名：ZHOUZHOU | 文学院 2024级</div>
+                        <div class="profile-logout" onclick="logout()">退出登录</div>
+                    </div>
+                </div>
+                <div class="profile-item">
+                    <div class="profile-item-label">学号</div>
+                    <div class="profile-item-value">2024010707</div>
+                </div>
+                <div class="profile-item">
+                    <div class="profile-item-label">专业</div>
+                    <div class="profile-item-value">汉语言文学（古籍修复方向）</div>
+                </div>
+                <div class="profile-item">
+                    <div class="profile-item-label">常用地点</div>
+                    <div class="profile-item-value">老图书馆</div>
+                </div>
+            </div>
+
+            <!-- 个人备忘录 -->
+            <div class="memo-card">
+                <div class="memo-header">个人备忘录</div>
+                <span class="memo-time">1月9日 中午</span>
+                
+                <div class="todo-list">
+                    <div class="todo-item">
+                        <div class="checkbox checked"></div>
+                        <div class="todo-text">问张叔有没有捡到一本黑色笔记本</div>
+                    </div>
+                    <div class="todo-item">
+                        <div class="checkbox"></div>
+                        <div class="todo-text">
+                            晚上去拿本子！<span class="todo-important">（重要）</span>，在<span class="todo-highlight">地下一层书架7</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -769,7 +946,7 @@
     </div>
 
     <script>
-        // 标签切换功能
+        // 标签切换功能（和主页面一致）
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.content');
             contents.forEach(content => content.classList.remove('active'));
@@ -777,74 +954,58 @@
             tabs.forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
+        }
+
+        // 私信切换聊天对象
+        function switchChat(chatId, event) {
+            // 隐藏所有聊天窗口
+            const chatWindows = document.querySelectorAll('.chat-window');
+            chatWindows.forEach(window => window.style.display = 'none');
+            // 显示选中的聊天窗口
+            document.getElementById(`${chatId}Chat`).style.display = 'flex';
             
-            // 切换到发现板块时隐藏所有搜索结果
-            if (tabId === 'discover') {
-                hideAllResultCards();
-            }
+            // 更新联系人选中状态
+            const contactItems = document.querySelectorAll('.contact-item');
+            contactItems.forEach(item => item.classList.remove('active'));
+            event.target.closest('.contact-item').classList.add('active');
         }
 
-        // 隐藏所有搜索结果卡片
-        function hideAllResultCards() {
-            const resultCards = document.querySelectorAll('.search-result-card');
-            resultCards.forEach(card => card.classList.remove('active'));
+        // 退出登录返回主页面
+        function logout() {
+            location.href = "second-page.html"; 
         }
 
-        // 显示管理员7详情
-        function showAdmin7Detail() {
-            hideAllResultCards();
-            document.getElementById('admin7Card').classList.add('active');
-        }
-        
-        // 搜索功能：修改为跳转到独立页面
-        const searchInput = document.getElementById('searchInput');
-        searchInput.addEventListener('keyup', function(e) {
-            if (e.key === 'Enter') {
-                const keyword = this.value.trim();
-                // 搜索不同关键词，跳转到对应的独立页面
-                if (keyword === '苏晚') {
-                    location.href = "suwan.html"; // 苏晚无法打开的档案页面
-                } else if (keyword === '老图书馆') {
-                    location.href = "library.html"; // 老图书馆资料页面
-                } else if (keyword === '管理员') {
-                    location.href = "guanliyuan.html"; // 管理员列表页面
-                } else if (keyword) {
-                    alert(`未找到「${keyword}」相关内容`);
-                }
-            }
-        });
-
-        // 初始化时间显示（已修改为2026年1月9日 0:00）
+        // 初始化时间和交互
         window.onload = function() {
-            document.getElementById('currentTime').textContent = '2026年1月9日 0:00';
+            // 修正时间格式（中文冒号改英文）
+            document.getElementById('currentTime').textContent = '2026年1月10日 0:00';
+            
+            // 复选框勾选/取消勾选交互
+            const checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                });
+            });
+
+            // 搜索功能（和主页面一致）
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    const keyword = this.value.trim();
+                    // 搜索不同关键词，跳转到对应的独立页面
+                    if (keyword === '苏晚') {
+                        location.href = "suwan.html"; // 苏晚档案页面
+                    } else if (keyword === '旧图书馆') {
+                        location.href = "library.html"; // 旧图书馆资料页面
+                    } else if (keyword === '管理员') {
+                        location.href = "guanliyuan.html"; // 管理员列表页面
+                    } else if (keyword) {
+                        alert(`未找到「${keyword}」相关内容`);
+                    }
+                }
+            });
         };
-
-        // 显示登录表单
-        function showLoginForm() {
-            document.getElementById('loginForm').classList.add('active');
-        }
-
-        // 验证登录信息
-        function checkLogin() {
-            const username = document.getElementById('username').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const errorTip = document.getElementById('errorTip');
-            
-            // 隐藏错误提示
-            errorTip.classList.remove('active');
-            
-            // 验证用户名和密码
-            if (username === 'ZHOUZHOU' && password === 'DEATHNOTE') {
-                // 跳转到周桐专属页面
-                location.href = "zhouzhou.html";
-            } else if (username === 'LIBRARY' && password === 'ORYIZIB') {
-                // 跳转到张睿页面
-                location.href = "zhangrui.html";
-            } else {
-                // 显示错误提示
-                errorTip.classList.add('active');
-            }
-        }
     </script>
 </body>
 </html>
