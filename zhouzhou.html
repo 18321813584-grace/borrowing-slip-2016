@@ -18,24 +18,7 @@
             position: relative;
         }
 
-        /* 顶部时间容器：和主页面完全一致 */
-        .top-time-container {
-            background-color: #fff;
-            border-bottom: 1px solid #e5e5e7;
-            padding: 4px 0;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
-        }
-        .top-time {
-            font-size: 14px;
-            color: #86868b;
-        }
-
-        /* 顶部导航栏：固定在时间下方 */
+        /* 顶部导航栏：最上方（显示上北大学·校园圈） */
         .top-nav {
             display: flex;
             align-items: center;
@@ -44,7 +27,7 @@
             background-color: #fff;
             border-bottom: 1px solid #e5e5e7;
             position: fixed;
-            top: 28px; /* 适配时间容器高度 */
+            top: 0;
             left: 0;
             right: 0;
             z-index: 999;
@@ -64,6 +47,23 @@
             justify-content: center;
             color: #fff;
             font-size: 14px;
+        }
+
+        /* 时间容器：在导航栏下方（和正确页面一致） */
+        .top-time-container {
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e7;
+            padding: 4px 0;
+            text-align: center;
+            position: fixed;
+            top: 48px; /* 适配导航栏高度 */
+            left: 0;
+            right: 0;
+            z-index: 999;
+        }
+        .top-time {
+            font-size: 14px;
+            color: #86868b;
         }
 
         /* 底部功能导航 */
@@ -93,9 +93,9 @@
             font-size: 12px;
         }
 
-        /* 内容区域：适配顶部固定栏 */
+        /* 内容区域：适配顶部固定栏（导航48px + 时间28px） */
         .content {
-            margin-top: 70px; /* 时间(28px) + 导航(42px) */
+            margin-top: 76px; 
             margin-bottom: 60px;
             padding: 10px 16px;
             display: none;
@@ -104,7 +104,7 @@
             display: block;
         }
 
-        /* 圈子板块：卡片样式修复 */
+        /* 圈子板块：卡片样式和正确页面一致 */
         .post-card {
             background-color: #fff;
             border-radius: 12px;
@@ -131,7 +131,7 @@
             padding: 2px 8px;
             border-radius: 4px;
             margin-right: 8px;
-            display: inline-block; /* 确保标签样式生效 */
+            display: inline-block;
         }
         .tag-notice {
             background-color: #e8f0fe;
@@ -234,7 +234,7 @@
         /* 私信板块样式 */
         .message-content {
             display: flex;
-            height: calc(100vh - 130px);
+            height: calc(100vh - 136px);
         }
         .contact-list {
             width: 30%;
@@ -466,15 +466,15 @@
     </style>
 </head>
 <body>
-    <!-- 顶部时间容器（和主页面一致） -->
-    <div class="top-time-container">
-        <div class="top-time" id="currentTime">2026年1月10日 0:00</div>
-    </div>
-
-    <!-- 顶部导航 -->
+    <!-- 顶部导航：最上方（显示上北大学·校园圈） -->
     <div class="top-nav">
         <div class="title">上北大学 · 校园圈</div>
         <div class="avatar">周</div>
+    </div>
+
+    <!-- 时间容器：导航栏下方（和正确页面位置一致） -->
+    <div class="top-time-container">
+        <div class="top-time" id="currentTime">2026年1月10日 0:00</div>
     </div>
 
     <!-- 圈子板块：完整保留所有帖子 -->
