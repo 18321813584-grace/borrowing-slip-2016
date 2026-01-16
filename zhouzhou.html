@@ -19,29 +19,44 @@
             padding-top: 20px; /* 给顶部时间留出空间 */
         }
 
-        /* 新增：顶部时间样式（和second-page.html一致） */
-        .top-time {
-            text-align: center;
-            font-size: 14px;
-            color: #86868b;
-            margin-bottom: 10px;
-            padding: 4px 0;
-        }
-
-        /* 顶部导航栏：和主页面一致（调整margin-top适配时间） */
-        .top-nav {
+        /* 顶部整合容器：标题+时间+头像同一行 */
+        .top-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e7;
+            z-index: 999;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 12px 16px;
-            background-color: #fff;
-            border-bottom: 1px solid #e5e5e7;
-            position: fixed;
-            top: 34px; /* 适配顶部时间高度 */
-            left: 0;
-            right: 0;
-            z-index: 999;
         }
+        .top-container .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        .top-container .top-time {
+            font-size: 14px;
+            color: #86868b;
+            flex: 1;
+            text-align: center;
+            margin: 0 10px;
+        }
+        .top-container .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #e2b887;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+        }
+        
         .top-nav .title {
             font-size: 18px;
             font-weight: 600;
@@ -88,7 +103,7 @@
 
         /* 内容区域：调整margin-top适配新的导航位置 */
         .content {
-            margin-top: 94px; /* 时间(34px) + 导航(60px) */
+            margin-top: 68px; /* 适配新的顶部容器高度 */
             margin-bottom: 60px;
             padding: 10px 16px;
             display: none;
