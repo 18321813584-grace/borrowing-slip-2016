@@ -355,6 +355,73 @@
             display: inline-block;
         }
 
+        /* 登录表单样式 */
+        .login-btn {
+            padding: 10px 24px;
+            background-color: #e2b887;
+            color: #fff;
+            border: none;
+            border-radius: 22px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 16px;
+            transition: all 0.2s ease;
+        }
+        .login-btn:hover {
+            background-color: #d1a06d;
+        }
+        .login-form {
+            display: none;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .login-form.active {
+            display: flex;
+        }
+        .form-input {
+            height: 44px;
+            padding: 0 16px;
+            border-radius: 8px;
+            border: 1px solid #e5e5e7;
+            font-size: 15px;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: #e2b887;
+            box-shadow: 0 0 0 4px rgba(226, 184, 135, 0.1);
+        }
+        .submit-btn {
+            height: 44px;
+            background-color: #e2b887;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .submit-btn:hover {
+            background-color: #d1a06d;
+        }
+        .error-tip {
+            color: #ff453a;
+            font-size: 12px;
+            text-align: center;
+            display: none;
+        }
+        .error-tip.active {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .post-card {
                 padding: 12px;
@@ -649,6 +716,15 @@
         <div class="empty-content">
             <span class="placeholder-icon">👤</span>
             <span>请登录后查看我的内容</span>
+            <button class="login-btn" onclick="showLoginForm()">登录</button>
+            
+            <!-- 登录表单 -->
+            <div class="login-form" id="loginForm">
+                <input type="text" class="form-input" id="username" placeholder="请输入用户名">
+                <input type="password" class="form-input" id="password" placeholder="请输入密码">
+                <button class="submit-btn" onclick="checkLogin()">登录</button>
+                <div class="error-tip" id="errorTip">用户名或密码错误</div>
+            </div>
         </div>
     </div>
 
@@ -721,6 +797,33 @@
         window.onload = function() {
             document.getElementById('currentTime').textContent = '2026年1月9日';
         };
+
+        // 显示登录表单
+        function showLoginForm() {
+            document.getElementById('loginForm').classList.add('active');
+        }
+
+        // 验证登录信息
+        function checkLogin() {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const errorTip = document.getElementById('errorTip');
+            
+            // 隐藏错误提示
+            errorTip.classList.remove('active');
+            
+            // 验证用户名和密码
+            if (username === 'ZHOUZHOU' && password === 'DEATHNOTE') {
+                // 跳转到ZHOUZHOU对应的页面
+                location.href = "zhouzhou.html";
+            } else if (username === 'LIBRARY' && password === 'ORYIZIB') {
+                // 跳转到LIBRARY(张睿)对应的页面
+                location.href = "zhangrui.html";
+            } else {
+                // 显示错误提示
+                errorTip.classList.add('active');
+            }
+        }
     </script>
 </body>
 </html>
