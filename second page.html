@@ -422,6 +422,122 @@
             display: block;
         }
 
+        /* 周桐的备忘录样式（集成到我的板块） */
+        .user-profile {
+            display: none;
+            padding: 16px;
+        }
+        .user-profile.active {
+            display: block;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .profile-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: #e2b887;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .profile-info {
+            flex: 1;
+        }
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        .profile-id {
+            font-size: 12px;
+            color: #86868b;
+            margin-top: 4px;
+        }
+        .logout-btn {
+            font-size: 12px;
+            color: #ff453a;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+
+        /* 备忘录样式 */
+        .memo-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid #f0f0f0;
+        }
+        .memo-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #e2b887;
+        }
+        .memo-time {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .todo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .todo-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 2px solid #e2b887;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .checkbox.checked {
+            background-color: #e2b887;
+            color: #fff;
+        }
+        .checkbox.checked::after {
+            content: "✓";
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .todo-text {
+            flex: 1;
+        }
+        .todo-important {
+            color: #ff453a;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+        .todo-highlight {
+            color: #ff7300;
+            font-weight: 500;
+        }
+
         @media (max-width: 768px) {
             .post-card {
                 padding: 12px;
@@ -431,6 +547,9 @@
             }
             .comment-item {
                 font-size: 13px;
+            }
+            .todo-item {
+                font-size: 14px;
             }
         }
     </style>
@@ -701,7 +820,7 @@
             </div>
             <div class="search-tips">可以搜索“苏晚”试试看</div>
         </div>
-    </div> <!-- 关键修复：补上发现板块的闭合标签 -->
+    </div>
 
     <!-- 私信板块 -->
     <div id="message" class="content">
@@ -713,7 +832,8 @@
 
     <!-- 我的板块 -->
     <div id="mine" class="content">
-        <div class="empty-content">
+        <!-- 未登录状态 -->
+        <div class="empty-content" id="unloginState">
             <span class="placeholder-icon">👤</span>
             <span>请登录后查看我的内容</span>
             <button class="login-btn" onclick="showLoginForm()">登录</button>
@@ -724,6 +844,40 @@
                 <input type="password" class="form-input" id="password" placeholder="请输入密码">
                 <button class="submit-btn" onclick="checkLogin()">登录</button>
                 <div class="error-tip" id="errorTip">用户名或密码错误</div>
+            </div>
+        </div>
+
+        <!-- 周桐已登录状态（备忘录界面） -->
+        <div class="user-profile" id="zhouzhouProfile">
+            <div class="profile-header">
+                <div class="profile-avatar">周</div>
+                <div class="profile-info">
+                    <div class="profile-name">周桐（ZHOUZHOU）</div>
+                    <div class="profile-id">ID: ZHOUZHOU</div>
+                    <div class="logout-btn" onclick="logout()">退出登录</div>
+                </div>
+            </div>
+
+            <!-- 周桐的备忘录 -->
+            <div class="memo-card">
+                <div class="memo-header">个人备忘录</div>
+                <span class="memo-time">1月12日 中午</span>
+                
+                <div class="todo-list">
+                    <!-- 已完成的待办 -->
+                    <div class="todo-item">
+                        <div class="checkbox checked"></div>
+                        <div class="todo-text">问张叔有没有捡到一本黑色笔记本</div>
+                    </div>
+                    
+                    <!-- 未完成的待办 -->
+                    <div class="todo-item">
+                        <div class="checkbox"></div>
+                        <div class="todo-text">
+                            晚上去拿本子！<span class="todo-important">（重要）</span>，在<span class="todo-highlight">地下一层书架7</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -786,7 +940,7 @@
                 } else if (keyword === '旧图书馆') {
                     location.href = "library.html"; // 旧图书馆资料页面
                 } else if (keyword === '管理员') {
-                    location.href = "guanliyuan.html"; // 管理员列表页面（你改的文件名）
+                    location.href = "guanliyuan.html"; // 管理员列表页面
                 } else if (keyword) {
                     alert(`未找到「${keyword}」相关内容`);
                 }
@@ -814,16 +968,39 @@
             
             // 验证用户名和密码
             if (username === 'ZHOUZHOU' && password === 'DEATHNOTE') {
-                // 跳转到ZHOUZHOU对应的页面
-                location.href = "zhouzhou.html";
+                // 切换到周桐的已登录状态
+                document.getElementById('unloginState').style.display = 'none';
+                document.getElementById('zhouzhouProfile').classList.add('active');
             } else if (username === 'LIBRARY' && password === 'ORYIZIB') {
-                // 跳转到LIBRARY(张睿)对应的页面
+                // 张睿账号跳转新页面（保持原有逻辑）
                 location.href = "zhangrui.html";
             } else {
                 // 显示错误提示
                 errorTip.classList.add('active');
             }
         }
+
+        // 退出登录
+        function logout() {
+            // 恢复未登录状态
+            document.getElementById('zhouzhouProfile').classList.remove('active');
+            document.getElementById('unloginState').style.display = 'flex';
+            // 清空登录表单
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('loginForm').classList.remove('active');
+            document.getElementById('errorTip').classList.remove('active');
+        }
+
+        // 复选框点击切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('click', function() {
+                    this.classList.toggle('checked');
+                });
+            });
+        });
     </script>
 </body>
 </html>
