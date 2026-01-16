@@ -73,11 +73,6 @@
             color: #e2b887;
             font-weight: 500;
         }
-        .tab-item i {
-            font-size: 20px;
-            margin-bottom: 4px;
-            display: block;
-        }
         .tab-item span {
             font-size: 12px;
         }
@@ -233,6 +228,9 @@
             transform: translateY(-50%);
             color: #86868b;
             font-size: 18px;
+            /* 用文字图标替代原来的mask图标，更简单 */
+            content: "🔍";
+            display: inline-block;
         }
         .search-tips {
             font-size: 14px;
@@ -249,10 +247,11 @@
             height: 60vh;
             color: #86868b;
         }
-        .empty-content i {
+        .empty-content .placeholder-icon {
             font-size: 48px;
             margin-bottom: 16px;
             opacity: 0.5;
+            display: block;
         }
         .empty-content span {
             font-size: 15px;
@@ -282,32 +281,6 @@
             .comment-item {
                 font-size: 13px;
             }
-        }
-
-        /* 模拟图标（替代字体图标，避免依赖） */
-        .icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background-color: currentColor;
-            mask-size: contain;
-            -webkit-mask-size: contain;
-            mask-repeat: no-repeat;
-            -webkit-mask-repeat: no-repeat;
-            mask-position: center;
-            -webkit-mask-position: center;
-        }
-        .icon-circle {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z'/%3E%3C/svg%3E");
-        }
-        .icon-search {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E");
-        }
-        .icon-message {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z'/%3E%3C/svg%3E");
-        }
-        .icon-user {
-            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E");
         }
     </style>
 </head>
@@ -572,7 +545,7 @@
     <div id="discover" class="content">
         <div class="discover-content">
             <div class="search-box">
-                <i class="icon icon-search search-icon"></i>
+                <span class="search-icon">🔍</span>
                 <input type="text" class="search-input" id="searchInput" placeholder="搜索校园圈内容...">
             </div>
             <div class="search-tips">输入「苏晚」可查看相关线索</div>
@@ -582,7 +555,7 @@
     <!-- 私信板块 -->
     <div id="message" class="content">
         <div class="empty-content">
-            <i class="icon icon-message"></i>
+            <span class="placeholder-icon">💬</span>
             <span>暂无私信消息</span>
         </div>
     </div>
@@ -590,7 +563,7 @@
     <!-- 我的板块 -->
     <div id="mine" class="content">
         <div class="empty-content">
-            <i class="icon icon-user"></i>
+            <span class="placeholder-icon">👤</span>
             <span>请登录后查看我的内容</span>
         </div>
     </div>
@@ -615,7 +588,7 @@
     <div class="time-label" id="currentTime">2026年1月9日</div>
 
     <script>
-        // 标签切换功能
+        // 标签切换功能（修复后确保能正常执行）
         function switchTab(tabId) {
             // 隐藏所有内容
             const contents = document.querySelectorAll('.content');
@@ -628,14 +601,14 @@
             document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
         }
 
-        // 搜索功能：输入苏晚跳转指定链接
+        // 搜索功能：修复语法错误，确保逻辑正常
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('keyup', function(e) {
             if (e.key === 'Enter') {
                 const keyword = this.value.trim();
                 if (keyword === '苏晚') {
-                    function enterNextPage() {
-            location.href = "second page.html";
+                    // 跳转苏晚相关页面（注意文件名空格问题，建议改成second-page.html）
+                    location.href = "second page.html";
                 } else if (keyword) {
                     alert(`未找到「${keyword}」相关内容`);
                 }
