@@ -42,22 +42,26 @@
             text-shadow: 0 0 5px rgba(180, 160, 120, 0.3);
             border-bottom: 1px dashed #555;
             padding-bottom: 20px;
+            /* 标题也加入渐出动画 */
+            opacity: 0;
+            animation: fadeOut 2s ease forwards;
+            animation-delay: 0.2s;
         }
 
-        /* 剧情文本：逐行浮现的悬疑感 */
+        /* 剧情文本容器：统一控制所有文本的渐出动画 */
+        .text-container {
+            opacity: 0;
+            animation: fadeOut 2.5s ease forwards;
+            animation-delay: 0.5s;
+        }
+
+        /* 剧情文本：统一样式，取消原来的逐行延迟 */
         .story-text {
             font-size: 1.1rem;
             color: #dcdcdc;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             text-indent: 2em;
-            opacity: 0;
-            animation: fadeIn 1.5s ease forwards;
-            animation-delay: 0.3s;
         }
-        .story-text:nth-child(2) { animation-delay: 0.6s; }
-        .story-text:nth-child(3) { animation-delay: 0.9s; }
-        .story-text:nth-child(4) { animation-delay: 1.2s; }
-        .story-text:nth-child(5) { animation-delay: 1.5s; }
 
         /* 关键细节高亮：营造心理压迫感 */
         .highlight {
@@ -66,7 +70,7 @@
             text-shadow: 0 0 2px rgba(226, 184, 135, 0.5);
         }
 
-        /* 开始游玩按钮：老旧金属质感 */
+        /* 开始游玩按钮：老旧金属质感 + 渐出动画 */
         .start-btn {
             display: block;
             width: 200px;
@@ -81,6 +85,10 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            /* 按钮渐出动画 */
+            opacity: 0;
+            animation: fadeOut 2.5s ease forwards;
+            animation-delay: 1s;
         }
         .start-btn::before {
             content: "";
@@ -102,18 +110,22 @@
             left: 100%;
         }
 
-        /* 底部细节：模拟图书馆的老旧标注 */
+        /* 底部细节：模拟图书馆的老旧标注 + 渐出动画 */
         .footer-note {
             text-align: right;
             margin-top: 50px;
             font-size: 0.9rem;
             color: #888;
             font-style: italic;
+            /* 底部文字渐出动画 */
+            opacity: 0;
+            animation: fadeOut 2.5s ease forwards;
+            animation-delay: 1.2s;
         }
 
-        /* 动画：文本渐入 */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        /* 核心动画：文本渐出（从完全透明到不透明） */
+        @keyframes fadeOut {
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -136,21 +148,24 @@
     <div class="container">
         <h1 class="page-title">2016年的借阅条</h1>
         
-        <p class="story-text">你是上北大学的一名新生，临近期末考，宿舍里键盘敲击声、背书声、嬉笑打闹声混作一团，吵得你根本没法静下心复习。你揉了揉发胀的太阳穴，心里盘算着找个安静的地方——新图书馆是首选，但你太清楚了，那里早就被占座的“卷王”们挤得水泄不通，连个空座位的影子都见不到。</p>
-        
-        <p class="story-text">你站在宿舍楼下，目光无意间扫向校园深处的老图书馆。那栋楼比新馆矮了半截，外墙的瓷砖掉了不少，窗框也泛着锈迹，看起来灰蒙蒙的。但奇怪的是，傍晚的天色里，老馆的几层窗户还亮着昏黄的灯光，像是有人还在里面。</p>
-        
-        <p class="story-text">“凑活一下吧。”你想着，抬脚往老图书馆走。里面的设施确实老旧，木质书架磨得发亮，借阅机也卡得厉害，但胜在人少，找了个靠窗的位置坐下，居然真的安安静静看了一下午书。</p>
-        
-        <p class="story-text">闭馆的铃声响了三遍，管理员开始催促离场。你收拾好东西往外走，在门口碰到一个陌生的小姐姐，她抱着几本书，说要去借阅机打张借阅条，让你稍等她一分钟。你没多想，点了点头，先走到一楼大厅等她。</p>
-        
-        <p class="story-text">可等你走出老图书馆的大门，晚风裹着凉意吹过来，你回头望了望，<span class="highlight">大厅里空空的，根本没有她的身影</span>。你愣了愣，心想她是不是从侧门走了，或者自己走得太快没注意，没太放在心上，转身回了宿舍。</p>
-        
-        <p class="story-text">七天后，你在食堂门口的公告栏上看到一张<span class="highlight">寻人启事</span>——照片上的女孩眉眼清秀，正是那天在老图书馆门口让你等她的那个小姐姐。启事上写着：“失踪时间：闭馆当日晚；失踪地点：上北大学老图书馆附近”。你的后背瞬间爬满凉意，手里的饭盒差点没拿稳。</p>
+        <!-- 新增文本容器，统一控制所有剧情文本的动画 -->
+        <div class="text-container">
+            <p class="story-text">你是上北大学的一名新生，临近期末考，宿舍里键盘敲击声、背书声、嬉笑打闹声混作一团，吵得你根本没法静下心复习。你揉了揉发胀的太阳穴，心里盘算着找个安静的地方——新图书馆是首选，但你太清楚了，那里早就被占座的“卷王”们挤得水泄不通，连个空座位的影子都见不到。</p>
+            
+            <p class="story-text">你站在宿舍楼下，目光无意间扫向校园深处的老图书馆。那栋楼比新馆矮了半截，外墙的瓷砖掉了不少，窗框也泛着锈迹，看起来灰蒙蒙的。但奇怪的是，傍晚的天色里，老馆的几层窗户还亮着昏黄的灯光，像是有人还在里面。</p>
+            
+            <p class="story-text">“凑活一下吧。”你想着，抬脚往老图书馆走。里面的设施确实老旧，木质书架磨得发亮，借阅机也卡得厉害，但胜在人少，找了个靠窗的位置坐下，居然真的安安静静看了一下午书。</p>
+            
+            <p class="story-text">闭馆的铃声响了三遍，管理员开始催促离场。你收拾好东西往外走，在门口碰到一个陌生的小姐姐，她抱着几本书，说要去借阅机打张借阅条，让你稍等她一分钟。你没多想，点了点头，先走到一楼大厅等她。</p>
+            
+            <p class="story-text">可等你走出老图书馆的大门，晚风裹着凉意吹过来，你回头望了望，<span class="highlight">大厅里空空的，根本没有她的身影</span>。你愣了愣，心想她是不是从侧门走了，或者自己走得太快没注意，没太放在心上，转身回了宿舍。</p>
+            
+            <p class="story-text">七天后，你在食堂门口的公告栏上看到一张<span class="highlight">寻人启事</span>——照片上的女孩眉眼清秀，正是那天在老图书馆门口让你等她的那个小姐姐。启事上写着：“失踪时间：闭馆当日晚；失踪地点：上北大学老图书馆附近”。你的后背瞬间爬满凉意，手里的饭盒差点没拿稳。</p>
 
-        <p class="story-text">如果<span class="highlight">时光倒流</span>，你能否避免<span class="highlight">这场意外</span>？</p>
+            <p class="story-text">如果<span class="highlight">时光倒流</span>，你能否避免<span class="highlight">这场意外</span>？</p>
+        </div>
         
-        <!-- 开始游玩按钮：点击跳转到第二页（可替换为实际第二页路径） -->
+        <!-- 开始游玩按钮：点击跳转到第二页（修复文件名空格问题） -->
         <button class="start-btn" onclick="enterNextPage()">开始游玩</button>
         
         <!-- 底部微恐细节：强化日常中的异常感 -->
@@ -160,9 +175,9 @@
     </div>
 
     <script>
-        // 跳转第二页的逻辑（可根据实际第二页文件名修改）
+        // 跳转第二页的逻辑（修复文件名空格问题，改为标准命名）
         function enterNextPage() {
-            location.href = "second page.html"; 
+            location.href = "secondpage.html"; 
         }
     </script>
 </body>
