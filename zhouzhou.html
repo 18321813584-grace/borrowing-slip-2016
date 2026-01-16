@@ -16,9 +16,19 @@
             color: #1d1d1f;
             overflow-x: hidden;
             position: relative;
+            padding-top: 20px; /* 给顶部时间留出空间 */
         }
 
-        /* 顶部导航栏：和主页面一致 */
+        /* 新增：顶部时间样式（和second-page.html一致） */
+        .top-time {
+            text-align: center;
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 10px;
+            padding: 4px 0;
+        }
+
+        /* 顶部导航栏：和主页面一致（调整margin-top适配时间） */
         .top-nav {
             display: flex;
             align-items: center;
@@ -27,7 +37,7 @@
             background-color: #fff;
             border-bottom: 1px solid #e5e5e7;
             position: fixed;
-            top: 0;
+            top: 34px; /* 适配顶部时间高度 */
             left: 0;
             right: 0;
             z-index: 999;
@@ -76,9 +86,9 @@
             font-size: 12px;
         }
 
-        /* 内容区域：和主页面一致 */
+        /* 内容区域：调整margin-top适配新的导航位置 */
         .content {
-            margin-top: 60px;
+            margin-top: 94px; /* 时间(34px) + 导航(60px) */
             margin-bottom: 60px;
             padding: 10px 16px;
             display: none;
@@ -230,25 +240,11 @@
             text-align: center;
         }
 
-        /* 右下角时间显示：和主页面一致 */
-        .time-label {
-            position: fixed;
-            bottom: 70px;
-            right: 16px;
-            font-size: 12px;
-            color: #86868b;
-            background-color: rgba(255,255,255,0.8);
-            padding: 4px 8px;
-            border-radius: 4px;
-            border: 1px solid #e5e5e7;
-            z-index: 998;
-        }
-
         /* ========== 周桐页面专属样式 ========== */
         /* 私信板块：联系人列表 + 聊天内容 */
         .message-content {
             display: flex;
-            height: calc(100vh - 120px);
+            height: calc(100vh - 154px); /* 适配顶部和底部高度 */
         }
         /* 联系人列表 */
         .contact-list {
@@ -488,9 +484,13 @@
         }
 
         @media (max-width: 768px) {
-            /* 移动端私信布局调整 */
+            /* 移动端适配 */
+            .content {
+                margin-top: 90px;
+            }
             .message-content {
                 flex-direction: column;
+                height: calc(100vh - 150px);
             }
             .contact-list {
                 width: 100%;
@@ -514,6 +514,9 @@
     </style>
 </head>
 <body>
+    <!-- 新增：顶部中间时间显示（和second-page.html格式一致） -->
+    <div class="top-time" id="currentTime">2026年1月10日 0:00</div>
+
     <!-- 顶部导航 -->
     <div class="top-nav">
         <div class="title">上北大学 · 校园圈</div>
@@ -625,7 +628,7 @@
                     <span class="comment-content">谢谢！已经去电子库查了, 准备明天去旧图书馆看看，不过2楼学长你说的是什么呀？</span>
                 </div>
             </div>
-        </div> <!-- 修复：补上这个post-card的闭合标签 -->
+        </div>
 
         <!-- 求助帖：找苏晚学姐 -->
         <div class="post-card">
@@ -942,9 +945,6 @@
         </div>
     </div>
 
-    <!-- 右下角时间 -->
-    <div class="time-label" id="currentTime">2026年1月10日0：00</div>
-
     <script>
         // 标签切换功能（和主页面一致）
         function switchTab(tabId) {
@@ -956,7 +956,7 @@
             document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
         }
 
-        // 私信切换聊天对象（修复：添加event参数）
+        // 私信切换聊天对象
         function switchChat(chatId, event) {
             // 隐藏所有聊天窗口
             const chatWindows = document.querySelectorAll('.chat-window');
@@ -970,15 +970,15 @@
             event.target.closest('.contact-item').classList.add('active');
         }
 
-        // 退出登录返回主页面（修复：去掉URL空格）
+        // 退出登录返回主页面
         function logout() {
             location.href = "second-page.html"; 
         }
 
         // 初始化时间和交互
         window.onload = function() {
-            // 设置当前时间
-            document.getElementById('currentTime').textContent = '2026年1月10日0：00';
+            // 修正时间格式（中文冒号改英文）
+            document.getElementById('currentTime').textContent = '2026年1月10日 0:00';
             
             // 复选框勾选/取消勾选交互
             const checkboxes = document.querySelectorAll('.checkbox');
