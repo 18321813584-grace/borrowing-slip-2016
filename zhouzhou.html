@@ -501,7 +501,15 @@
         @media (max-width: 768px) {
             /* 移动端适配 */
             .content {
-                margin-top: 90px;
+                margin-top: 60px; /* 适配顶部容器 */
+            }
+            .top-container .title {
+                font-size: 16px; /* 移动端标题缩小 */
+            }
+            .top-container .top-time {
+                font-size: 12px; /* 移动端时间缩小 */
+            }
+            /* 其他样式保留不变... */
             }
             .message-content {
                 flex-direction: column;
