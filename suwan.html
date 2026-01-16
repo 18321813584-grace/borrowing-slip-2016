@@ -22,6 +22,26 @@
             padding: 40px 20px;
         }
 
+        /* 新增：返回按钮样式（放在最顶部） */
+        .back-btn {
+            position: fixed;
+            top: 10px;
+            left: 20px;
+            z-index: 998; /* 低于弹窗但高于其他内容 */
+            background-color: #e2b887;
+            color: #fff;
+            border: none;
+            border-radius: 22px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            background-color: #d1a06d;
+        }
+
         /* 顶部导航：和校园圈统一 */
         .top-nav {
             width: 100%;
@@ -34,6 +54,7 @@
             border-bottom: 1px solid #e5e5e7;
             border-radius: 8px 8px 0 0;
             margin-bottom: 0;
+            margin-top: 10px; /* 给返回按钮留出空间 */
         }
         .top-nav .title {
             font-size: 18px;
@@ -155,10 +176,17 @@
             .main-container {
                 padding: 30px 20px;
             }
+            .back-btn {
+                padding: 6px 16px;
+                font-size: 13px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- 新增：返回按钮 - 点击回到主页面的发现搜索界面 -->
+    <button class="back-btn" onclick="goBackToDiscover()">关闭并返回搜索界面</button>
+
     <!-- 顶部导航：和校园圈统一 -->
     <div class="top-nav">
         <div class="title">上北大学 · 学生档案管理系统</div>
@@ -210,6 +238,18 @@
                 banModal.style.display = 'none';
             }
         });
+
+        // 新增：返回主页面发现搜索界面的核心函数
+        function goBackToDiscover() {
+            // 优先使用浏览器历史记录返回（保留搜索框状态）
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                // 兜底方案：直接跳转到主页面并激活发现板块
+                // 注意：将 index.html 替换成你的主页面实际文件名
+                window.location.href = "index.html#discover";
+            }
+        }
     </script>
 </body>
 </html>
