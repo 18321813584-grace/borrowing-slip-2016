@@ -625,7 +625,9 @@
                     <span class="comment-content">谢谢！已经去电子库查了, 准备明天去旧图书馆看看，不过2楼学长你说的是什么呀？</span>
                 </div>
             </div>
-            <!-- 求助帖：找苏晚学姐 -->
+        </div> <!-- 修复：补上这个post-card的闭合标签 -->
+
+        <!-- 求助帖：找苏晚学姐 -->
         <div class="post-card">
             <div class="post-header">
                 <div class="left">
@@ -762,7 +764,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> <!-- 圈子板块闭合 -->
 
     <!-- 发现板块：和主页面一致 -->
     <div id="discover" class="content">
@@ -780,15 +782,15 @@
         <div class="message-content">
             <!-- 联系人列表 -->
             <div class="contact-list">
-                <div class="contact-item active" onclick="switchChat('library')">
+                <div class="contact-item active" onclick="switchChat('library', event)">
                     <div class="contact-name">LIBRARY</div>
                     <div class="contact-lastmsg">黑色笔记本在地下一层书架7附近...</div>
                 </div>
-                <div class="contact-item" onclick="switchChat('zhangshu')">
+                <div class="contact-item" onclick="switchChat('zhangshu', event)">
                     <div class="contact-name">张叔</div>
                     <div class="contact-lastmsg">你要找的笔记本我帮你留着了...</div>
                 </div>
-                <div class="contact-item" onclick="switchChat('admin7')">
+                <div class="contact-item" onclick="switchChat('admin7', event)">
                     <div class="contact-name">管理员7</div>
                     <div class="contact-lastmsg">禁止打探苏晚相关信息...</div>
                 </div>
@@ -943,8 +945,8 @@
             document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
         }
 
-        // 私信切换聊天对象
-        function switchChat(chatId) {
+        // 私信切换聊天对象（修复：添加event参数）
+        function switchChat(chatId, event) {
             // 隐藏所有聊天窗口
             const chatWindows = document.querySelectorAll('.chat-window');
             chatWindows.forEach(window => window.style.display = 'none');
@@ -957,9 +959,9 @@
             event.target.closest('.contact-item').classList.add('active');
         }
 
-        // 退出登录返回主页面
+        // 退出登录返回主页面（修复：去掉URL空格）
         function logout() {
-            location.href = "second page.html"; 
+            location.href = "secondpage.html"; 
         }
 
         // 初始化时间和交互
