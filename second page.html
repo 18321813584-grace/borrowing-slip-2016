@@ -225,7 +225,6 @@
             transform: translateY(-50%);
             color: #86868b;
             font-size: 18px;
-            /* 用文字图标替代原来的mask图标，更简单 */
             content: "🔍";
             display: inline-block;
         }
@@ -264,6 +263,95 @@
             padding: 4px 8px;
             border-radius: 4px;
             border: 1px solid #e5e5e7;
+        }
+
+        /* 新增：搜索结果卡片样式 */
+        .search-result-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: none;
+        }
+        .search-result-card.active {
+            display: block;
+        }
+        .result-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+        .result-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        /* 新增：权限封禁提示 */
+        .forbidden-tip {
+            text-align: center;
+            padding: 40px 20px;
+            color: #ff453a;
+        }
+        .forbidden-icon {
+            font-size: 60px;
+            margin-bottom: 16px;
+            display: block;
+        }
+        .forbidden-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        .forbidden-desc {
+            font-size: 14px;
+            color: #86868b;
+        }
+
+        /* 新增：管理员列表样式 */
+        .admin-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+        .admin-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background-color: #f8f8f8;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .admin-item.active {
+            color: #e2b887;
+            font-weight: 500;
+            background-color: #fef7ed;
+        }
+        .admin-item:not(.active):hover {
+            background-color: #f0f0f0;
+        }
+        .admin-item.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+            background-color: #fafafa;
+        }
+
+        /* 新增：管理员7详情样式 */
+        .admin-detail {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        .admin-detail p {
+            margin-bottom: 8px;
+        }
+        .admin-detail strong {
+            color: #e2b887;
+            width: 80px;
+            display: inline-block;
         }
 
         @media (max-width: 768px) {
@@ -543,7 +631,55 @@
                 <span class="search-icon">🔍</span>
                 <input type="text" class="search-input" id="searchInput" placeholder="搜索校园圈内容...">
             </div>
-            <div class="search-tips">输入「苏晚」可查看相关线索</div>
+            <div class="search-tips">可搜索：苏晚、旧图书馆、管理员</div>
+
+            <!-- 苏晚档案（权限封禁） -->
+            <div class="search-result-card" id="suWanCard">
+                <div class="forbidden-tip">
+                    <span class="forbidden-icon">🚫</span>
+                    <div class="forbidden-text">文档已被封禁</div>
+                    <div class="forbidden-desc">该档案涉及敏感信息，需更高权限方可查看</div>
+                </div>
+            </div>
+
+            <!-- 旧图书馆资料 -->
+            <div class="search-result-card" id="libCard">
+                <div class="result-title">上北大学旧图书馆沿革</div>
+                <div class="result-text">
+                    上北大学旧图书馆于 1959 年正式落成，作为校园内承载知识与记忆的标志性建筑，陪伴了数代学子的求学时光。然而在 1988 年，一场意外火灾突袭，馆内大量珍贵书籍、古籍文献及基础设施遭到严重损毁，这座承载着校园历史的建筑一度陷入沉寂。万幸的是，在同年，资助者黄诚如先生慷慨出资，牵头推动图书馆重建工程，让这座历经劫难的知识殿堂得以重焕生机，继续为师生提供阅览与研学的空间。
+                </div>
+            </div>
+
+            <!-- 管理员列表 -->
+            <div class="search-result-card" id="adminListCard">
+                <div class="result-title">上北大学图书馆管理员名单</div>
+                <ul class="admin-list">
+                    <li class="admin-item disabled">管理员1</li>
+                    <li class="admin-item disabled">管理员2</li>
+                    <li class="admin-item disabled">管理员3</li>
+                    <li class="admin-item disabled">管理员4</li>
+                    <li class="admin-item disabled">管理员5</li>
+                    <li class="admin-item disabled">管理员6</li>
+                    <li class="admin-item active" onclick="showAdmin7Detail()">管理员7</li>
+                    <li class="admin-item disabled">管理员8</li>
+                    <li class="admin-item disabled">管理员9</li>
+                    <li class="admin-item disabled">管理员10</li>
+                </ul>
+            </div>
+
+            <!-- 管理员7详情 -->
+            <div class="search-result-card" id="admin7Card">
+                <div class="result-title">上北大学图书馆管理员7 张睿 个人资料</div>
+                <div class="admin-detail">
+                    <p><strong>姓名：</strong>张睿</p>
+                    <p><strong>出生年份：</strong>1959年</p>
+                    <p><strong>入职时间：</strong>1982年</p>
+                    <p><strong>学历背景：</strong>高校图书情报专业专科毕业</p>
+                    <p><strong>工作履历：</strong>1982年入职上北大学图书馆，先后负责流通阅览、图书编目、古籍整理等工作；1988年参与火灾后书籍抢救与图书馆重建筹备，全程跟进馆藏恢复与设施调试；深耕岗位四十余年，现主要负责老馆日常管理与读者咨询服务</p>
+                    <p><strong>核心特质：</strong>沉稳内敛，对馆藏资源（尤其老馆古籍相关）极为熟悉，对待工作严谨细致，因见证过1988年火灾与图书馆变迁，对老馆地下一层相关话题较为敏感</p>
+                    <p><strong>口碑评价：</strong>师生眼中的“老图书馆活字典”，熟悉各类书籍存放位置，能精准帮读者对接所需资源，四十余年坚守岗位，是校园里见证图书馆发展的“元老级”人物</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -583,6 +719,7 @@
     <div class="time-label" id="currentTime">2026年1月9日</div>
 
     <script>
+        // 标签切换功能
         function switchTab(tabId) {
             const contents = document.querySelectorAll('.content');
             contents.forEach(content => content.classList.remove('active'));
@@ -590,20 +727,45 @@
             tabs.forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            
+            // 切换到发现板块时隐藏所有搜索结果
+            if (tabId === 'discover') {
+                hideAllResultCards();
+            }
         }
 
+        // 隐藏所有搜索结果卡片
+        function hideAllResultCards() {
+            const resultCards = document.querySelectorAll('.search-result-card');
+            resultCards.forEach(card => card.classList.remove('active'));
+        }
+
+        // 显示管理员7详情
+        function showAdmin7Detail() {
+            hideAllResultCards();
+            document.getElementById('admin7Card').classList.add('active');
+        }
+
+        // 搜索功能逻辑
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('keyup', function(e) {
             if (e.key === 'Enter') {
                 const keyword = this.value.trim();
+                hideAllResultCards();
+                
                 if (keyword === '苏晚') {
-                    location.href = "suwan.html";
+                    document.getElementById('suWanCard').classList.add('active');
+                } else if (keyword === '旧图书馆') {
+                    document.getElementById('libCard').classList.add('active');
+                } else if (keyword === '管理员') {
+                    document.getElementById('adminListCard').classList.add('active');
                 } else if (keyword) {
                     alert(`未找到「${keyword}」相关内容`);
                 }
             }
         });
 
+        // 初始化时间显示
         window.onload = function() {
             document.getElementById('currentTime').textContent = '2026年1月9日';
         };
