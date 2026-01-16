@@ -263,6 +263,7 @@
             padding: 4px 8px;
             border-radius: 4px;
             border: 1px solid #e5e5e7;
+            z-index: 998; /* 加个z-index确保不被遮挡 */
         }
 
         /* 新增：搜索结果卡片样式 */
@@ -401,7 +402,7 @@
             </div>
             <div class="post-content">
                 有没有人觉得老馆的闭馆铃不对劲？！<br>
-                家人们谁懂啊！昨晚去老馆借书，闭馆铃响的时候居然是<strong>“三短一长”<strong>？以前不都是 “两短” 吗？而且地下一层好像有奇怪的回声，像是有人在哼歌？有没有昨晚也在老馆的同学，来证实一下不是我幻听！
+                家人们谁懂啊！昨晚去老馆借书，闭馆铃响的时候居然是<strong>“三短一长”</strong>？以前不都是 “两短” 吗？而且地下一层好像有奇怪的回声，像是有人在哼歌？有没有昨晚也在老馆的同学，来证实一下不是我幻听！
             </div>
             <div class="comment-list">
                 <div class="comment-item">
@@ -632,6 +633,8 @@
                 <input type="text" class="search-input" id="searchInput" placeholder="搜索校园圈内容...">
             </div>
             <div class="search-tips">可以搜索“苏晚”试试看</div>
+        </div>
+    </div> <!-- 关键修复：补上发现板块的闭合标签 -->
 
     <!-- 私信板块 -->
     <div id="message" class="content">
@@ -695,6 +698,7 @@
             hideAllResultCards();
             document.getElementById('admin7Card').classList.add('active');
         }
+        
         // 搜索功能：修改为跳转到独立页面
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('keyup', function(e) {
@@ -706,13 +710,12 @@
                 } else if (keyword === '旧图书馆') {
                     location.href = "library.html"; // 旧图书馆资料页面
                 } else if (keyword === '管理员') {
-                    location.href = "guanliyuan.html"; // 管理员列表页面
+                    location.href = "guanliyuan.html"; // 管理员列表页面（你改的文件名）
                 } else if (keyword) {
                     alert(`未找到「${keyword}」相关内容`);
                 }
             }
         });
-
 
         // 初始化时间显示
         window.onload = function() {
