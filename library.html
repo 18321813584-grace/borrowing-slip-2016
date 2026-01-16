@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上北大学 | 旧图书馆资料</title>
+    <style>
+        /* 保持和主页面一致的样式风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            padding: 20px 16px;
+        }
+        .top-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e7;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .top-nav .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1d1d1f;
+        }
+        .top-nav .back {
+            color: #e2b887;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .content-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        .result-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 8px;
+        }
+        .result-text {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航（带返回按钮） -->
+    <div class="top-nav">
+        <div class="back" onclick="window.history.back()">← 返回校园圈</div>
+        <div class="title">上北大学旧图书馆沿革</div>
+        <div></div>
+    </div>
+
+    <!-- 旧图书馆资料内容 -->
+    <div class="content-card">
+        <div class="result-title">旧图书馆历史资料</div>
+        <div class="result-text">
+            上北大学旧图书馆于 1959 年正式落成，作为校园内承载知识与记忆的标志性建筑，陪伴了数代学子的求学时光。然而在 1988 年，一场意外火灾突袭，馆内大量珍贵书籍、古籍文献及基础设施遭到严重损毁，这座承载着校园历史的建筑一度陷入沉寂。万幸的是，在同年，资助者黄诚如先生慷慨出资，牵头推动图书馆重建工程，让这座历经劫难的知识殿堂得以重焕生机，继续为师生提供阅览与研学的空间。
+        </div>
+    </div>
+</body>
+</html>
