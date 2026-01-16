@@ -18,19 +18,21 @@
             position: relative;
         }
 
-        /* 顶部导航栏：狐友经典样式 */
+        /* 顶部导航栏：狐友经典样式 + 新增时间容器 */
+        .top-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            border-bottom: 1px solid #e5e5e7;
+            z-index: 999;
+        }
         .top-nav {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 12px 16px;
-            background-color: #fff;
-            border-bottom: 1px solid #e5e5e7;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 999;
         }
         .top-nav .title {
             font-size: 18px;
@@ -47,6 +49,15 @@
             justify-content: center;
             color: #fff;
             font-size: 14px;
+        }
+
+        /* 新增：顶部中间时间样式 */
+        .top-time {
+            text-align: center;
+            font-size: 14px;
+            color: #86868b;
+            padding: 4px 0;
+            border-top: 1px solid #f0f0f0;
         }
 
         /* 底部功能导航：圈子/发现/私信/我的 */
@@ -77,7 +88,7 @@
         }
 
         .content {
-            margin-top: 60px;
+            margin-top: 100px; /* 顶部新增时间栏，调整内容区上边距 */
             margin-bottom: 60px;
             padding: 10px 16px;
             display: none;
@@ -252,20 +263,6 @@
             font-size: 15px;
         }
 
-        /* 右下角时间显示 */
-        .time-label {
-            position: fixed;
-            bottom: 70px;
-            right: 16px;
-            font-size: 12px;
-            color: #86868b;
-            background-color: rgba(255,255,255,0.8);
-            padding: 4px 8px;
-            border-radius: 4px;
-            border: 1px solid #e5e5e7;
-            z-index: 998; /* 加个z-index确保不被遮挡 */
-        }
-
         /* 新增：搜索结果卡片样式 */
         .search-result-card {
             max-width: 500px;
@@ -432,14 +429,22 @@
             .comment-item {
                 font-size: 13px;
             }
+            .content {
+                margin-top: 90px; /* 移动端适配，微调上边距 */
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部导航 -->
-    <div class="top-nav">
-        <div class="title">上北大学 · 校园圈</div>
-        <div class="avatar">我</div>
+    <!-- 顶部容器：包含导航栏 + 中间时间 -->
+    <div class="top-container">
+        <!-- 顶部导航 -->
+        <div class="top-nav">
+            <div class="title">上北大学 · 校园圈</div>
+            <div class="avatar">我</div>
+        </div>
+        <!-- 顶部中间时间（修改后） -->
+        <div class="top-time" id="currentTime">2026年1月9日 12:00</div>
     </div>
 
     <!-- 圈子板块 -->
@@ -740,9 +745,6 @@
         </div>
     </div>
 
-    <!-- 右下角时间 -->
-    <div class="time-label" id="currentTime">2026年1月9日</div>
-
     <script>
         // 标签切换功能
         function switchTab(tabId) {
@@ -789,9 +791,9 @@
             }
         });
 
-        // 初始化时间显示
+        // 初始化时间显示（已修改为2026年1月9日 12:00）
         window.onload = function() {
-            document.getElementById('currentTime').textContent = '2026年1月9日';
+            document.getElementById('currentTime').textContent = '2026年1月9日 12:00';
         };
 
         // 显示登录表单
