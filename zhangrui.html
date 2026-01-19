@@ -1089,11 +1089,13 @@
                     const keyword = this.value.trim();
                     // 搜索不同关键词，跳转到对应的独立页面
                     if (keyword === '苏晚') {
-                        location.href = "suwan.html"; // 苏晚档案页面
-                    } else if (keyword === '1998') {
-                        location.href = "1998.html"; // 1998年事件页面
-                    } else if (keyword === '书架7') {
-                        location.href = "bookshelf7.html"; // 书架7详情页面
+                        location.href = "suwan1.html"; // 苏晚档案页面
+                    } else if (keyword === '黄诚如') {
+                        location.href = "huangchengru.html"; //黄诚如档案页面
+                    } else if (keyword === '老图书馆') {
+                        location.href = "library.html"; // 老图书馆详情页面
+                    } else if (keyword === '管理员') {
+                        location.href = "guanliyuan.html"; // 管理员详情页面
                     } else if (keyword) {
                         alert(`未找到「${keyword}」相关内容`);
                     }
