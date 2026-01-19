@@ -9,92 +9,147 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            font-family: "PingFang SC", "Microsoft YaHei", "SimSun", serif;
         }
         body {
-            background-color: #121212; /* 暗黑背景 */
-            color: #e0e0e0; /* 浅灰色文字 */
+            background-color: #0a0a0a; /* 更深的黑色背景 */
+            color: #d0d0d0; /* 更暗淡的文字色 */
             overflow-x: hidden;
             position: relative;
             padding-top: 20px;
+            /* 背景添加微弱的噪点纹理 */
+            background-image: 
+                radial-gradient(#1a1a1a 1px, transparent 1px),
+                radial-gradient(#1a1a1a 1px, transparent 1px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
         }
 
-        /* 顶部整合容器：暗黑风格 */
+        /* 页面叠加微弱的红色滤镜，营造血色氛围 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(80, 0, 0, 0.05);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 顶部整合容器：强化暗黑恐怖风格 */
         .top-container {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background-color: #1e1e1e; /* 深灰背景 */
-            border-bottom: 1px solid #333; /* 灰色边框 */
+            background-color: #121212; /* 更深的顶部背景 */
+            border-bottom: 1px solid #442222; /* 暗红边框 */
             z-index: 999;
             padding: 12px 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            /* 顶部添加微弱的血迹纹理 */
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q 25 0, 50 10 T 100 10' stroke='%23552222' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
         }
         .top-container .title {
             font-size: 18px;
             font-weight: 600;
-            color: #e2b887; /* 金色标题 */
+            color: #d99066; /* 偏暗的锈金色 */
+            text-shadow: 0 0 3px rgba(217, 144, 102, 0.3);
         }
         .top-container .top-time {
             font-size: 14px;
-            color: #86868b;
+            color: #775555; /* 暗红灰色 */
             flex: 1;
             text-align: center;
             margin: 0 10px;
+            /* 时间文字轻微闪烁 */
+            animation: flicker 5s infinite alternate;
         }
         .top-container .avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            background-color: #444; /* 暗黑头像背景 */
+            background-color: #221111; /* 暗红黑色头像背景 */
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #e2b887; /* 金色文字 */
+            color: #d99066; /* 锈金色文字 */
             font-size: 14px;
-            border: 1px solid #e2b887;
+            border: 1px solid #773333; /* 暗红边框 */
+            box-shadow: 0 0 5px rgba(119, 51, 51, 0.5);
         }
 
-        /* 内容区域：暗黑风格适配 */
+        /* 内容区域：强化暗黑恐怖风格 */
         .content {
             margin-top: 68px;
             margin-bottom: 60px;
             padding: 10px 16px;
             display: block;
+            /* 内容区轻微晃动动画，营造不安感 */
+            animation: subtleShake 30s infinite ease-in-out;
         }
 
-        /* 档案卡片样式：暗黑风格 */
+        /* 档案卡片样式：暗黑恐怖风格 */
         .file-card {
-            background-color: #1e1e1e; /* 卡片深灰背景 */
+            background-color: #121212; /* 更深的卡片背景 */
             border-radius: 12px;
             padding: 20px;
             margin-bottom: 16px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3); /* 深色阴影 */
-            border: 1px solid #333; /* 灰色边框 */
+            box-shadow: 
+                0 2px 10px rgba(0, 0, 0, 0.8),
+                0 0 15px rgba(100, 0, 0, 0.2); /* 暗红阴影 */
+            border: 1px solid #552222; /* 暗红边框 */
+            /* 卡片添加陈旧纸张纹理 */
+            background-image: 
+                linear-gradient(rgba(18, 18, 18, 0.95), rgba(18, 18, 18, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L100 100 M100 0 L0 100' stroke='%23221111' fill='none' stroke-width='0.5'/%3E%3C/svg%3E");
+            position: relative;
+            overflow: hidden;
         }
+        
+        /* 卡片角落添加血迹效果 */
+        .file-card::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            width: 80px;
+            height: 80px;
+            background-color: rgba(100, 0, 0, 0.1);
+            border-radius: 50%;
+            filter: blur(20px);
+            z-index: 0;
+        }
+        
         .file-card.封禁 {
-            border-left: 4px solid #ef9a9a; /* 红色封禁边框 */
+            border-left: 4px solid #b74a4a; /* 更深的红色封禁边框 */
         }
         .file-header {
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 20px;
             padding-bottom: 12px;
-            border-bottom: 1px solid #333;
-            color: #e2b887;
+            border-bottom: 1px solid #442222; /* 暗红分隔线 */
+            color: #d99066;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
         .file-status {
             font-size: 12px;
             padding: 2px 8px;
             border-radius: 4px;
-            background-color: #4a1414;
-            color: #ef9a9a;
+            background-color: #331111; /* 暗红背景 */
+            color: #e76f51; /* 血色文字 */
+            border: 1px solid #552222;
+            box-shadow: 0 0 3px rgba(231, 111, 81, 0.3);
         }
 
         /* 档案信息项 */
@@ -103,249 +158,99 @@
             margin-bottom: 16px;
             font-size: 15px;
             line-height: 1.6;
+            position: relative;
+            z-index: 1;
         }
         .file-item-label {
             width: 120px;
-            color: #86868b;
+            color: #886666; /* 暗红灰色标签 */
             flex-shrink: 0;
         }
         .file-item-value {
             flex: 1;
-            color: #e0e0e0;
+            color: #d0d0d0;
         }
         .file-item-value.highlight {
-            color: #e2b887;
+            color: #d99066; /* 锈金色高亮 */
             font-weight: 500;
+            text-shadow: 0 0 2px rgba(217, 144, 102, 0.2);
         }
         .file-item-value.danger {
-            color: #ef9a9a;
+            color: #e76f51; /* 血色危险文字 */
             font-weight: 500;
+            /* 危险文字轻微闪烁 */
+            animation: dangerPulse 3s infinite alternate;
         }
 
         /* 关键事件列表 */
         .event-list {
             margin-top: 20px;
             padding-top: 16px;
-            border-top: 1px solid #333;
+            border-top: 1px solid #442222; /* 暗红分隔线 */
+            position: relative;
+            z-index: 1;
         }
         .event-title {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 12px;
-            color: #e2b887;
+            color: #d99066;
+            text-shadow: 0 0 2px rgba(217, 144, 102, 0.2);
         }
         .event-item {
             padding: 12px;
-            background-color: #252525;
+            background-color: #1a1111; /* 暗红黑色事件背景 */
             border-radius: 8px;
             margin-bottom: 8px;
             font-size: 14px;
             line-height: 1.6;
+            border: 1px solid #331111;
+            /* 事件项hover效果 */
+            transition: all 0.3s ease;
+        }
+        .event-item:hover {
+            background-color: #221111;
+            box-shadow: 0 0 8px rgba(100, 0, 0, 0.2);
         }
         .event-item .event-tag {
             font-size: 11px;
             padding: 1px 6px;
             border-radius: 3px;
-            background-color: #0f3443;
-            color: #81d4fa;
+            background-color: #221111;
+            color: #e9c46a; /* 暗黄色标签 */
             margin-right: 8px;
+            border: 1px solid #442222;
         }
 
-        /* 借阅条样式 */
+        /* 借阅条样式：陈旧血迹效果 */
         .borrow-ticket {
-            background-color: #2d2d2d;
-            border: 1px solid #e2b887;
+            background-color: #1a1111; /* 暗红黑色借阅条背景 */
+            border: 1px solid #773333; /* 暗红边框 */
             border-radius: 8px;
             padding: 16px;
             margin: 20px 0;
             font-family: "SimSun", serif;
             position: relative;
+            /* 陈旧纸张纹理 + 血迹 */
+            background-image: 
+                linear-gradient(rgba(26, 17, 17, 0.95), rgba(26, 17, 17, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='200' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 20 Q 50 5, 90 20 T 170 20' stroke='%23442222' fill='none' stroke-width='1'/%3E%3Cpath d='M30 40 Q 70 25, 110 40 T 190 40' stroke='%23442222' fill='none' stroke-width='0.8'/%3E%3Cpath d='M50 60 Q 90 45, 130 60 T 210 60' stroke='%23442222' fill='none' stroke-width='0.6'/%3E%3C/svg%3E");
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.8),
+                inset 0 0 10px rgba(100, 0, 0, 0.1);
+            /* 借阅条轻微倾斜，营造不规则感 */
+            transform: rotate(-0.5deg);
+            transition: all 0.5s ease;
         }
+        
+        .borrow-ticket:hover {
+            transform: rotate(0deg) scale(1.01);
+            box-shadow: 
+                0 2px 12px rgba(0, 0, 0, 0.9),
+                inset 0 0 15px rgba(100, 0, 0, 0.2);
+        }
+        
         .borrow-ticket::before {
             content: "";
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: repeating-linear-gradient(90deg, #e2b887, #e2b887 8px, transparent 8px, transparent 16px);
-        }
-        .ticket-title {
-            text-align: center;
-            font-size: 16px;
-            color: #e2b887;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-        .ticket-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-        .ticket-back {
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px dashed #86868b;
-            font-style: italic;
-            color: #ef9a9a;
-        }
-
-        /* 底部返回按钮 */
-        .back-btn {
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            padding: 12px;
-            text-align: center;
-            background-color: #e2b887;
-            color: #121212;
-            border-radius: 24px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 15px;
-        }
-        .back-btn:hover {
-            background-color: #d1a06d;
-        }
-
-        @media (max-width: 768px) {
-            .content {
-                margin-top: 60px;
-            }
-            .top-container .title {
-                font-size: 16px;
-            }
-            .top-container .top-time {
-                font-size: 12px;
-            }
-            .file-item {
-                flex-direction: column;
-            }
-            .file-item-label {
-                width: 100%;
-                margin-bottom: 4px;
-            }
-        }
-    </style>
-</head>
-<body>
-    
-    <!-- 顶部导航 -->
-    <div class="top-container">
-        <div class="title">上北大学 · 档案库</div>
-        <div class="top-time" id="currentTime">2026年1月10日 23:10</div>
-        <div class="avatar">档</div>
-    </div>
-    
-    <!-- 档案内容区域 -->
-    <div class="content">
-        <!-- 苏晚个人档案卡片 -->
-        <div class="file-card 封禁">
-            <div class="file-header">
-                <span>苏晚 · 个人档案</span>
-                <span class="file-status">严格封禁</span>
-            </div>
-
-            <!-- 基本信息 -->
-            <div class="file-item">
-                <div class="file-item-label">姓名</div>
-                <div class="file-item-value highlight">苏晚</div>
-            </div>
-            <div class="file-item">
-                <div class="file-item-label">学院/年级</div>
-                <div class="file-item-value">文学院 / 2015级</div>
-            </div>
-            <div class="file-item">
-                <div class="file-item-label">学号</div>
-                <div class="file-item-value highlight">2015030707</div>
-            </div>
-            <div class="file-item">
-                <div class="file-item-label">专业</div>
-                <div class="file-item-value">文学院古籍修复</div>
-            </div>
-            <div class="file-item">
-                <div class="file-item-label">出生年份</div>
-                <div class="file-item-value">1997年7月4日</div>
-            </div>
-            <div class="file-item">
-                <div class="file-item-label">失踪时间</div>
-                <div class="file-item-value danger">2016年1月10日</div>
-            </div>
-            <div class="file-item">
-                <div class="file-item-label">最后出现地点</div>
-                <div class="file-item-value danger">老图书馆地下一层</div>
-            </div>
-
-            <!-- 失踪前关键行为 -->
-            <div class="event-list">
-                <div class="event-title">失踪前关键行为</div>
-                <div class="event-item">
-                    <span class="event-tag">线索1</span>
-                    向好友提及借到“奇怪的书”，书中记录风吹声、落叶声、书架后哭声，最后一页标注“闭馆时对书架7唱歌才算归还”
-                </div>
-                <div class="event-item">
-                    <span class="event-tag">线索2</span>
-                    前往老图书馆地下一层执行“还书”仪式，最终失踪
-                </div>
-            </div>
-
-            <!-- 核心关联事件 -->
-            <div class="event-list">
-                <div class="event-title">核心关联事件</div>
-                <div class="event-item">
-                    <span class="event-tag">事件1</span>
-                    2015年意外在老图书馆地下一层借到神秘书籍（无封面，记录各类声音，疑似《四神足》或《雾声录》）
-                </div>
-                <div class="event-item">
-                    <span class="event-tag">事件2</span>
-                    成为黄诚如邪教献祭计划的2016年周期候选人（十年献祭周期：1988年→2016年→2026年）
-                </div>
-                <div class="event-item">
-                    <span class="event-tag">事件3</span>
-                    遗留关键线索“2016.1.10”借阅条，背面藏有“书架7”相关神秘提示
-                </div>
-            </div>
-
-            <!-- 借阅条复刻 -->
-            <div class="borrow-ticket">
-                <div class="ticket-title">上北大学图书馆借阅凭证</div>
-                <div class="ticket-item">
-                    <span>借阅人：</span>
-                    <span>苏晚</span>
-                </div>
-                <div class="ticket-item">
-                    <span>学号：</span>
-                    <span>2015030707</span>
-                </div>
-                <div class="ticket-item">
-                    <span>书名：</span>
-                    <span class="highlight">《四神足》</span>
-                </div>
-                <div class="ticket-item">
-                    <span>借阅日期：</span>
-                    <span>2016年1月10日</span>
-                </div>
-                <div class="ticket-item">
-                    <span>归还日期：</span>
-                    <span>无</span>
-                </div>
-                <div class="ticket-back">
-                    【背面字迹】书架7，三更唱，声归位，人归土
-                </div>
-            </div>
-        </div>
-
-        <!-- 返回按钮 -->
-        <a href="javascript:history.back()" class="back-btn">返回上一页</a>
-    </div>
-
-    <script>
-        // 初始化时间显示
-        window.onload = function() {
-            document.getElementById('currentTime').textContent = '2026年1月10日 23:10';
-        };
-    </script>
-</body>
-</html>
