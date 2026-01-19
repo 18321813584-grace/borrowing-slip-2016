@@ -254,3 +254,296 @@
             content: "";
             position: absolute;
             top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, #773333, #773333 8px, transparent 8px, transparent 16px);
+        }
+        
+        /* 借阅条添加血迹斑点 */
+        .borrow-ticket::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 15px;
+            height: 15px;
+            background-color: rgba(100, 0, 0, 0.3);
+            border-radius: 50%;
+            filter: blur(2px);
+        }
+        
+        .ticket-title {
+            text-align: center;
+            font-size: 16px;
+            color: #d99066;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-shadow: 0 0 2px rgba(217, 144, 102, 0.2);
+        }
+        .ticket-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #d0d0d0;
+        }
+        .ticket-back {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed #664444; /* 暗红虚线 */
+            font-style: italic;
+            color: #e76f51; /* 血色文字 */
+            /* 神秘文字轻微模糊+闪烁 */
+            animation: textBlur 8s infinite alternate;
+        }
+
+        /* 底部返回按钮：暗黑恐怖风格 */
+        .back-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            padding: 12px;
+            text-align: center;
+            background-color: #221111; /* 暗红黑色按钮 */
+            color: #d99066; /* 锈金色文字 */
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            border: 1px solid #552222;
+            box-shadow: 
+                0 2px 8px rgba(0, 0, 0, 0.8),
+                0 0 5px rgba(217, 144, 102, 0.1);
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background-color: #331111;
+            color: #e76f51;
+            box-shadow: 
+                0 2px 12px rgba(0, 0, 0, 0.9),
+                0 0 8px rgba(231, 111, 81, 0.2);
+        }
+
+        /* 动画效果定义 */
+        /* 轻微闪烁 */
+        @keyframes flicker {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        /* 危险文字脉冲 */
+        @keyframes dangerPulse {
+            0% { opacity: 0.8; text-shadow: 0 0 1px rgba(231, 111, 81, 0.3); }
+            100% { opacity: 1; text-shadow: 0 0 3px rgba(231, 111, 81, 0.5); }
+        }
+        
+        /* 文字模糊效果 */
+        @keyframes textBlur {
+            0% { filter: blur(0px); opacity: 0.9; }
+            50% { filter: blur(0.5px); opacity: 0.7; }
+            100% { filter: blur(0px); opacity: 0.9; }
+        }
+        
+        /* 轻微晃动 */
+        @keyframes subtleShake {
+            0% { transform: translateX(0px) rotate(0deg); }
+            25% { transform: translateX(1px) rotate(0.1deg); }
+            50% { transform: translateX(0px) rotate(0deg); }
+            75% { transform: translateX(-1px) rotate(-0.1deg); }
+            100% { transform: translateX(0px) rotate(0deg); }
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 768px) {
+            .content {
+                margin-top: 60px;
+            }
+            .top-container .title {
+                font-size: 16px;
+            }
+            .top-container .top-time {
+                font-size: 12px;
+            }
+            .file-item {
+                flex-direction: column;
+            }
+            .file-item-label {
+                width: 100%;
+                margin-bottom: 4px;
+            }
+            .borrow-ticket {
+                transform: rotate(0deg);
+            }
+            .borrow-ticket:hover {
+                transform: scale(1.01);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- 顶部导航 -->
+    <div class="top-container">
+        <div class="title">上北大学 · 封存档案</div>
+        <div class="top-time" id="currentTime">2026年1月10日 23:10</div>
+        <div class="avatar">禁</div>
+    </div>
+    
+    <!-- 档案内容区域 -->
+    <div class="content">
+        <!-- 苏晚个人档案卡片 -->
+        <div class="file-card 封禁">
+            <div class="file-header">
+                <span>苏晚 · 绝密档案</span>
+                <span class="file-status">严格封禁 | 最高机密</span>
+            </div>
+
+            <!-- 基本信息 -->
+            <div class="file-item">
+                <div class="file-item-label">姓名</div>
+                <div class="file-item-value highlight">苏晚</div>
+            </div>
+            <div class="file-item">
+                <div class="file-item-label">学院/年级</div>
+                <div class="file-item-value">文学院 / 2015级</div>
+            </div>
+            <div class="file-item">
+                <div class="file-item-label">学号</div>
+                <div class="file-item-value highlight">2015030707</div>
+            </div>
+            <div class="file-item">
+                <div class="file-item-label">专业</div>
+                <div class="file-item-value">文学院古籍修复</div>
+            </div>
+            <div class="file-item">
+                <div class="file-item-label">出生年份</div>
+                <div class="file-item-value">1997年7月4日</div>
+            </div>
+            <div class="file-item">
+                <div class="file-item-label">失踪时间</div>
+                <div class="file-item-value danger">2016年1月10日 深夜</div>
+            </div>
+            <div class="file-item">
+                <div class="file-item-label">最后出现地点</div>
+                <div class="file-item-value danger">老图书馆地下一层 · 书架7</div>
+            </div>
+
+            <!-- 失踪前关键行为 -->
+            <div class="event-list">
+                <div class="event-title">⚠️ 失踪前关键行为</div>
+                <div class="event-item">
+                    <span class="event-tag">线索1</span>
+                    向好友提及借到“被诅咒的书”，书中记录诡异声响：风吹声、落叶声、书架后女人哭声，最后一页用血书写：“闭馆时对书架7唱歌才算归还”
+                </div>
+                <div class="event-item">
+                    <span class="event-tag">线索2</span>
+                    失踪当日携带红色丝线前往老图书馆地下一层，疑似执行神秘“还书”仪式，监控记录到此中断，无离开画面
+                </div>
+            </div>
+
+            <!-- 核心关联事件 -->
+            <div class="event-list">
+                <div class="event-title">🔴 核心关联事件</div>
+                <div class="event-item">
+                    <span class="event-tag">事件1</span>
+                    2015年冬至日在老图书馆地下一层借到无封面禁书（内部代号：《四神足》/《雾声录》），书籍触碰时会发出微弱的哼唱声
+                </div>
+                <div class="event-item">
+                    <span class="event-tag">事件2</span>
+                    被黄诚如邪教组织选中为2016年十年献祭周期的祭品（献祭序列：1988→2016→2026），生辰与献祭仪式完全契合
+                </div>
+                <div class="event-item">
+                    <span class="event-tag">事件3</span>
+                    遗留带血借阅条（2016.1.10），借阅人苏晚、书名《四神足》、无归还日期，背面用血写：“书架7，三更唱，声归位，人归土”
+                </div>
+            </div>
+
+            <!-- 借阅条复刻：恐怖版本 -->
+            <div class="borrow-ticket">
+                <div class="ticket-title">上北大学图书馆 | 禁书借阅凭证</div>
+                <div class="ticket-item">
+                    <span>借阅人：</span>
+                    <span class="danger">苏晚</span>
+                </div>
+                <div class="ticket-item">
+                    <span>学号：</span>
+                    <span>2015030707</span>
+                </div>
+                <div class="ticket-item">
+                    <span>书名：</span>
+                    <span class="highlight">《四神足》【禁书编号：9807】</span>
+                </div>
+                <div class="ticket-item">
+                    <span>借阅日期：</span>
+                    <span class="danger">2016年1月10日 23:00</span>
+                </div>
+                <div class="ticket-item">
+                    <span>归还日期：</span>
+                    <span>—— 永不归还 ——</span>
+                </div>
+                <div class="ticket-back">
+                    【背面血书】<br>
+                    书架7，三更唱<br>
+                    声归位，人归土<br>
+                    十年一祭，魂归古籍
+                </div>
+            </div>
+        </div>
+
+        <!-- 返回按钮 -->
+        <a href="javascript:history.back()" class="back-btn">⚠️ 退出绝密档案查看</a>
+    </div>
+
+    <script>
+        // 初始化时间显示
+        window.onload = function() {
+            document.getElementById('currentTime').textContent = '2026年1月10日 23:10';
+            
+            // 添加鼠标移动时的轻微氛围变化
+            document.addEventListener('mousemove', function(e) {
+                const x = e.clientX / window.innerWidth;
+                const y = e.clientY / window.innerHeight;
+                
+                // 页面背景轻微的颜色变化，营造跟随感
+                document.body.style.backgroundColor = `rgb(10, 10, 10, ${0.95 + y * 0.05})`;
+            });
+            
+            // 随机出现的微弱提示文字（恐怖氛围加成）
+            const scaryTexts = [
+                "你不该来这里...",
+                "书架7在召唤...",
+                "闭馆铃响了...",
+                "十年之期已到...",
+                "苏晚在看着你..."
+            ];
+            
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    const text = document.createElement('div');
+                    text.style.position = 'fixed';
+                    text.style.top = `${Math.random() * 80}%`;
+                    text.style.left = `${Math.random() * 80}%`;
+                    text.style.color = 'rgba(231, 111, 81, 0.2)';
+                    text.style.fontSize = '12px';
+                    text.style.pointerEvents = 'none';
+                    text.style.zIndex = '9999';
+                    text.textContent = scaryTexts[Math.floor(Math.random() * scaryTexts.length)];
+                    
+                    document.body.appendChild(text);
+                    
+                    // 缓慢消失
+                    setTimeout(() => {
+                        text.style.transition = 'opacity 2s ease';
+                        text.style.opacity = '0';
+                        setTimeout(() => {
+                            document.body.removeChild(text);
+                        }, 2000);
+                    }, 3000);
+                }
+            }, 10000);
+        };
+    </script>
+</body>
+</html>
