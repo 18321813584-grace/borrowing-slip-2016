@@ -18,7 +18,7 @@
             position: relative;
         }
 
-        /* 顶部导航栏：狐友经典样式 + 新增时间容器 */
+        /* 顶部导航栏：修改为一行布局 */
         .top-container {
             position: fixed;
             top: 0;
@@ -39,6 +39,11 @@
             font-weight: 600;
             color: #1d1d1f;
         }
+        /* 新增：时间样式调整为行内显示 */
+        .top-nav .time-wrapper {
+            font-size: 14px;
+            color: #86868b;
+        }
         .top-nav .avatar {
             width: 32px;
             height: 32px;
@@ -49,15 +54,6 @@
             justify-content: center;
             color: #fff;
             font-size: 14px;
-        }
-
-        /* 新增：顶部中间时间样式 */
-        .top-time {
-            text-align: center;
-            font-size: 14px;
-            color: #86868b;
-            padding: 4px 0;
-            border-top: 1px solid #f0f0f0;
         }
 
         /* 底部功能导航：圈子/发现/私信/我的 */
@@ -88,7 +84,7 @@
         }
 
         .content {
-            margin-top: 100px; /* 顶部新增时间栏，调整内容区上边距 */
+            margin-top: 70px; /* 调整内容区上边距（原100px） */
             margin-bottom: 60px;
             padding: 10px 16px;
             display: none;
@@ -430,21 +426,24 @@
                 font-size: 13px;
             }
             .content {
-                margin-top: 90px; /* 移动端适配，微调上边距 */
+                margin-top: 60px; /* 移动端适配，微调上边距（原90px） */
+            }
+            /* 移动端时间文字缩小 */
+            .top-nav .time-wrapper {
+                font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- 顶部容器：包含导航栏 + 中间时间 -->
+    <!-- 顶部容器：修改为一行布局 -->
     <div class="top-container">
-        <!-- 顶部导航 -->
+        <!-- 顶部导航：整合标题、时间、头像 -->
         <div class="top-nav">
             <div class="title">上北大学 · 校园圈</div>
+            <div class="time-wrapper" id="currentTime">2026年1月9日 0:00</div>
             <div class="avatar">我</div>
         </div>
-        <!-- 顶部中间时间 -->
-        <div class="top-time" id="currentTime">2026年1月9日 0:00</div>
     </div>
 
     <!-- 圈子板块 -->
@@ -805,7 +804,7 @@
             }
         });
 
-        // 初始化时间显示（已修改为2026年1月9日 0:00）
+        // 初始化时间显示
         window.onload = function() {
             document.getElementById('currentTime').textContent = '2026年1月9日 0:00';
         };
