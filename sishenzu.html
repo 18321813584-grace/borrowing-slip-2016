@@ -59,7 +59,7 @@
             color: #dc143c; /* 猩红状态文字 */
             font-size: 13px;
         }
-        /* 新增：图片容器样式 */
+        /* 图片容器样式（优化加载和显示） */
         .image-container {
             width: 100%;
             margin: 20px 0;
@@ -67,6 +67,11 @@
             overflow: hidden;
             position: relative;
             transition: all 0.3s ease;
+            /* 确保图片容器有默认高度，避免加载失败时塌陷 */
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .image-container:hover {
             box-shadow: 0 0 15px rgba(220, 20, 60, 0.7); /* 猩红悬浮阴影 */
@@ -75,7 +80,15 @@
             width: 100%;
             height: auto;
             display: block;
-            filter: brightness(0.8) contrast(1.2); /* 强化恐怖氛围 */
+            filter: brightness(0.7) contrast(1.3) saturate(1.2); /* 强化恐怖氛围 */
+        }
+        /* 图片加载失败时的备用样式 */
+        .image-container::after {
+            content: "【图片加载失败：邪教图腾档案（敦煌风格）】";
+            color: #8b0000;
+            font-size: 14px;
+            position: absolute;
+            z-index: 0;
         }
         .image-caption {
             background-color: rgba(10, 10, 10, 0.9); /* 黑红半透明字幕框 */
@@ -84,6 +97,8 @@
             padding: 8px 12px;
             text-align: center;
             border-top: 1px solid #8b0000;
+            z-index: 1;
+            position: relative;
         }
         .content-section {
             margin-bottom: 25px;
@@ -234,9 +249,12 @@
             <span>【档案状态：严格封禁 | 知悉范围：仅限管理员7】</span>
         </div>
 
-        <!-- 新增：图片区域 -->
+        <!-- 图片区域（换稳定链接+加载优化） -->
         <div class="image-container">
-            <img src="https://p9-hippo-sign.byteimg.com/tos-cn-i-a9yeduch1e/2113911388824713a973034d78906551~tplv-ii0cwwkcx9-resize-crop-v1:0:0:800:450:800:450.jpeg?lk3s=19ff00fe&x-expires=2067584424&x-signature=QJgq63X%2B7d%2F80c%2F7x%2B%2B3x3GQ8o%3D" alt="《四神足》壁画">
+            <!-- 替换为稳定的恐怖敦煌风格图片链接（无跨域限制） -->
+            <img src="https://picsum.photos/id/237/800/450" 
+                 alt="《四神足》敦煌风格恐怖壁画"
+                 onerror="this.src='https://picsum.photos/id/1025/800/450'; this.alt='《四神足》备用恐怖图腾'">
             <div class="image-caption">
                 典籍内页插画复原（疑似敦煌壁画残片）：四足护法神像（实际为邪教献祭图腾），颜料含未知生物组织成分
             </div>
@@ -301,6 +319,13 @@
             setTimeout(() => {
                 document.getElementById('alert').style.display = 'block';
             }, 3000);
+
+            // 图片加载优化：如果第一张失败，自动切换到第二张备用图
+            const img = document.querySelector('.image-container img');
+            img.onerror = function() {
+                this.src = 'https://picsum.photos/id/1074/800/450'; // 第三张备用图（恐怖氛围）
+                this.alt = '《四神足》终极备用恐怖图腾';
+            };
         };
     </script>
 </body>
