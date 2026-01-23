@@ -9,12 +9,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* 核心：替换为极简机械感字体 - 优先系统基础字体，无装饰、强线条感 */
             font-family: "Courier New", Courier, monospace, "SimSun", "宋体";
         }
         body {
-            background-color: #000000; /* 纯黑背景，替代深灰，强化黑红对比 */
-            color: #f0f0f0; /* 浅白文字，提升可读性 */
+            background-color: #000000;
+            color: #f0f0f0;
             overflow-x: hidden;
             position: relative;
             padding-top: 20px;
@@ -26,8 +25,8 @@
             top: 0;
             left: 0;
             right: 0;
-            background-color: #0a0a0a; /* 近纯黑顶部背景 */
-            border-bottom: 1px solid #8b0000; /* 暗红边框，替代灰色 */
+            background-color: #0a0a0a;
+            border-bottom: 1px solid #8b0000;
             z-index: 999;
             padding: 12px 16px;
             display: flex;
@@ -37,34 +36,16 @@
         .top-container .title {
             font-size: 18px;
             font-weight: 600;
-            color: #dc143c; /* 猩红标题，替代金色 */
+            color: #dc143c;
         }
         .top-container .top-time {
             font-size: 14px;
-            color: #8b0000; /* 暗红时间文字 */
+            color: #8b0000;
             flex: 1;
             text-align: center;
             margin: 0 10px;
         }
         .top-container .avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: #1a1a1a; /* 深黑头像背景 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #dc143c; /* 猩红头像文字 */
-            font-size: 14px;
-            border: 1px solid #dc143c; /* 猩红边框 */
-        }
-        
-        .top-nav .title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #dc143c; /* 猩红 */
-        }
-        .top-nav .avatar {
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -76,6 +57,8 @@
             font-size: 14px;
             border: 1px solid #dc143c;
         }
+        
+        /* 移除了重复的 .top-nav 样式（冗余代码） */
 
         /* 底部功能导航：黑红风格 */
         .bottom-tab {
@@ -84,8 +67,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background-color: #0a0a0a; /* 近纯黑底部背景 */
-            border-top: 1px solid #8b0000; /* 暗红边框 */
+            background-color: #0a0a0a;
+            border-top: 1px solid #8b0000;
             z-index: 999;
         }
         .tab-item {
@@ -93,11 +76,11 @@
             padding: 10px 0;
             text-align: center;
             cursor: pointer;
-            color: #8b0000; /* 暗红未选中 */
+            color: #8b0000;
             transition: all 0.2s ease;
         }
         .tab-item.active {
-            color: #dc143c; /* 猩红选中 */
+            color: #dc143c;
             font-weight: 500;
         }
         .tab-item span {
@@ -117,15 +100,15 @@
 
         /* 圈子板块样式：黑红核心风格 */
         .post-card {
-            background-color: #0a0a0a; /* 近纯黑卡片背景 */
-            border-radius: 0; /* 去掉圆角，强化机械/冷峻感 */
+            background-color: #0a0a0a;
+            border-radius: 0;
             padding: 16px;
             margin-bottom: 12px;
-            box-shadow: 0 1px 3px rgba(139, 0, 0, 0.3); /* 暗红阴影 */
-            border: 1px solid #8b0000; /* 暗红边框 */
+            box-shadow: 0 1px 3px rgba(139, 0, 0, 0.3);
+            border: 1px solid #8b0000;
         }
         .post-card.sticky {
-            border-left: 4px solid #dc143c; /* 猩红置顶边框 */
+            border-left: 4px solid #dc143c;
         }
         .post-header {
             display: flex;
@@ -140,50 +123,50 @@
         .post-tag {
             font-size: 12px;
             padding: 2px 8px;
-            border-radius: 0; /* 去掉圆角，机械感 */
+            border-radius: 0;
             margin-right: 8px;
-            border: 1px solid #8b0000; /* 暗红标签边框 */
+            border: 1px solid #8b0000;
         }
         /* 标签颜色调整为黑红适配 */
         .tag-notice {
-            background-color: #1a0000; /* 黑红系通知标签 */
+            background-color: #1a0000;
             color: #dc143c;
         }
         .tag-complaint {
-            background-color: #2a0000; /* 黑红系吐槽标签 */
+            background-color: #2a0000;
             color: #ff4500;
         }
         .tag-help {
-            background-color: #1a0000; /* 黑红系求助标签 */
+            background-color: #1a0000;
             color: #dc143c;
         }
         .tag-chat {
-            background-color: #2a0000; /* 黑红系闲聊标签 */
+            background-color: #2a0000;
             color: #ff4500;
         }
         .tag-confess {
-            background-color: #1a0000; /* 黑红系表白标签 */
+            background-color: #1a0000;
             color: #dc143c;
         }
         .tag-recommend {
-            background-color: #2a0000; /* 黑红系安利标签 */
+            background-color: #2a0000;
             color: #ff4500;
         }
         .post-author {
             font-size: 14px;
             font-weight: 500;
             margin-right: 8px;
-            color: #dc143c; /* 猩红作者名 */
+            color: #dc143c;
         }
         .post-time {
             font-size: 12px;
-            color: #8b0000; /* 暗红时间 */
+            color: #8b0000;
         }
         .post-content {
             font-size: 15px;
             line-height: 1.6;
             margin-bottom: 12px;
-            color: #f0f0f0; /* 浅白正文 */
+            color: #f0f0f0;
         }
         .post-content .blur-text {
             color: #2a2a2a;
@@ -192,43 +175,40 @@
             -webkit-background-clip: text;
             background-clip: text;
         }
-        /* ========== 新增：动态马赛克样式（放在.blur-text下方，逻辑统一） ========== */
+        /* 动态马赛克样式 */
         .dynamic-mosaic {
             position: relative;
-            /* 默认显示黑红马赛克 */
             color: transparent;
             background-image: repeating-linear-gradient(
                 45deg,
-                #8b0000, /* 暗红 */
+                #8b0000,
                 #8b0000 6px,
-                #0a0a0a, /* 近纯黑 */
+                #0a0a0a,
                 #0a0a0a 12px
             );
             -webkit-background-clip: text;
             background-clip: text;
-            filter: blur(0.8px); /* 轻微模糊强化马赛克感 */
-            cursor: pointer; /* 鼠标指针提示可交互 */
-            transition: all 0.3s ease; /* 过渡动画，不突兀 */
+            filter: blur(0.8px);
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        /* 鼠标hover时清除马赛克，显示真实文字 */
         .dynamic-mosaic:hover {
-            color: #dc143c; /* 猩红文字，贴合黑红风格 */
+            color: #dc143c;
             background-image: none;
             filter: none;
-            text-shadow: 0 0 2px rgba(220, 20, 60, 0.5); /* 轻微发光，凸显恐怖感 */
+            text-shadow: 0 0 2px rgba(220, 20, 60, 0.5);
         }
-        /* ========== 马赛克样式结束 ========== */
         .post-content a {
-            color: #dc143c; /* 猩红链接 */
+            color: #dc143c;
             text-decoration: none;
         }
         .post-content a:hover {
             text-decoration: underline;
-            color: #ff4500; /* 亮红hover */
+            color: #ff4500;
         }
         .comment-list {
             margin-left: 16px;
-            border-left: 1px solid #8b0000; /* 暗红评论分隔线 */
+            border-left: 1px solid #8b0000;
             padding-left: 16px;
         }
         .comment-item {
@@ -238,10 +218,10 @@
         .comment-author {
             font-weight: 500;
             margin-right: 8px;
-            color: #8b0000; /* 暗红评论作者 */
+            color: #8b0000;
         }
         .comment-content {
-            color: #f0f0f0; /* 浅白评论内容 */
+            color: #f0f0f0;
         }
 
         /* 发现板块样式：黑红风格 */
@@ -261,25 +241,25 @@
             width: 100%;
             height: 44px;
             padding: 0 16px 0 40px;
-            border-radius: 0; /* 去掉圆角，机械感 */
-            border: 1px solid #8b0000; /* 暗红边框 */
+            border-radius: 0;
+            border: 1px solid #8b0000;
             font-size: 15px;
-            background-color: #1a1a1a; /* 黑红系搜索框背景 */
-            color: #f0f0f0; /* 浅白输入文字 */
+            background-color: #1a1a1a;
+            color: #f0f0f0;
             outline: none;
             transition: all 0.2s ease;
         }
         .search-input:focus {
-            border-color: #dc143c; /* 猩红聚焦边框 */
-            box-shadow: 0 0 0 4px rgba(220, 20, 60, 0.2); /* 猩红聚焦阴影 */
+            border-color: #dc143c;
+            box-shadow: 0 0 0 4px rgba(220, 20, 60, 0.2);
         }
         .search-tips {
             font-size: 14px;
-            color: #8b0000; /* 暗红提示文字 */
+            color: #8b0000;
             text-align: center;
         }
 
-        /* ========== 张睿页面专属样式 - 黑红风格 ========== */
+        /* 张睿页面专属样式 - 黑红风格 */
         /* 私信板块：联系人列表 + 聊天内容 */
         .message-content {
             display: flex;
@@ -289,19 +269,19 @@
         .contact-list {
             width: 30%;
             min-width: 200px;
-            background-color: #0a0a0a; /* 近纯黑 */
-            border-right: 1px solid #8b0000; /* 暗红分隔线 */
+            background-color: #0a0a0a;
+            border-right: 1px solid #8b0000;
             overflow-y: auto;
         }
         .contact-item {
             padding: 12px 16px;
-            border-bottom: 1px solid #8b0000; /* 暗红分隔线 */
+            border-bottom: 1px solid #8b0000;
             cursor: pointer;
             transition: background-color 0.2s ease;
         }
         .contact-item.active {
-            background-color: #1a1a1a; /* 深黑选中背景 */
-            color: #dc143c; /* 猩红选中文字 */
+            background-color: #1a1a1a;
+            color: #dc143c;
         }
         .contact-item:hover {
             background-color: #1a1a1a;
@@ -310,11 +290,11 @@
             font-size: 14px;
             font-weight: 500;
             margin-bottom: 4px;
-            color: #dc143c; /* 猩红联系人名 */
+            color: #dc143c;
         }
         .contact-lastmsg {
             font-size: 12px;
-            color: #8b0000; /* 暗红最后消息 */
+            color: #8b0000;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -324,13 +304,13 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            background-color: #0a0a0a; /* 近纯黑 */
+            background-color: #0a0a0a;
         }
         .chat-header {
             padding: 12px 16px;
-            border-bottom: 1px solid #8b0000; /* 暗红分隔线 */
+            border-bottom: 1px solid #8b0000;
             font-weight: 500;
-            color: #dc143c; /* 猩红聊天标题 */
+            color: #dc143c;
         }
         .chat-messages {
             flex: 1;
@@ -350,59 +330,59 @@
         }
         .message-bubble {
             padding: 8px 12px;
-            border-radius: 0; /* 去掉圆角，机械感 */
+            border-radius: 0;
             font-size: 14px;
             line-height: 1.5;
         }
         .receive .message-bubble {
-            background-color: #1a1a1a; /* 深黑接收消息背景 */
-            color: #f0f0f0; /* 浅白文字 */
-            border-left: 2px solid #8b0000; /* 暗红左侧标识 */
+            background-color: #1a1a1a;
+            color: #f0f0f0;
+            border-left: 2px solid #8b0000;
         }
         .send .message-bubble {
-            background-color: #dc143c; /* 猩红发送消息背景 */
-            color: #000000; /* 纯黑发送文字，强化对比 */
-            border-right: 2px solid #8b0000; /* 暗红右侧标识 */
+            background-color: #dc143c;
+            color: #000000;
+            border-right: 2px solid #8b0000;
         }
         .message-time {
             font-size: 10px;
-            color: #8b0000; /* 暗红时间 */
+            color: #8b0000;
             margin-top: 4px;
             text-align: right;
         }
         /* 聊天输入框 - 黑红 */
         .chat-input {
             padding: 12px 16px;
-            border-top: 1px solid #8b0000; /* 暗红分隔线 */
+            border-top: 1px solid #8b0000;
             display: flex;
             gap: 8px;
-            background-color: #0a0a0a; /* 近纯黑 */
+            background-color: #0a0a0a;
         }
         .chat-input input {
             flex: 1;
             height: 36px;
             padding: 0 12px;
-            border-radius: 0; /* 去掉圆角，机械感 */
-            border: 1px solid #8b0000; /* 暗红边框 */
+            border-radius: 0;
+            border: 1px solid #8b0000;
             outline: none;
-            background-color: #1a1a1a; /* 深黑输入框背景 */
-            color: #f0f0f0; /* 浅白输入文字 */
+            background-color: #1a1a1a;
+            color: #f0f0f0;
             font-size: 14px;
         }
         .chat-input input::placeholder {
-            color: #8b0000; /* 暗红占位符 */
+            color: #8b0000;
         }
         .chat-input button {
             padding: 0 16px;
-            border-radius: 0; /* 去掉圆角，机械感 */
+            border-radius: 0;
             border: none;
-            background-color: #dc143c; /* 猩红按钮 */
-            color: #000000; /* 纯黑按钮文字 */
+            background-color: #dc143c;
+            color: #000000;
             cursor: pointer;
             font-weight: 500;
         }
         .chat-input button:hover {
-            background-color: #8b0000; /* 暗红hover */
+            background-color: #8b0000;
             color: #f0f0f0;
         }
 
@@ -411,12 +391,12 @@
             padding: 20px 16px;
         }
         .profile-card {
-            background-color: #0a0a0a; /* 近纯黑 */
-            border-radius: 0; /* 去掉圆角，机械感 */
+            background-color: #0a0a0a;
+            border-radius: 0;
             padding: 20px;
             margin-bottom: 16px;
-            box-shadow: 0 1px 3px rgba(139, 0, 0, 0.3); /* 暗红阴影 */
-            border: 1px solid #8b0000; /* 暗红边框 */
+            box-shadow: 0 1px 3px rgba(139, 0, 0, 0.3);
+            border: 1px solid #8b0000;
         }
         .profile-header {
             display: flex;
@@ -424,20 +404,20 @@
             gap: 16px;
             margin-bottom: 20px;
             padding-bottom: 16px;
-            border-bottom: 1px solid #8b0000; /* 暗红分隔线 */
+            border-bottom: 1px solid #8b0000;
         }
         .profile-avatar {
             width: 64px;
             height: 64px;
-            border-radius: 0; /* 改成方形，强化机械感 */
-            background-color: #1a1a1a; /* 深黑头像背景 */
+            border-radius: 0;
+            background-color: #1a1a1a;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #dc143c; /* 猩红头像文字 */
+            color: #dc143c;
             font-size: 24px;
             font-weight: 600;
-            border: 2px solid #dc143c; /* 猩红边框 */
+            border: 2px solid #dc143c;
         }
         .profile-info {
             flex: 1;
@@ -446,14 +426,14 @@
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 4px;
-            color: #dc143c; /* 猩红姓名 */
+            color: #dc143c;
         }
         .profile-id {
             font-size: 14px;
-            color: #8b0000; /* 暗红ID */
+            color: #8b0000;
         }
         .profile-logout {
-            color: #dc143c; /* 猩红退出文字 */
+            color: #dc143c;
             font-size: 14px;
             cursor: pointer;
             margin-top: 8px;
@@ -463,36 +443,36 @@
             display: flex;
             justify-content: space-between;
             padding: 12px 0;
-            border-bottom: 1px solid #8b0000; /* 暗红分隔线 */
+            border-bottom: 1px solid #8b0000;
         }
         .profile-item-label {
             font-size: 15px;
-            color: #8b0000; /* 暗红标签 */
+            color: #8b0000;
         }
         .profile-item-value {
             font-size: 15px;
             font-weight: 500;
-            color: #f0f0f0; /* 浅白值 */
+            color: #f0f0f0;
         }
         /* 备忘录卡片 - 黑红 */
         .memo-card {
-            background-color: #0a0a0a; /* 近纯黑 */
-            border-radius: 0; /* 去掉圆角，机械感 */
+            background-color: #0a0a0a;
+            border-radius: 0;
             padding: 20px;
-            box-shadow: 0 1px 3px rgba(139, 0, 0, 0.3); /* 暗红阴影 */
-            border: 1px solid #8b0000; /* 暗红边框 */
+            box-shadow: 0 1px 3px rgba(139, 0, 0, 0.3);
+            border: 1px solid #8b0000;
         }
         .memo-header {
             font-size: 16px;
             font-weight: 600;
             margin-bottom: 16px;
             padding-bottom: 8px;
-            border-bottom: 1px solid #8b0000; /* 暗红分隔线 */
-            color: #dc143c; /* 猩红备忘录标题 */
+            border-bottom: 1px solid #8b0000;
+            color: #dc143c;
         }
         .memo-time {
             font-size: 14px;
-            color: #8b0000; /* 暗红时间 */
+            color: #8b0000;
             margin-bottom: 20px;
             display: block;
         }
@@ -507,24 +487,24 @@
             gap: 12px;
             font-size: 15px;
             line-height: 1.6;
-            color: #f0f0f0; /* 浅白待办文字 */
+            color: #f0f0f0;
         }
         .checkbox {
             width: 20px;
             height: 20px;
-            border-radius: 0; /* 方形复选框，机械感 */
-            border: 2px solid #dc143c; /* 猩红边框 */
+            border-radius: 0;
+            border: 2px solid #dc143c;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
             margin-top: 2px;
             cursor: pointer;
-            background-color: #1a1a1a; /* 深黑复选框背景 */
+            background-color: #1a1a1a;
         }
         .checkbox.checked {
-            background-color: #dc143c; /* 猩红选中背景 */
-            color: #000000; /* 纯黑勾选符号 */
+            background-color: #dc143c;
+            color: #000000;
         }
         .checkbox.checked::after {
             content: "✓";
@@ -535,17 +515,16 @@
             flex: 1;
         }
         .todo-important {
-            color: #dc143c; /* 猩红重要标识 */
+            color: #dc143c;
             font-weight: 500;
             margin-left: 8px;
         }
         .todo-highlight {
-            color: #ff4500; /* 亮红高亮标识 */
+            color: #ff4500;
             font-weight: 500;
         }
 
         @media (max-width: 768px) {
-            /* 移动端适配 - 黑红风格 */
             .content {
                 margin-top: 60px;
             }
@@ -563,7 +542,7 @@
                 width: 100%;
                 height: 40%;
                 border-right: none;
-                border-bottom: 1px solid #8b0000; /* 暗红分隔线 */
+                border-bottom: 1px solid #8b0000;
             }
             .chat-window {
                 height: 60%;
@@ -1010,14 +989,22 @@
     </div>
 
     <script>
-        // 标签切换功能
+        // 修复标签切换函数（增强鲁棒性）
         function switchTab(tabId) {
-            const contents = document.querySelectorAll('.content');
-            contents.forEach(content => content.classList.remove('active'));
-            const tabs = document.querySelectorAll('.tab-item');
-            tabs.forEach(tab => tab.classList.remove('active'));
+            // 1. 隐藏所有内容区域
+            const allContents = document.getElementsByClassName('content');
+            for (let i = 0; i < allContents.length; i++) {
+                allContents[i].classList.remove('active');
+            }
+            // 2. 移除所有标签的active状态
+            const allTabs = document.getElementsByClassName('tab-item');
+            for (let i = 0; i < allTabs.length; i++) {
+                allTabs[i].classList.remove('active');
+            }
+            // 3. 显示目标内容 + 激活目标标签
             document.getElementById(tabId).classList.add('active');
-            document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            // 找到对应点击的标签并激活
+            event.target.closest('.tab-item').classList.add('active');
         }
 
         // 私信切换聊天对象
