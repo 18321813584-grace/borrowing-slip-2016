@@ -60,18 +60,21 @@
             font-size: 13px;
         }
 
-        /* 图片容器：比例适配 + 可点击 */
+        /* 图片容器：比例适配 + 跳转原图 */
         .image-container {
             width: 100%;
             margin: 20px 0;
             border: 1px solid #8b0000;
             overflow: hidden;
             position: relative;
-            /* 适配图片原始比例（根据你的图片调整，这里用通用的4:3） */
-            aspect-ratio: 4/3;
-            cursor: pointer; /* 提示可点击 */
+            aspect-ratio: 4/3; /* 适配图片比例，可调整 */
         }
-        .image-container img {
+        .image-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .image-link img {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -79,21 +82,22 @@
             filter: brightness(0.6) contrast(1.4) saturate(1.2);
             transition: transform 0.3s ease;
         }
-        .image-container:hover img {
-            transform: scale(1.02); /*  hover轻微放大，提示可点击 */
+        .image-link:hover img {
+            transform: scale(1.02); /* hover放大提示可点击 */
         }
-        /* 点击提示文字 */
+        /* 明确跳转提示 */
         .image-container::after {
-            content: "点击查看高清原图";
+            content: "点击跳转至高清原图";
             position: absolute;
             bottom: 10px;
             right: 10px;
-            background: rgba(0,0,0,0.7);
-            color: #dc143c;
-            font-size: 12px;
-            padding: 4px 8px;
+            background: rgba(0,0,0,0.8);
+            color: #ff4500;
+            font-size: 14px;
+            padding: 5px 10px;
             border-radius: 4px;
             z-index: 1;
+            font-weight: 500;
         }
 
         .image-caption {
@@ -103,44 +107,6 @@
             padding: 8px 12px;
             text-align: center;
             border-top: 1px solid #8b0000;
-        }
-
-        /* 原图弹窗样式：全屏显示高清图 */
-        .image-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0,0,0,0.95);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .image-modal.show {
-            display: flex;
-        }
-        .image-modal img {
-            /* 关键：弹窗图片自适应，最大显示全屏，不压缩、不缩小 */
-            max-width: 90vw;
-            max-height: 90vh;
-            object-fit: contain; /* 保持原图比例，完整显示 */
-        }
-        /* 关闭按钮 */
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #dc143c;
-            font-size: 30px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .close-modal:hover {
-            color: #ff4500;
         }
 
         .content-section {
@@ -290,22 +256,17 @@
             <span>【档案状态：严格封禁 | 知悉范围：仅限管理员7】</span>
         </div>
 
-        <!-- 可点击的图片容器 -->
-        <div class="image-container" id="clickable-image">
-            <img 
-                src="https://i.ibb.co/Csnbwnxr/your-image.jpg" 
-                alt="《四神足》恐怖敦煌壁画"
-                onerror="this.src='https://i.ibb.co/8MfQT6s/horror-dunhuang-four-legs-god-2.jpg';">
+        <!-- 点击直接跳转原图链接（核心修改） -->
+        <div class="image-container">
+            <a href="https://ibb.co/Csnbwnxr" target="_blank" class="image-link">
+                <img 
+                    src="https://i.ibb.co/Csnbwnxr/your-image.jpg" 
+                    alt="《四神足》恐怖敦煌壁画"
+                    onerror="this.src='https://i.ibb.co/8MfQT6s/horror-dunhuang-four-legs-god-2.jpg';">
+            </a>
         </div>
         <div class="image-caption">
             典籍内页插画复原（敦煌壁画残片）：四足护法神像（邪教献祭图腾），颜料含未知生物组织成分
-        </div>
-
-        <!-- 原图弹窗 -->
-        <div class="image-modal" id="image-modal">
-            <span class="close-modal" id="close-modal">&times;</span>
-            <img src="https://i.ibb.co/Csnbwnxr/your-image.jpg" alt="《四神足》高清原图"
-                 onerror="this.src='https://i.ibb.co/8MfQT6s/horror-dunhuang-four-legs-god-2.jpg';">
         </div>
 
         <div class="content-section">
@@ -354,36 +315,6 @@
     <div class="corner-tip">你现在关掉页面，还来得及。</div>
 
     <script>
-        // 原图弹窗逻辑
-        const imageContainer = document.getElementById('clickable-image');
-        const imageModal = document.getElementById('image-modal');
-        const closeModal = document.getElementById('close-modal');
-        const modalImage = imageModal.querySelector('img');
-
-        // 点击图片打开弹窗（加载高清原图）
-        imageContainer.addEventListener('click', function() {
-            // 弹窗图片用原图链接，保证清晰度
-            modalImage.src = this.querySelector('img').src;
-            imageModal.classList.add('show');
-            // 禁止页面滚动
-            document.body.style.overflow = 'hidden';
-        });
-
-        // 关闭弹窗
-        closeModal.addEventListener('click', function() {
-            imageModal.classList.remove('show');
-            document.body.style.overflow = 'auto';
-        });
-
-        // 点击弹窗空白处关闭
-        imageModal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                this.classList.remove('show');
-                document.body.style.overflow = 'auto';
-            }
-        });
-
-        // 页面基础逻辑
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(() => {
                 const alert = document.getElementById('alert');
