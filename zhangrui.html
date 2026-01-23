@@ -58,7 +58,23 @@
             border: 1px solid #dc143c;
         }
         
-        /* 移除了重复的 .top-nav 样式（冗余代码） */
+        .top-nav .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #dc143c;
+        }
+        .top-nav .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #dc143c;
+            font-size: 14px;
+            border: 1px solid #dc143c;
+        }
 
         /* 底部功能导航：黑红风格 */
         .bottom-tab {
@@ -175,7 +191,7 @@
             -webkit-background-clip: text;
             background-clip: text;
         }
-        /* 动态马赛克样式 */
+        /* ========== 新增：动态马赛克样式（放在.blur-text下方，逻辑统一） ========== */
         .dynamic-mosaic {
             position: relative;
             color: transparent;
@@ -192,12 +208,14 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
+        /* 鼠标hover时清除马赛克，显示真实文字 */
         .dynamic-mosaic:hover {
             color: #dc143c;
             background-image: none;
             filter: none;
             text-shadow: 0 0 2px rgba(220, 20, 60, 0.5);
         }
+        /* ========== 马赛克样式结束 ========== */
         .post-content a {
             color: #dc143c;
             text-decoration: none;
@@ -224,7 +242,7 @@
             color: #f0f0f0;
         }
 
-        /* 发现板块样式：黑红风格 */
+        /* 发现板块样式：黑红风格 - 修复搜索框点击问题 */
         .discover-content {
             display: flex;
             flex-direction: column;
@@ -237,10 +255,19 @@
             position: relative;
             margin-bottom: 20px;
         }
+        /* 新增：修复搜索图标定位，避免遮挡输入框 */
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b0000;
+            z-index: 1;
+        }
         .search-input {
             width: 100%;
             height: 44px;
-            padding: 0 16px 0 40px;
+            padding: 0 16px 0 40px; /* 左侧padding适配图标，避免输入文字被遮挡 */
             border-radius: 0;
             border: 1px solid #8b0000;
             font-size: 15px;
@@ -248,6 +275,9 @@
             color: #f0f0f0;
             outline: none;
             transition: all 0.2s ease;
+            /* 新增：确保输入框可点击 */
+            pointer-events: auto;
+            z-index: 2;
         }
         .search-input:focus {
             border-color: #dc143c;
@@ -259,7 +289,7 @@
             text-align: center;
         }
 
-        /* 张睿页面专属样式 - 黑红风格 */
+        /* ========== 张睿页面专属样式 - 黑红风格 ========== */
         /* 私信板块：联系人列表 + 聊天内容 */
         .message-content {
             display: flex;
@@ -525,6 +555,7 @@
         }
 
         @media (max-width: 768px) {
+            /* 移动端适配 - 黑红风格 */
             .content {
                 margin-top: 60px;
             }
@@ -570,7 +601,7 @@
     
     <!-- 圈子板块：张睿视角的内容 -->
     <div id="circle" class="content active">
-        <!-- 置顶通知帖 - 张睿视角 -->
+        <!-- 置顶通知帖 - 修复标签嵌套错误，恢复置顶显示 -->
         <div class="post-card sticky">
             <div class="post-header">
                 <div class="left">
@@ -581,7 +612,6 @@
             <div class="post-content">
                 <strong>【置顶】老图书馆地下一层临时封闭通知</strong><br>
                 各位同学：因古籍区设备检修，老图书馆地下一层自今日起临时封闭，开放时间另行通知。请大家勿擅自进入封闭区域，遵守图书馆管理规定，感谢配合。
-                </div>
             </div>
         </div>
 
@@ -792,7 +822,7 @@
         </div>
     </div> <!-- 圈子板块闭合 -->
 
-    <!-- 发现板块：张睿视角 -->
+    <!-- 发现板块：张睿视角 - 修复搜索框交互 -->
     <div id="discover" class="content">
         <div class="discover-content">
             <div class="search-box">
@@ -989,22 +1019,14 @@
     </div>
 
     <script>
-        // 修复标签切换函数（增强鲁棒性）
+        // 标签切换功能
         function switchTab(tabId) {
-            // 1. 隐藏所有内容区域
-            const allContents = document.getElementsByClassName('content');
-            for (let i = 0; i < allContents.length; i++) {
-                allContents[i].classList.remove('active');
-            }
-            // 2. 移除所有标签的active状态
-            const allTabs = document.getElementsByClassName('tab-item');
-            for (let i = 0; i < allTabs.length; i++) {
-                allTabs[i].classList.remove('active');
-            }
-            // 3. 显示目标内容 + 激活目标标签
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('active'));
+            const tabs = document.querySelectorAll('.tab-item');
+            tabs.forEach(tab => tab.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
-            // 找到对应点击的标签并激活
-            event.target.closest('.tab-item').classList.add('active');
+            document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`).classList.add('active');
         }
 
         // 私信切换聊天对象
@@ -1079,8 +1101,12 @@
                 });
             });
 
-            // 搜索功能（张睿专属）
+            // 搜索功能（张睿专属）- 确保搜索框可聚焦、可输入
             const searchInput = document.getElementById('searchInput');
+            // 新增：主动绑定聚焦事件，确保可点击
+            searchInput.addEventListener('click', function() {
+                this.focus();
+            });
             searchInput.addEventListener('keyup', function(e) {
                 if (e.key === 'Enter') {
                     const keyword = this.value.trim();
