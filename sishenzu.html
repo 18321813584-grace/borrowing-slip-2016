@@ -61,21 +61,21 @@
             font-size: 13px;
         }
 
-        /* 核心优化：图片比例适配 + 点击查看原图 */
+        /* 核心修正：图片比例+点击查看原图 */
         .image-container {
             width: 100%;
             margin: 20px 0;
             border: 1px solid #8b0000;
             overflow: hidden;
             position: relative;
-            /* 适配敦煌壁画常见比例（竖版/横版通用） */
-            aspect-ratio: 3/4; /* 竖版壁画适配，若你的图是横版，改为 16/9 即可 */
-            cursor: zoom-in; /* 提示可点击查看原图 */
+            /* 固定协调比例（4:3，符合古籍插画常见比例） */
+            aspect-ratio: 4/3;
+            cursor: zoom-in; /* 提示可点击 */
         }
         .image-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* 关键：保持图片原有比例，不拉伸，四周留黑边贴合风格 */
+            object-fit: contain; /* 关键：保持原图比例，不拉伸，两边留黑边贴合风格 */
             display: block;
             filter: brightness(0.6) contrast(1.4) saturate(1.2);
             opacity: 0;
@@ -84,39 +84,25 @@
         .image-container img.loaded {
             opacity: 1;
         }
-        /* 点击后显示原图的弹窗样式 */
+        /* 点击后原图弹窗 */
         .image-modal {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             background-color: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
             display: none;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            z-index: 1000;
+            cursor: zoom-out;
         }
-        .image-modal.active {
-            display: flex;
-        }
-        .modal-content {
+        .image-modal img {
             max-width: 90%;
-            max-height: 90vh;
-            border: 2px solid #dc143c;
-        }
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            color: #dc143c;
-            font-size: 30px;
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-        .close-modal:hover {
-            color: #ff4500;
+            max-height: 90%;
+            object-fit: contain;
+            border: 1px solid #8b0000;
         }
 
         .image-caption {
@@ -126,6 +112,12 @@
             padding: 8px 12px;
             text-align: center;
             border-top: 1px solid #8b0000;
+        }
+        .caption-tip {
+            color: #dc143c;
+            font-size: 11px;
+            margin-top: 4px;
+            display: block;
         }
 
         .content-section {
@@ -275,7 +267,7 @@
             <span>【档案状态：严格封禁 | 知悉范围：仅限管理员7】</span>
         </div>
 
-        <!-- 图片区域：比例修正 + 点击查看原图 -->
+        <!-- 修正比例+点击查看原图 -->
         <div class="image-container" onclick="openModal()">
             <img 
                 src="https://i.ibb.co/Csnbwnxr/your-image.jpg" 
@@ -284,15 +276,87 @@
                 onerror="this.src='https://i.ibb.co/8MfQT6s/horror-dunhuang-four-legs-god-2.jpg'; this.classList.add('loaded');">
         </div>
         <div class="image-caption">
-            典籍内页插画复原（敦煌壁画残片）：四足护法神像（邪教献祭图腾），点击查看原图 | 颜料含未知生物组织成分
+            典籍内页插画复原（敦煌壁画残片）：四足护法神像（邪教献祭图腾），颜料含未知生物组织成分
+            <span class="caption-tip">点击图片查看原图</span>
         </div>
 
         <!-- 原图弹窗 -->
-        <div class="image-modal" id="imageModal">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <img src="https://i.ibb.co/Csnbwnxr/your-image.jpg" class="modal-content" alt="《四神足》原图">
+        <div class="image-modal" onclick="closeModal()">
+            <img src="https://i.ibb.co/Csnbwnxr/your-image.jpg" alt="《四神足》原图">
         </div>
 
         <div class="content-section">
             <h2>基本信息</h2>
-            <p>《四神足》，疑似上座部神教核心典籍，无明确作者及成书年代，全书无正规封面，纸张泛黄发脆，边缘有
+            <p>《四神足》，疑似上座部神教核心典籍，无明确作者及成书年代，全书无正规封面，纸张泛黄发脆，边缘有不规则磨损痕迹，疑似长期藏于地下潮湿环境。</p>
+            <p>典籍原始文本记载：<span class="highlight">“任何人修习、多修习四神足，以其为工具，以其为基础，建立、稳固、保持它，便可随其所欲住寿一劫或一劫以上”</span>，核心围绕“寿命延长”展开论述，文字排版混乱，部分段落有暗红色水渍浸染（疑似血迹）。</p>
+            <p>该典籍唯一已知借阅记录：<span class="highlight">2016年1月10日，苏晚（学号：2015030707）</span>，借阅条编号980112，无归还记录，现为特级失踪档案关联物证，封存于地下一层书架7暗格。</p>
+        </div>
+
+        <div class="content-section">
+            <h2>异常特征</h2>
+            <p>典籍内容并非传统经文，除开篇理论外，其余章节均记录各类异常声音描述，包括“风吹声如低语”“落叶声似计数”“书架后隐约哭声”等，夜间翻阅时可听见微弱异响，与文字描述高度吻合。</p>
+            <p>典籍最后一页用红墨水标注特殊仪式说明：<span class="mosaic-text">“闭馆时对书架7唱歌才算归还，三短一长为应和，雾声起时即献祭”</span>，该标注非原书内容，经核查为苏晚失踪前添加。</p>
+            <p>关键异常：借阅者会被自动标记为“献祭候选人”，典籍会通过未知方式引导借阅者前往老图书馆地下一层书架7，完成所谓“还书仪式”，至今无成功归还案例。</p>
+        </div>
+
+        <div class="关联线索">
+            <h3>核心关联事件</h3>
+            <ul>
+                <li>1988年老图书馆火灾：火灾为人为纵火，目的是改造地下一层为邪教献祭场，典籍在此期间被秘密藏匿</li>
+                <li>2016年苏晚失踪案：苏晚为典籍最后借阅者，失踪前最后行为为携带典籍前往地下一层执行“还书仪式”</li>
+                <li>十年献祭周期：典籍借阅记录与1988年、2016年、2026年三个关键时间点高度重合（每十年一次献祭）</li>
+                <li>黄诚如邪教协议：典籍为黄诚如资助图书馆重建的核心条件，是其“换寿”仪式的关键道具</li>
+                <li>借阅条秘密：苏晚遗留借阅条背面藏有微缩字迹，经放大显示：<span class="mosaic-text">“书架7后有暗格，雾声是召唤，无归还即永生”</span></li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>风险提示</h2>
+            <p>该典籍已被判定为<span class="highlight">邪教核心工具</span>，其原始教义被恶意扭曲解读，所谓“延长寿命”实为献祭他人生命换取自身寿元的理论依据。</p>
+            <p>任何试图寻找、翻阅、复刻该典籍的行为均存在极高风险，可能被邪教标记为下一位“候选人”，相关记录将自动同步至黄诚如终端。</p>
+            <p>管理员职责：定期检查书架7暗格封存状态，严禁向任何学生透露典籍相关信息，如有异常，立即向黄诚如先生汇报（联系方式：加密私信）。</p>
+        </div>
+
+        <div class="footer-warning">
+            【警告：本档案内容严禁外泄 | 访问记录已上传至核心服务器 | 违规者将被纳入“候选人”名单】
+        </div>
+
+        <a href="index.html" class="back-btn">返回校园圈</a>
+    </div>
+
+    <div class="dynamic-alert" id="alert">
+        检测到异常访问 | 闭馆铃声（三短一长）即将响起
+    </div>
+
+    <div class="corner-tip">你现在关掉页面，还来得及。</div>
+
+    <script>
+        // 原图弹窗逻辑
+        const modal = document.querySelector('.image-modal');
+        const modalImg = modal.querySelector('img');
+        
+        function openModal() {
+            modal.style.display = 'flex';
+            // 确保弹窗图片和容器图片一致（包括容错后的图片）
+            const containerImg = document.querySelector('.image-container img');
+            modalImg.src = containerImg.src;
+        }
+        
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        // 页面核心逻辑
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(() => {
+                const alert = document.getElementById('alert');
+                alert.style.display = alert.style.display === 'block' ? 'none' : 'block';
+            }, 10000);
+
+            setTimeout(() => {
+                document.getElementById('alert').style.display = 'block';
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
