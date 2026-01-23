@@ -192,6 +192,32 @@
             -webkit-background-clip: text;
             background-clip: text;
         }
+        /* ========== 新增：动态马赛克样式（放在.blur-text下方，逻辑统一） ========== */
+        .dynamic-mosaic {
+            position: relative;
+            /* 默认显示黑红马赛克 */
+            color: transparent;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #8b0000, /* 暗红 */
+                #8b0000 6px,
+                #0a0a0a, /* 近纯黑 */
+                #0a0a0a 12px
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: blur(0.8px); /* 轻微模糊强化马赛克感 */
+            cursor: pointer; /* 鼠标指针提示可交互 */
+            transition: all 0.3s ease; /* 过渡动画，不突兀 */
+        }
+        /* 鼠标hover时清除马赛克，显示真实文字 */
+        .dynamic-mosaic:hover {
+            color: #dc143c; /* 猩红文字，贴合黑红风格 */
+            background-image: none;
+            filter: none;
+            text-shadow: 0 0 2px rgba(220, 20, 60, 0.5); /* 轻微发光，凸显恐怖感 */
+        }
+        /* ========== 马赛克样式结束 ========== */
         .post-content a {
             color: #dc143c; /* 猩红链接 */
             text-decoration: none;
