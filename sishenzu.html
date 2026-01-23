@@ -59,6 +59,32 @@
             color: #dc143c; /* 猩红状态文字 */
             font-size: 13px;
         }
+        /* 新增：图片容器样式 */
+        .image-container {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #8b0000; /* 暗红边框 */
+            overflow: hidden;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .image-container:hover {
+            box-shadow: 0 0 15px rgba(220, 20, 60, 0.7); /* 猩红悬浮阴影 */
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(0.8) contrast(1.2); /* 强化恐怖氛围 */
+        }
+        .image-caption {
+            background-color: rgba(10, 10, 10, 0.9); /* 黑红半透明字幕框 */
+            color: #8b0000; /* 暗红字幕 */
+            font-size: 12px;
+            padding: 8px 12px;
+            text-align: center;
+            border-top: 1px solid #8b0000;
+        }
         .content-section {
             margin-bottom: 25px;
         }
@@ -206,6 +232,14 @@
         </div>
         <div class="doc-status">
             <span>【档案状态：严格封禁 | 知悉范围：仅限管理员7】</span>
+        </div>
+
+        <!-- 新增：图片区域 -->
+        <div class="image-container">
+            <img src="https://p9-hippo-sign.byteimg.com/tos-cn-i-a9yeduch1e/2113911388824713a973034d78906551~tplv-ii0cwwkcx9-resize-crop-v1:0:0:800:450:800:450.jpeg?lk3s=19ff00fe&x-expires=2067584424&x-signature=QJgq63X%2B7d%2F80c%2F7x%2B%2B3x3GQ8o%3D" alt="《四神足》壁画">
+            <div class="image-caption">
+                典籍内页插画复原（疑似敦煌壁画残片）：四足护法神像（实际为邪教献祭图腾），颜料含未知生物组织成分
+            </div>
         </div>
 
         <div class="content-section">
