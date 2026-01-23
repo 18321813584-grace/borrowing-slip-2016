@@ -60,7 +60,7 @@
             font-size: 13px;
         }
 
-        /* 图片容器：比例适配 + 跳转原图 */
+        /* 图片容器：仅保留图片显示，移除跳转相关样式 */
         .image-container {
             width: 100%;
             margin: 20px 0;
@@ -69,35 +69,12 @@
             position: relative;
             aspect-ratio: 4/3; /* 适配图片比例，可调整 */
         }
-        .image-link {
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        .image-link img {
+        .image-container img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
             filter: brightness(0.6) contrast(1.4) saturate(1.2);
-            transition: transform 0.3s ease;
-        }
-        .image-link:hover img {
-            transform: scale(1.02); /* hover放大提示可点击 */
-        }
-        /* 明确跳转提示 */
-        .image-container::after {
-            content: "点击跳转至高清原图";
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0,0,0,0.8);
-            color: #ff4500;
-            font-size: 14px;
-            padding: 5px 10px;
-            border-radius: 4px;
-            z-index: 1;
-            font-weight: 500;
         }
 
         .image-caption {
@@ -256,14 +233,12 @@
             <span>【档案状态：严格封禁 | 知悉范围：仅限管理员7】</span>
         </div>
 
-        <!-- 点击直接跳转原图链接（核心修改） -->
+        <!-- 仅保留图片显示，移除跳转链接 -->
         <div class="image-container">
-            <a href="https://ibb.co/Csnbwnxr" target="_blank" class="image-link">
-                <img 
-                    src="https://i.ibb.co/Csnbwnxr/your-image.jpg" 
-                    alt="《四神足》恐怖敦煌壁画"
-                    onerror="this.src='https://i.ibb.co/8MfQT6s/horror-dunhuang-four-legs-god-2.jpg';">
-            </a>
+            <img 
+                src="https://i.ibb.co/Csnbwnxr/your-image.jpg" 
+                alt="《四神足》恐怖敦煌壁画"
+                onerror="this.src='https://i.ibb.co/8MfQT6s/horror-dunhuang-four-legs-god-2.jpg';">
         </div>
         <div class="image-caption">
             典籍内页插画复原（敦煌壁画残片）：四足护法神像（邪教献祭图腾），颜料含未知生物组织成分
