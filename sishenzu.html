@@ -1,1 +1,140 @@
-
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上北大学 | 古籍档案 - 《四神足》</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Courier New", Courier, monospace, "SimSun", "宋体";
+        }
+        body {
+            background-color: #000000;
+            color: #f0f0f0;
+            overflow-x: hidden;
+            position: relative;
+            padding: 30px 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #0a0a0a;
+            border: 1px solid #8b0000;
+            padding: 25px;
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+        }
+        .header {
+            border-bottom: 1px solid #8b0000;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #dc143c;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .header .time {
+            color: #8b0000;
+            font-size: 14px;
+            text-align: right;
+        }
+        .doc-status {
+            background-color: #1a0000;
+            border: 1px solid #dc143c;
+            padding: 8px 12px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        .doc-status span {
+            color: #dc143c;
+            font-size: 13px;
+        }
+        .content-section {
+            margin-bottom: 25px;
+        }
+        .content-section h2 {
+            color: #dc143c;
+            font-size: 18px;
+            margin-bottom: 12px;
+            border-left: 3px solid #dc143c;
+            padding-left: 8px;
+        }
+        .content-section p {
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 10px;
+            text-indent: 2em;
+        }
+        .highlight {
+            color: #ff4500;
+            font-weight: 500;
+        }
+        .mosaic-text {
+            position: relative;
+            color: transparent;
+            background-image: repeating-linear-gradient(
+                45deg,
+                #8b0000,
+                #8b0000 6px,
+                #0a0a0a,
+                #0a0a0a 12px
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: blur(0.8px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .mosaic-text:hover {
+            color: #dc143c;
+            background-image: none;
+            filter: none;
+            text-shadow: 0 0 2px rgba(220, 20, 60, 0.5);
+        }
+        .关联线索 {
+            background-color: #1a0000;
+            padding: 15px;
+            border-left: 2px solid #dc143c;
+            margin: 20px 0;
+        }
+        .关联线索 h3 {
+            color: #dc143c;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .关联线索 ul {
+            list-style: none;
+            padding-left: 15px;
+        }
+        .关联线索 li {
+            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+        .关联线索 li::before {
+            content: "▪";
+            color: #dc143c;
+            position: absolute;
+            left: -15px;
+        }
+        .footer-warning {
+            border-top: 1px solid #8b0000;
+            padding-top: 15px;
+            margin-top: 30px;
+            color: #8b0000;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .back-btn {
+            display: block;
+            width: 120px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            background-color: #dc143c;
