@@ -183,6 +183,27 @@
             background-color: #8b0000;
             color: #f0f0f0;
         }
+        /* 新增：前往地下一层按钮样式 */
+        .underground-btn {
+            display: block;
+            width: 140px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #1a0000;
+            color: #dc143c;
+            text-decoration: none;
+            margin: 15px auto 0;
+            border: 1px solid #dc143c;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        .underground-btn:hover {
+            background-color: #8b0000;
+            color: #f0f0f0;
+            box-shadow: 0 0 8px rgba(220,20,60,0.6);
+        }
         .dynamic-alert {
             position: fixed;
             bottom: 30px;
@@ -268,6 +289,8 @@
             【警告：本档案内容严禁外泄】
         </div>
 
+        <!-- 新增：前往地下一层按钮 -->
+        <a href="underground_floor.html" class="underground-btn">前往地下一层</a>
         <!-- 核心修改：将跳转链接改为 zhangrui.html -->
         <a href="zhangrui.html" class="back-btn">返回校园圈</a>
     </div>
