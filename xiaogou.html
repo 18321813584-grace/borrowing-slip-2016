@@ -3,449 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>上北大学 | 古籍档案 - 《四神足》</title>
+    <title>可爱小狗图片展示</title>
     <style>
+        /* 基础样式，让页面更美观 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Courier New", Courier, monospace, "SimSun", "宋体";
         }
+
         body {
-            background-color: #000000;
-            color: #f0f0f0;
-            padding: 30px 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #0a0a0a;
-            border: 1px solid #8b0000;
-            padding: 25px;
-            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
-        }
-        .header {
-            border-bottom: 1px solid #8b0000;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+            background-color: #f8f9fa;
             display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: "Microsoft YaHei", sans-serif;
         }
-        .header h1 {
-            color: #dc143c;
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
             font-size: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .header .access-info {
-            color: #8b0000;
-            font-size: 12px;
-            text-align: right;
-        }
-        .doc-status {
-            background-color: #1a0000;
-            border: 1px solid #dc143c;
-            padding: 8px 12px;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
-        .doc-status span {
-            color: #dc143c;
-            font-size: 13px;
         }
 
-        /* 纯CSS绘制的《四神足》恐怖敦煌壁画 */
-        .mural-container {
-            width: 100%;
-            height: 400px;
-            margin: 20px 0;
-            border: 1px solid #8b0000;
-            background-color: #1a0a0a;
-            position: relative;
-            overflow: hidden;
-            filter: brightness(0.7) contrast(1.3);
-        }
-        /* 背景纹理（敦煌壁画斑驳感） */
-        .mural-bg {
-            width: 100%;
-            height: 100%;
-            background-image: 
-                repeating-linear-gradient(45deg, rgba(139, 0, 0, 0.1) 0px, rgba(139, 0, 0, 0.1) 2px, transparent 2px, transparent 6px),
-                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%238b0000' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
-        }
-        /* 四足神像主体 */
-        .four-foot-god {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60%;
-            height: 80%;
-        }
-        /* 头部（恐怖夜叉脸） */
-        .god-head {
-            width: 40%;
-            height: 30%;
-            margin: 0 auto;
-            position: relative;
-        }
-        .god-face {
-            width: 100%;
-            height: 100%;
-            background-color: #dc143c;
-            border-radius: 50% 50% 40% 40%;
-            border: 3px solid #000;
-            position: relative;
-            overflow: hidden;
-        }
-        .god-eye {
-            width: 20%;
-            height: 30%;
-            background-color: #000;
+        /* 图片容器，适配不同屏幕 */
+        .dog-img-container {
+            max-width: 80%;
             border-radius: 10px;
-            position: absolute;
-            top: 30%;
-            box-shadow: 0 0 8px #ff4500 inset;
-        }
-        .god-eye.left { left: 20%; }
-        .god-eye.right { right: 20%; }
-        .god-mouth {
-            width: 50%;
-            height: 25%;
-            background-color: #000;
-            border-radius: 0 0 30px 30px;
-            position: absolute;
-            bottom: 10%;
-            left: 25%;
             overflow: hidden;
-        }
-        .god-teeth {
-            width: 100%;
-            height: 60%;
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-end;
-        }
-        .god-tooth {
-            width: 15%;
-            height: 80%;
-            background-color: #f0f0f0;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
-        }
-        /* 身体（敦煌力士造型） */
-        .god-body {
-            width: 80%;
-            height: 50%;
-            margin: 0 auto;
-            background-color: #dc143c;
-            border: 3px solid #000;
-            border-radius: 20px 20px 40px 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        .god-body::before {
-            content: "";
-            width: 100%;
-            height: 40%;
-            background-color: #8b0000;
-            position: absolute;
-            top: 0;
-            border-bottom: 2px solid #000;
-        }
-        /* 四肢（四足） */
-        .god-limbs {
-            width: 100%;
-            height: 60%;
-            position: absolute;
-            bottom: 0;
-            display: flex;
-            justify-content: space-around;
-        }
-        .god-limb {
-            width: 20%;
-            height: 100%;
-            background-color: #dc143c;
-            border: 3px solid #000;
-            border-radius: 10px;
-            transform: rotate(15deg);
-        }
-        .god-limb:nth-child(2) { transform: rotate(-15deg); }
-        .god-limb:nth-child(3) { transform: rotate(15deg); }
-        .god-limb:nth-child(4) { transform: rotate(-15deg); }
-        /* 火焰背光（敦煌风格） */
-        .god-halo {
-            position: absolute;
-            top: -20%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120%;
-            height: 60%;
-            background: radial-gradient(circle, rgba(220,20,60,0.5) 0%, rgba(139,0,0,0.2) 70%, transparent 100%);
-            border-radius: 50%;
-            z-index: -1;
-        }
-        /* 血迹/污渍 */
-        .mural-stain {
-            position: absolute;
-            background-color: rgba(220,20,60,0.3);
-            border-radius: 50%;
-            filter: blur(5px);
-        }
-        .stain1 { width: 50px; height: 50px; top: 20%; left: 10%; }
-        .stain2 { width: 80px; height: 80px; bottom: 10%; right: 15%; }
-        .stain3 { width: 40px; height: 40px; top: 70%; left: 20%; }
-
-        .image-caption {
-            background-color: rgba(10, 10, 10, 0.9);
-            color: #8b0000;
-            font-size: 12px;
-            padding: 8px 12px;
-            text-align: center;
-            border-top: 1px solid #8b0000;
-            margin-top: -5px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .content-section {
-            margin-bottom: 25px;
-        }
-        .content-section h2 {
-            color: #dc143c;
-            font-size: 18px;
-            margin-bottom: 12px;
-            border-left: 3px solid #dc143c;
-            padding-left: 8px;
-        }
-        .content-section p {
-            line-height: 1.8;
-            font-size: 15px;
-            margin-bottom: 10px;
-            text-indent: 2em;
-        }
-        .highlight {
-            color: #ff4500;
-            font-weight: 500;
-        }
-        .mosaic-text {
-            position: relative;
-            color: transparent;
-            background-image: repeating-linear-gradient(
-                45deg,
-                #8b0000,
-                #8b0000 6px,
-                #0a0a0a,
-                #0a0a0a 12px
-            );
-            -webkit-background-clip: text;
-            background-clip: text;
-            filter: blur(0.8px);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .mosaic-text:hover {
-            color: #dc143c;
-            background-image: none;
-            filter: none;
-            text-shadow: 0 0 2px rgba(220,20,60,0.5);
-        }
-        .关联线索 {
-            background-color: #1a0000;
-            padding: 15px;
-            border-left: 2px solid #dc143c;
-            margin: 20px 0;
-        }
-        .关联线索 h3 {
-            color: #dc143c;
-            font-size: 16px;
-            margin-bottom: 10px;
-        }
-        .关联线索 ul {
-            list-style: none;
-            padding-left: 15px;
-        }
-        .关联线索 li {
-            line-height: 1.6;
-            font-size: 14px;
-            margin-bottom: 8px;
-            position: relative;
-        }
-        .关联线索 li::before {
-            content: "▪";
-            color: #dc143c;
-            position: absolute;
-            left: -15px;
-        }
-        .footer-warning {
-            border-top: 1px solid #8b0000;
-            padding-top: 15px;
-            margin-top: 30px;
-            color: #8b0000;
-            font-size: 14px;
-            text-align: center;
-            line-height: 1.6;
-        }
-        .back-btn {
+        .dog-img {
+            width: 100%;
+            height: auto;
             display: block;
-            width: 120px;
-            height: 36px;
-            line-height: 36px;
-            text-align: center;
-            background-color: #dc143c;
-            color: #000000;
-            text-decoration: none;
-            margin: 20px auto 0;
-            border: none;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-        .back-btn:hover {
-            background-color: #8b0000;
-            color: #f0f0f0;
-        }
-        .dynamic-alert {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(139,0,0,0.9);
-            color: #f0f0f0;
-            padding: 10px 20px;
-            border: 1px solid #dc143c;
-            font-size: 14px;
-            display: none;
-            z-index: 999;
-            animation: flash 1s infinite alternate;
-        }
-        @keyframes flash {
-            from { opacity: 0.7; }
-            to { opacity: 1; }
-        }
-        .corner-tip {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            color: #8b0000;
-            font-size: 12px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            background-color: rgba(10,10,10,0.8);
-            padding: 8px 12px;
-            border: 1px solid #333;
-            z-index: 998;
-        }
-        .corner-tip:hover {
-            opacity: 1;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>古籍档案 - 《四神足》</h1>
-            <div class="access-info">
-                访问账号：LIBRARY<br>
-                访问时间：2026年1月10日 23:47<br>
-                权限等级：管理员7级（最高）
-            </div>
-        </div>
-        <div class="doc-status">
-            <span>【档案状态：严格封禁 | 知悉范围：仅限管理员7】</span>
-        </div>
-
-        <!-- 纯CSS绘制的《四神足》恐怖敦煌壁画 -->
-        <div class="mural-container">
-            <div class="mural-bg"></div>
-            <div class="four-foot-god">
-                <div class="god-halo"></div>
-                <div class="god-head">
-                    <div class="god-face">
-                        <div class="god-eye left"></div>
-                        <div class="god-eye right"></div>
-                        <div class="god-mouth">
-                            <div class="god-teeth">
-                                <div class="god-tooth"></div>
-                                <div class="god-tooth"></div>
-                                <div class="god-tooth"></div>
-                                <div class="god-tooth"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="god-body">
-                    <div class="god-limbs">
-                        <div class="god-limb"></div>
-                        <div class="god-limb"></div>
-                        <div class="god-limb"></div>
-                        <div class="god-limb"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="mural-stain stain1"></div>
-            <div class="mural-stain stain2"></div>
-            <div class="mural-stain stain3"></div>
-        </div>
-        <div class="image-caption">
-            典籍内页插画复原（疑似敦煌壁画残片）：四足护法神像（实际为邪教献祭图腾），颜料含未知生物组织成分
-        </div>
-
-        <div class="content-section">
-            <h2>基本信息</h2>
-            <p>《四神足》，疑似上座部神教核心典籍，无明确作者及成书年代，全书无正规封面，纸张泛黄发脆，边缘有不规则磨损痕迹，疑似长期藏于地下潮湿环境。</p>
-            <p>典籍原始文本记载：<span class="highlight">“任何人修习、多修习四神足，以其为工具，以其为基础，建立、稳固、保持它，便可随其所欲住寿一劫或一劫以上”</span>，核心围绕“寿命延长”展开论述，文字排版混乱，部分段落有暗红色水渍浸染（疑似血迹）。</p>
-            <p>该典籍唯一已知借阅记录：<span class="highlight">2016年1月10日，苏晚（学号：2015030707）</span>，借阅条编号980112，无归还记录，现为特级失踪档案关联物证，封存于地下一层书架7暗格。</p>
-        </div>
-
-        <div class="content-section">
-            <h2>异常特征</h2>
-            <p>典籍内容并非传统经文，除开篇理论外，其余章节均记录各类异常声音描述，包括“风吹声如低语”“落叶声似计数”“书架后隐约哭声”等，夜间翻阅时可听见微弱异响，与文字描述高度吻合。</p>
-            <p>典籍最后一页用红墨水标注特殊仪式说明：<span class="mosaic-text">“闭馆时对书架7唱歌才算归还，三短一长为应和，雾声起时即献祭”</span>，该标注非原书内容，经核查为苏晚失踪前添加。</p>
-            <p>关键异常：借阅者会被自动标记为“献祭候选人”，典籍会通过未知方式引导借阅者前往老图书馆地下一层书架7，完成所谓“还书仪式”，至今无成功归还案例。</p>
-        </div>
-
-        <div class="关联线索">
-            <h3>核心关联事件</h3>
-            <ul>
-                <li>1988年老图书馆火灾：火灾为人为纵火，目的是改造地下一层为邪教献祭场，典籍在此期间被秘密藏匿</li>
-                <li>2016年苏晚失踪案：苏晚为典籍最后借阅者，失踪前最后行为为携带典籍前往地下一层执行“还书仪式”</li>
-                <li>十年献祭周期：典籍借阅记录与1988年、2016年、2026年三个关键时间点高度重合（每十年一次献祭）</li>
-                <li>黄诚如邪教协议：典籍为黄诚如资助图书馆重建的核心条件，是其“换寿”仪式的关键道具</li>
-                <li>借阅条秘密：苏晚遗留借阅条背面藏有微缩字迹，经放大显示：<span class="mosaic-text">“书架7后有暗格，雾声是召唤，无归还即永生”</span></li>
-            </ul>
-        </div>
-
-        <div class="content-section">
-            <h2>风险提示</h2>
-            <p>该典籍已被判定为<span class="highlight">邪教核心工具</span>，其原始教义被恶意扭曲解读，所谓“延长寿命”实为献祭他人生命换取自身寿元的理论依据。</p>
-            <p>任何试图寻找、翻阅、复刻该典籍的行为均存在极高风险，可能被邪教标记为下一位“候选人”，相关记录将自动同步至黄诚如终端。</p>
-            <p>管理员职责：定期检查书架7暗格封存状态，严禁向任何学生透露典籍相关信息，如有异常，立即向黄诚如先生汇报（联系方式：加密私信）。</p>
-        </div>
-
-        <div class="footer-warning">
-            【警告：本档案内容严禁外泄 | 访问记录已上传至核心服务器 | 违规者将被纳入“候选人”名单】
-        </div>
-
-        <a href="index.html" class="back-btn">返回校园圈</a>
+    <h1>可爱的小狗🐶</h1>
+    <div class="dog-img-container">
+        <!-- 嵌入Base64编码的小狗图片，无需外部图床 -->
+        <img class="dog-img" 
+             src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAeAB4AAD/4QAiRXhpZgAATU0AKgAAAAgAAQESAAMAAAABAAEAAAAAAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAYABADASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAABgj/8QAFQEBAgMAAAAAAAAAAAAAAAAAAgT/xAAdEAABBAIDAAMAAAAAAAAAAAABAgMRBBIhMUFREyJxgZGh/9oADAMBAAIRAxEAPwD3KKK+fCiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/Z" 
+             alt="可爱的小狗图片">
     </div>
-
-    <div class="dynamic-alert" id="alert">
-        检测到异常访问 | 闭馆铃声（三短一长）即将响起
-    </div>
-
-    <div class="corner-tip">你现在关掉页面，还来得及。</div>
-
-    <script>
-        setInterval(() => {
-            const alert = document.getElementById('alert');
-            alert.style.display = alert.style.display === 'block' ? 'none' : 'block';
-        }, 10000);
-
-        window.onload = function() {
-            setTimeout(() => {
-                document.getElementById('alert').style.display = 'block';
-            }, 3000);
-        };
-    </script>
 </body>
 </html>
