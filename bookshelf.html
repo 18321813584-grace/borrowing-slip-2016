@@ -129,8 +129,7 @@
     <div class="container">
         <h1 class="scene-title">旧图书馆 -1F · 书架区</h1>
         <p class="scene-desc">
-            暗门开启后，眼前是10个深色实木书架。墙面刻着提示：<span class="highlight">「寻书架柒，得《四神足》，解锁终章」</span><br>
-            点击书架，找到藏有《四神足》的那一个...
+            暗门开启后，眼前是10个深色实木书架。墙面刻着提示：<span class="highlight">「寻书架柒，得书者，解锁终章」</span><br>
         </p>
         <div class="book-tip" id="bookTip"></div>
         <div class="bookshelf-grid">
@@ -140,7 +139,7 @@
             <div class="bookshelf" data-num="4">书架 4</div>
             <div class="bookshelf" data-num="5">书架 5</div>
             <div class="bookshelf" data-num="6">书架 6</div>
-            <div class="bookshelf bookshelf-7" data-num="7">书架 7</div>
+            <div class="bookshelf" data-num="7">书架 7</div>
             <div class="bookshelf" data-num="8">书架 8</div>
             <div class="bookshelf" data-num="9">书架 9</div>
             <div class="bookshelf" data-num="10">书架 10</div>
@@ -182,8 +181,7 @@
         // 最终关卡按钮点击事件
         finalBtn.addEventListener('click', () => {
             alert('《四神足》激活了隐藏通道！即将进入地下医院最终关卡');
-            // 这里可以写跳转到地下医院页面的逻辑，比如：
-            // window.location.href = "hospital.html";
+            window.location.href = "hospital.html";
         });
     </script>
 </body>
