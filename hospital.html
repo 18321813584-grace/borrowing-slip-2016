@@ -214,3 +214,62 @@
     </script>
 </body>
 </html>
+<!-- 在地下医院页面的<script>最后添加结尾逻辑 -->
+<script>
+    // （保留之前的交互代码）
+
+    // 结尾触发：当用户点击完所有三个元素后，显示最终剧情
+    let clickedItems = 0;
+    const totalItems = 3; // 三个交互元素：病历、角落、抽屉
+
+    // 给每个交互元素加“已点击计数”
+    checkRecord.addEventListener('click', () => {
+        recordModal.classList.add('show');
+        if (!checkRecord.dataset.clicked) {
+            clickedItems++;
+            checkRecord.dataset.clicked = 'true';
+            checkEnd();
+        }
+    });
+
+    exploreRoom.addEventListener('click', () => {
+        alert('你在角落找到半瓶未开封的消毒液，瓶身标签已经模糊，暂时没有其他线索。');
+        if (!exploreRoom.dataset.clicked) {
+            clickedItems++;
+            exploreRoom.dataset.clicked = 'true';
+            checkEnd();
+        }
+    });
+
+    openDrawer.addEventListener('click', () => {
+        alert('抽屉里只有一张写着“四神足=静、定、安、虑”的残页，纸张边缘被烧过，剩下的内容不见了。');
+        if (!openDrawer.dataset.clicked) {
+            clickedItems++;
+            openDrawer.dataset.clicked = 'true';
+            checkEnd();
+        }
+    });
+
+    // 检查是否触发结尾
+    function checkEnd() {
+        if (clickedItems === totalItems) {
+            // 延迟2秒显示最终剧情（让用户有缓冲时间）
+            setTimeout(() => {
+                // 隐藏所有元素，显示结尾剧情
+                document.querySelector('.scene-elements').style.display = 'none';
+                document.querySelector('.hospital-desc').innerHTML = `
+                    <p style="font-size: 18px; line-height: 2.2; color: #e0d5c7;">
+                        你刚看完残页，诊室的手术灯突然闪了三下，彻底熄灭。<br>
+                        黑暗里，传来书页翻动的声音——不是你手里的残页，是从诊室深处的墙后传来的。<br>
+                        你摸向声音的方向，指尖触到的不是墙面，是冰凉的书脊。<br>
+                        墙后，似乎是另一排书架。<br>
+                        <span style="color: #e63946; font-weight: bold;">“旧图书馆的秘密，从来不止一层。”</span>
+                    </p>
+                    <p style="text-align: center; margin-top: 30px; color: #d4a373;">
+                        —— 本次闯关结束 ——
+                    </p>
+                `;
+            }, 2000);
+        }
+    }
+</script>
