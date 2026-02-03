@@ -1,1 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旧图书馆 -1F | 书架区</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SimSun", 宋体;
+        }
+        body {
+            background-color: #050505;
+            color: #f0e6d2;
+            min-height: 100vh;
+            padding: 30px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .scene-title {
+            font-size: 32px;
+            color: #d4a373;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .scene-desc {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 50px;
+            color: #e0d5c7;
+        }
+        .highlight {
+            color: #e9c46a;
+            font-weight: bold;
+        }
+        .bookshelf-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .bookshelf {
+            background-color: #2a1a1a;
+            border: 2px solid #442c2c;
+            height: 220px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: #d4a373;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .bookshelf::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg, rgba(92,43,43,0) 0, rgba(92,43,43,0.1) 5px, rgba(92,43,43,0) 10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .bookshelf:hover {
+            border-color: #d4a373;
+            box-shadow: 0 0 15px rgba(212, 163, 115, 0.4);
+            transform: translateY(-5px);
+        }
+        .bookshelf:hover::before {
+            opacity: 1;
+        }
+        /* 书架7的特殊样式 */
+        .bookshelf-7 {
+            border-color: #e9c46a;
+            background-color: #3a2515;
+        }
+        .bookshelf-7:hover {
+            box-shadow: 0 0 20px rgba(233, 196, 106, 0.6);
+        }
+        .book-tip {
+            text-align: center;
+            font-size: 20px;
+            color: #e9c46a;
+            margin: 20px 0;
+            height: 30px;
+        }
+        .final-btn {
+            display: block;
+            margin: 0 auto;
+            padding: 15px 50px;
+            background-color: #3a1a1a;
+            color: #f0e6d2;
+            border: 2px solid #e9c46a;
+            font-size: 22px;
+            cursor: pointer;
+            display: none;
+        }
+        .final-btn.show {
+            display: block;
+        }
+        .final-btn:hover {
+            background-color: #5c2b2b;
+            box-shadow: 0 0 20px rgba(233, 196, 106, 0.5);
+        }
+        /* 响应式适配 */
+        @media (max-width: 992px) {
+            .bookshelf-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .bookshelf-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="scene-title">旧图书馆 -1F · 书架区</h1>
+        <p class="scene-desc">
+            暗门开启后，眼前是10个深色实木书架。墙面刻着提示：<span class="highlight">「寻书架柒，得《四神足》，解锁终章」</span><br>
+            点击书架，找到藏有《四神足》的那一个...
+        </p>
+        <div class="book-tip" id="bookTip"></div>
+        <div class="bookshelf-grid">
+            <div class="bookshelf" data-num="1">书架 1</div>
+            <div class="bookshelf" data-num="2">书架 2</div>
+            <div class="bookshelf" data-num="3">书架 3</div>
+            <div class="bookshelf" data-num="4">书架 4</div>
+            <div class="bookshelf" data-num="5">书架 5</div>
+            <div class="bookshelf" data-num="6">书架 6</div>
+            <div class="bookshelf bookshelf-7" data-num="7">书架 7</div>
+            <div class="bookshelf" data-num="8">书架 8</div>
+            <div class="bookshelf" data-num="9">书架 9</div>
+            <div class="bookshelf" data-num="10">书架 10</div>
+        </div>
+        <button class="final-btn" id="finalBtn">进入地下医院 · 最终关卡</button>
+    </div>
 
+    <script>
+        const bookshelves = document.querySelectorAll('.bookshelf');
+        const bookTip = document.getElementById('bookTip');
+        const finalBtn = document.getElementById('finalBtn');
+        let isFound = false; // 是否找到书架7
+
+        // 给每个书架绑定点击事件
+        bookshelves.forEach(shelf => {
+            shelf.addEventListener('click', () => {
+                const shelfNum = shelf.dataset.num;
+                
+                if (isFound) return; // 找到后不再响应其他书架
+
+                if (shelfNum === '7') {
+                    // 点击书架7：找到《四神足》
+                    bookTip.textContent = "你在书架7的最里层，摸到了古卷《四神足》！";
+                    shelf.style.backgroundColor = "#5c2b2b";
+                    shelf.style.color = "#e9c46a";
+                    isFound = true;
+                    finalBtn.classList.add('show'); // 显示最终关卡按钮
+                } else {
+                    // 点击其他书架：提示无物
+                    bookTip.textContent = `书架 ${shelfNum} 中只有旧书，没有《四神足》`;
+                    // 2秒后清空提示
+                    setTimeout(() => {
+                        bookTip.textContent = "";
+                    }, 2000);
+                }
+            });
+        });
+
+        // 最终关卡按钮点击事件
+        finalBtn.addEventListener('click', () => {
+            alert('《四神足》激活了隐藏通道！即将进入地下医院最终关卡');
+            // 这里可以写跳转到地下医院页面的逻辑，比如：
+            // window.location.href = "hospital.html";
+        });
+    </script>
+</body>
+</html>
