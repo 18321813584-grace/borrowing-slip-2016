@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旧图书馆 - 地下医院</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "SimSun", 宋体, "Courier New", monospace;
+        }
+        body {
+            background-color: #0a0808;
+            color: #e0d5c7;
+            min-height: 100vh;
+            padding: 30px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233a2020' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(15, 10, 10, 0.95);
+            border: 1px solid #5c2b2b;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 0 30px rgba(92, 43, 43, 0.3);
+        }
+        .scene-title {
+            font-size: 36px;
+            color: #e63946;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(230, 57, 70, 0.2);
+        }
+        .scene-subtitle {
+            font-size: 18px;
+            color: #d4a373;
+            text-align: center;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+        .hospital-desc {
+            line-height: 2;
+            font-size: 16px;
+            margin-bottom: 50px;
+        }
+        .highlight {
+            color: #e9c46a;
+            font-weight: bold;
+        }
+        /* 医院场景元素 */
+        .scene-elements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 50px 0;
+        }
+        .scene-item {
+            width: 220px;
+            height: 200px;
+            background-color: #2a1a1a;
+            border: 2px solid #442c2c;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .scene-item:hover {
+            border-color: #e63946;
+            box-shadow: 0 0 15px rgba(230, 57, 70, 0.4);
+            transform: translateY(-5px);
+        }
+        .scene-icon {
+            font-size: 48px;
+            color: #e63946;
+        }
+        .scene-item-text {
+            font-size: 18px;
+            text-align: center;
+        }
+        /* 病历弹窗 */
+        .record-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+        .record-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .record-content {
+            background-color: #1a0a0a;
+            border: 2px solid #e63946;
+            padding: 30px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        .record-title {
+            color: #e63946;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #5c2b2b;
+            padding-bottom: 10px;
+        }
+        .record-text {
+            line-height: 1.8;
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #e0d5c7;
+        }
+        .close-btn {
+            padding: 8px 20px;
+            background-color: #3a1a1a;
+            color: #e0d5c7;
+            border: 1px solid #5c2b2b;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .close-btn:hover {
+            background-color: #5c2b2b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="scene-title">地下医院 · 最终关卡</h1>
+        <p class="scene-subtitle">“这里的消毒水味，混着旧书的霉气”</p>
+        
+        <div class="hospital-desc">
+            阶梯尽头的门后，是一间废弃的地下诊室：墙面贴着泛黄的消毒指引，锈迹斑斑的铁架上摆着空药瓶，诊床上的白布已经发黑。<br>
+            角落的铁皮柜半开着，露出几本卷边的病历本；墙上的手术灯还能勉强亮起，灯光晃过之处，能看到诊桌抽屉里露出半张写着<span class="highlight">「四神足实验记录」</span>的纸角...
+        </div>
+
+        <!-- 场景交互元素 -->
+        <div class="scene-elements">
+            <div class="scene-item" id="checkRecord">
+                <span class="scene-icon">📋</span>
+                <span class="scene-item-text">查看病历本</span>
+            </div>
+            <div class="scene-item" id="exploreRoom">
+                <span class="scene-icon">🔍</span>
+                <span class="scene-item-text">探索诊室角落</span>
+            </div>
+            <div class="scene-item" id="openDrawer">
+                <span class="scene-icon">🗄️</span>
+                <span class="scene-item-text">打开诊桌抽屉</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 病历弹窗 -->
+    <div class="record-modal" id="recordModal">
+        <div class="record-content">
+            <h3 class="record-title">病历本（编号：007）</h3>
+            <p class="record-text">
+                <strong>姓名：</strong>未知<br>
+                <strong>症状：</strong>长期失眠，伴随“看见旧书里的影子”的幻觉<br>
+                <strong>诊疗记录：</strong>
+                <br>1. 给予镇静类药物，无效；
+                <br>2. 尝试“四神足安神法”，患者状态短暂稳定；
+                <br>3. 后续：患者自称“在书里找到了出口”，于图书馆闭馆日失踪，诊室遗留《四神足》残页。
+            </p>
+            <button class="close-btn" id="closeModal">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        // 元素绑定
+        const checkRecord = document.getElementById('checkRecord');
+        const exploreRoom = document.getElementById('exploreRoom');
+        const openDrawer = document.getElementById('openDrawer');
+        const recordModal = document.getElementById('recordModal');
+        const closeBtn = document.getElementById('closeModal');
+
+        // 查看病历本
+        checkRecord.addEventListener('click', () => {
+            recordModal.classList.add('show');
+        });
+
+        // 关闭病历弹窗
+        closeBtn.addEventListener('click', () => {
+            recordModal.classList.remove('show');
+        });
+
+        // 探索诊室角落
+        exploreRoom.addEventListener('click', () => {
+            alert('你在角落找到半瓶未开封的消毒液，瓶身标签已经模糊，暂时没有其他线索。');
+        });
+
+        // 打开诊桌抽屉
+        openDrawer.addEventListener('click', () => {
+            alert('抽屉里只有一张写着“四神足=静、定、安、虑”的残页，纸张边缘被烧过，剩下的内容不见了。');
+        });
+    </script>
+</body>
+</html>
